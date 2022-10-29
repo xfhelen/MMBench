@@ -112,16 +112,17 @@ Correspondence to:
 
 [**Characterizing and Understanding End-to-End
 Multi-modal Neural Networks on GPUs**](https://ieeexplore.ieee.org/abstract/document/9924614)<br>
-Hou, Xiaofeng and Xu, Cheng and Liu, Jiacheng and Tang, Xuehan and Sun, Lingyu and Li, Chao and Cheng, Kwang-Ting<br>
+Xiaofeng Hou, Cheng Xu, Jiacheng Liu, Xuehan Tang, Lingyu Sun, Chao Li and Kwang-Ting Cheng<br>*IEEE Computer Architecture Letters (CAL)*
 
 If you find this repository useful, please cite our paper:
 ```bibtex
 @article{hou2022characterizing,
   title={Characterizing and Understanding End-to-End Multi-modal Neural Networks on GPUs},
-  author={Hou, Xiaofeng and Xu, Cheng and Liu, Jiacheng and Tang, Xuehan and Sun, Lingyu and Li, Chao and Cheng, Kwang-Ting},
-  journal={IEEE Computer Architecture Letters},
-  year={2022},
-  publisher={IEEE}
+  author={Xiaofeng Hou and Cheng Xu and Jiacheng Liu and Xuehan Tang and Lingyu Sun and Chao Li and Kwang-Ting Cheng},
+  journal={IEEE Computer Architecture Letters (CAL)},
+  year={2022}
 }
+
+
 
 ```
