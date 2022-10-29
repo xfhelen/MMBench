@@ -5,7 +5,7 @@
 
 Multi-modal neural networks have become increasingly pervasive in many machine learning application domains due to their superior accuracy by fusing various modalities. However, they present many unique characteristics such as multi-stage execution, frequent synchronization and high heterogeneity, which are not well understood in the system and architecture community. This benchmark aim to help guide future software/hardware design and optimization for efficient inference of multi-modal DNN applications.
 
-<img src="./Figures/overview.jpg"  width="100%" height="100%" />   
+<img src="./figures/overview.jpg"  width="100%" height="100%" />   
 <div align="center">
    Figure 1: An example multi-modal application
 </div>  
