@@ -1,4 +1,4 @@
-# MMBench: A Benchmark and Toolkit to Characterize End-to-End Multi-modal DNN Workloads
+# MMBench: A Benchmark and Toolkit to Characterize and Analyze End-to-End Multi-modal DNN Workloads
 
 
 ## 1. Introduction
