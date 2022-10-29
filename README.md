@@ -1,4 +1,4 @@
-# MMBench: A Benchmark and Toolkit for Characterizing and Understanding End-to-End Multi-modal Neural Networks
+# MMBench: A Benchmark and Toolkit to Characterize End-to-End Multi-modal DNN Workloads
 
 
 ## 1. Introduction
