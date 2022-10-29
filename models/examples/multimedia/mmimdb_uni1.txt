@@ -1,0 +1,104 @@
+CUDA API Statistics:
+
+ Time(%)  Total Time (ns)  Num Calls     Average      Minimum      Maximum                 Name
+ -------  ---------------  ---------  -------------  ---------  -------------  ----------------------------
+    54.6   14,809,645,810     31,359      472,261.4      1,668      4,844,626  cudaStreamSynchronize
+    20.3    5,514,787,877         29  190,165,099.2      6,094  5,508,777,451  cudaMalloc
+    15.0    4,055,480,197    506,935        8,000.0      5,470      4,000,222  cudaLaunchKernel
+     7.3    1,988,376,485     62,602       31,762.2      4,965     86,595,786  cudaMemcpyAsync
+     1.7      462,182,679         11   42,016,607.2        874    234,821,314  cudaFree
+     1.0      263,273,399    109,186        2,411.2      1,735      2,747,676  cudaEventRecord
+     0.1       24,633,480      7,799        3,158.5      2,724         18,166  cudaEventQuery
+     0.0        3,368,836          2    1,684,418.0     28,185      3,340,651  cudaMemcpy
+     0.0        1,134,028          1    1,134,028.0  1,134,028      1,134,028  cudaHostAlloc
+     0.0          623,986          4      155,996.5      2,054        614,612  cudaStreamCreateWithPriority
+     0.0           65,727          4       16,431.8      9,216         35,183  cudaMemsetAsync
+     0.0           61,580          8        7,697.5      2,043         42,817  cudaStreamCreateWithFlags
+     0.0           37,977         48          791.2        505          2,845  cudaEventCreateWithFlags
+     0.0           31,141          4        7,785.3      1,300         21,897  cudaDeviceSynchronize
+     0.0           14,860         18          825.6        492          3,949  cudaEventDestroy
+     0.0            2,232          2        1,116.0      1,028          1,204  cuInit
+
+
+
+CUDA Kernel Statistics:
+
+ Time(%)  Total Time (ns)  Instances   Average   Minimum  Maximum                                                  Name                                               
+ -------  ---------------  ---------  ---------  -------  -------  ----------------------------------------------------------------------------------------------------
+    57.5   24,390,232,916     70,191  347,483.8  138,623  547,420  volta_scudnn_128x64_relu_small_nn_v1                                                               
+    16.8    7,130,012,371     23,397  304,740.5  167,327  468,221  volta_scudnn_128x128_relu_small_nn_v1                                                              
+    16.6    7,033,921,064     31,196  225,475.1   30,304  723,932  void gemv2T_kernel_val<int, int, float, float, float, 128, 16, 4, 4, false, cublasGemvParams<cublas…
+     3.4    1,457,113,126    101,387   14,371.8    2,495   50,304  void at::native::unrolled_elementwise_kernel<at::native::AddFunctor<float>, at::detail::Array<char*…
+     3.1    1,315,817,145    116,985   11,247.7    1,023   48,832  void at::native::vectorized_elementwise_kernel<4, at::native::threshold_kernel_impl<float>(at::Tens…
+     1.4      603,940,965     38,995   15,487.7    1,503   44,192  void at::native::(anonymous namespace)::max_pool_forward_nchw<float, float>(int, float const*, int,…
+     0.7      276,470,895      7,799   35,449.5   32,767   41,568  volta_scudnn_128x32_relu_small_nn_v1                                                               
+     0.3      121,663,734    101,387    1,200.0      863    1,984  cudnn::gemm::computeOffsetsKernel(cudnn::gemm::ComputeOffsetsParams)                               
+     0.1       43,765,006      7,799    5,611.6    4,960    7,296  void at::native::(anonymous namespace)::adaptive_average_pool<float>(float*, float*, int, int, int,…
+     0.0       18,375,466      7,799    2,356.1    2,112    3,072  void splitKreduce_kernel<float, float, float>(cublasSplitKParams<float>, float const*, float const*…
+
+
+
+CUDA Memory Operation Statistics (by time):
+
+ Time(%)  Total Time (ns)  Operations  Average   Minimum   Maximum        Operation
+ -------  ---------------  ----------  --------  -------  ----------  ------------------
+    94.5      695,718,708      31,361  22,184.2    1,024  86,452,144  [CUDA memcpy HtoD]
+     5.5       40,520,746      31,243   1,297.0      960      70,527  [CUDA memcpy DtoD]
+     0.0            6,528           4   1,632.0    1,568       1,696  [CUDA memset]
+
+
+
+CUDA Memory Operation Statistics (by size in KiB):
+
+     Total      Operations  Average  Minimum    Maximum        Operation
+ -------------  ----------  -------  -------  -----------  ------------------
+ 5,858,091.906      31,361  186.795    0.008  401,408.000  [CUDA memcpy HtoD]
+        51.000           4   12.750   12.750       12.750  [CUDA memset]
+   472,109.957      31,243   15.111    0.008   19,456.000  [CUDA memcpy DtoD]
+
+
+
+Operating System Runtime API Statistics:
+
+ Time(%)  Total Time (ns)  Num Calls     Average       Minimum      Maximum               Name
+ -------  ---------------  ---------  -------------  -----------  -----------  --------------------------
+    50.7  154,214,162,099      1,521  101,389,981.7        3,823  244,696,067  poll
+    48.5  147,530,597,596        295  500,103,720.7  500,031,883  500,133,147  pthread_cond_timedwait
+     0.4    1,200,765,561     65,621       18,298.5        1,001  206,137,911  read
+     0.2      597,317,985    163,817        3,646.3        1,000      657,471  sched_yield
+     0.1      219,990,427      2,315       95,028.3        1,066   30,386,418  ioctl
+     0.0      112,592,684     17,157        6,562.5        1,435    1,764,505  open64
+     0.0       60,162,482         69      871,920.0        3,093    5,877,955  pthread_rwlock_wrlock
+     0.0       19,043,495         42      453,416.5        1,208   18,635,405  fopen
+     0.0       15,752,609         41      384,210.0       65,027   11,983,706  sleep
+     0.0       13,605,781         83      163,925.1       68,855      584,912  pthread_create
+     0.0        6,707,514        236       28,421.7        1,594    1,217,167  mmap
+     0.0        4,619,050        425       10,868.4        1,481      116,294  munmap
+     0.0        3,693,132        577        6,400.6        1,184      115,133  mmap64
+     0.0        3,505,569        534        6,564.7        1,520       71,905  fgets
+     0.0        3,351,625          2    1,675,812.5      505,810    2,845,815  fork
+     0.0        2,892,899         83       34,854.2        1,386      184,281  mprotect
+     0.0        1,852,330        171       10,832.3        1,051       18,573  pthread_rwlock_timedwrlock
+     0.0        1,784,167         11      162,197.0       63,500      993,725  sem_timedwait
+     0.0        1,197,066         29       41,278.1        1,366      182,208  pthread_mutex_lock
+     0.0          848,767        108        7,859.0        1,076       17,741  pthread_cond_signal
+     0.0          629,676         36       17,491.0        1,868       70,416  write
+     0.0          464,709         67        6,936.0        2,251       19,365  fopen64
+     0.0          429,998          3      143,332.7        1,191      426,442  fread
+     0.0          300,544         15       20,036.3        5,604       46,000  connect
+     0.0          183,127         48        3,815.1        1,038       14,211  fclose
+     0.0          181,704         12       15,142.0        1,873      111,288  open
+     0.0          113,845         17        6,696.8        3,526       10,456  socket
+     0.0           91,706          2       45,853.0       42,495       49,211  waitpid
+     0.0           64,472         12        5,372.7        1,952        9,900  fgets_unlocked
+     0.0           48,880         14        3,491.4        2,731        5,719  recvfrom
+     0.0           36,637          6        6,106.2        1,340       10,905  fgetc
+     0.0           23,956          5        4,791.2        2,164        6,972  pipe2
+     0.0           10,980          8        1,372.5        1,000        2,180  fcntl
+     0.0            7,794          6        1,299.0        1,184        1,487  pthread_mutex_trylock
+     0.0            5,465          2        2,732.5        1,731        3,734  bind
+     0.0            3,440          2        1,720.0        1,633        1,807  sigaction
+     0.0            3,035          1        3,035.0        3,035        3,035  fputs_unlocked
+     0.0            1,056          1        1,056.0        1,056        1,056  dup
+
+230846

@@ -1,0 +1,8 @@
+torchvision
+torch
+memory-profiler
+torchtext
+sklearn
+matplotlib
+h5py
+transformers
