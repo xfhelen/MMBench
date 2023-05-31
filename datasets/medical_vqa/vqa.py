@@ -111,9 +111,11 @@ class VQA2(VQABase):
         if not os.path.exists(self.path_processed):
             os.mkdir(self.path_processed)
         for name, data in sets.items():
-            io.save_pickle(data, jp(self.path_processed, name + '.pickle'))
+            with open(jp(self.path_processed, name + '.pickle'), 'wb') as f:
+                pickle.dump(data, f)
         for name, data in maps.items():
-            io.save_pickle(data, jp(self.path_processed, name + '.pickle'))
+            with open(jp(self.path_processed, name + '.pickle'), 'wb') as f:
+                pickle.dump(data, f)
 
 
 
@@ -199,9 +201,11 @@ class VQARegionsSingle(VQABase):
         if not os.path.exists(self.path_processed):
             os.mkdir(self.path_processed)
         for name, data in sets.items():
-            io.save_pickle(data, jp(self.path_processed, name + '.pickle'))
+            with open(jp(self.path_processed, name + '.pickle'), 'wb') as f:
+                pickle.dump(data, f)
         for name, data in maps.items():
-            io.save_pickle(data, jp(self.path_processed, name + '.pickle'))
+            with open(jp(self.path_processed, name + '.pickle'), 'wb') as f:
+                pickle.dump(data, f)
 
 
 class VQA2RegionsSingle(VQARegionsSingle):
@@ -231,9 +235,11 @@ class VQA2RegionsSingle(VQARegionsSingle):
         if not os.path.exists(self.path_processed):
             os.mkdir(self.path_processed)
         for name, data in sets.items():
-            io.save_pickle(data, jp(self.path_processed, name + '.pickle'))
+            with open(jp(self.path_processed, name + '.pickle'), 'wb') as f:
+                pickle.dump(data, f)
         for name, data in maps.items():
-            io.save_pickle(data, jp(self.path_processed, name + '.pickle'))
+            with open(jp(self.path_processed, name + '.pickle'), 'wb') as f:
+                pickle.dump(data, f)
 
 
 class VQARegionsSingleMainSub(VQARegionsSingle):

@@ -1,29 +1,25 @@
-# Project:
-#   VQA
-# Description:
-#   Main train file for VQA model
-# Author: 
-#   Sergio Tascon-Morales
-
-
-# IMPORTANT: All configurations are made through the yaml config file which is located in config/<dataset>/<file>.yaml. The path to this file is
-#           specified using CLI arguments, with --path_config <path_to_yaml_file> . If you don't use comet ml, set the parameter comet_ml to False
-
-
+import os 
+import argparse
 import torch 
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 import misc.io as io
-from core.datasets import loaders_factory
-from core.models import model_factory
-from core.train_vault import criterions, optimizers, train_utils, looper, comet
+from datasets.medical_vqa import loaders_factory
+from models.medical_vqa import model_factory
+from models.train_vault import criterions, optimizers, train_utils, looper, comet
 
 # read config name from CLI argument --path_config
-args = io.get_config_file_name()
+parser = argparse.ArgumentParser(
+    description='Read config file name',
+    formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+
+parser.add_argument('--path_config', default='default_consistency.yaml', type=str, help='path to a yaml options file') 
+args = parser.parse_args()
 
 def main():
     # read config file
-    config = io.read_config(args.path_config)
-    print('config done')
+    with open(args.path_config, "r") as ymlfile:
+        config = yaml.load(ymlfile, Loader=yaml.FullLoader)
+
     # define device as gpu (if available) or cpu
     device = torch.device('cuda' if torch.cuda.is_available() and config['cuda'] else 'cpu')
 

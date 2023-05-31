@@ -8,7 +8,7 @@
 from torch import nn
 import numpy as np
 import torch
-from ..models import model_factory
+from .. import model_factory
 import os
 
 def get_criterion(config, device, ignore_index = None, weights = None):

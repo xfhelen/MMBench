@@ -10,8 +10,7 @@ import numpy as np
 import shutil
 import torch
 import os
-from misc import dirs
-from . import comet, logbook
+from . import comet, logbook, dirs
 
 
 def save_results(results, epoch_index, config, path_logs):
