@@ -42,10 +42,12 @@ We use NVIDIA Nsight Systems v2021.5.2 and Nsight Compute v2022.1.1 to analyze t
 
 
 ### Medical_Vqa dataset
-1. Download [raw avmnist dataset](https://zenodo.org/record/6784358). 
+1. Download [raw medica_vqa dataset](https://zenodo.org/record/6784358). 
 2. Place the zip file in any location and then unzip it and refer to the path to the unzipped folder as <path_data> in configs/medical_vqa/default_consistency.yaml. 
 3. A more detailed description of the dataset can be found in the original repo(https://github.com/sergiotasconmorales/consistency_vqa).
 
+### Medical_Segmentation dataset
+1. Download the [raw medical_segmentation dataset](https://www.med.upenn.edu/sbia/brats2018/data.html) to ./MMBench/datastes/medical_segmentation/raw_data/
 ## 3. How to run the code
 First, download .pth files (model weights, untrained) to ./models_save folder from [google drive](https://drive.google.com/drive/folders/19WYmZqRDEhls3gMfDepGhslTy-y-Afqc?usp=sharing)(https://drive.google.com/drive/folders/19WYmZqRDEhls3gMfDepGhslTy-y-Afqc?usp=sharing)
 
