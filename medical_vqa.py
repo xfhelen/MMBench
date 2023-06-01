@@ -12,7 +12,7 @@ parser = argparse.ArgumentParser(
     description='Read config file name',
     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-parser.add_argument('--path_config', default='default_consistency.yaml', type=str, help='path to a yaml options file') 
+parser.add_argument('--path_config', default='configs/vilmedic/default_consistency.yaml', type=str, help='path to a yaml options file') 
 args = parser.parse_args()
 
 def main():
@@ -62,28 +62,23 @@ def main():
     # train loop
     for epoch in range(start_epoch, config['epochs']+1):
 
-        # train for one epoch
+        # # train for one epoch
         # train_epoch_metrics = train(train_loader, model, criterion, optimizer, device, epoch, config, logbook, comet_exp=comet_experiment, consistency_term=consisterm)
 
-        # log training metrics to comet, if required
-        # comet.log_metrics(comet_experiment, train_epoch_metrics, epoch)
-
-        # validate for one epoch
+        # # validate for one epoch
         validate(val_loader, model, criterion, device, epoch, config, logbook, comet_exp=comet_experiment, consistency_term=consisterm)
         break
-        # log val metrics to comet, if required
-        # comet.log_metrics(comet_experiment, val_epoch_metrics, epoch)
 
-        # if val metric has stagnated, reduce LR
+        # # if val metric has stagnated, reduce LR
         # scheduler.step(val_epoch_metrics[config['metric_to_monitor']])
 
-        # save validation answers for current epoch
+        # # save validation answers for current epoch
         # train_utils.save_results(val_results, epoch, config, path_logs)
         # logbook.save_logbook(path_logs)
 
         # early_stopping(val_epoch_metrics, config['metric_to_monitor'], model, optimizer, epoch)
 
-        # if patience was reached, stop train loop
+        # # if patience was reached, stop train loop
         # if early_stopping.early_stop: 
         #     print("Early stopping")
         #     break
