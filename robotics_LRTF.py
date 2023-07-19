@@ -23,7 +23,7 @@ import torch.nn as nn
 import torch
 import numpy as np
 import time
-import torch.profiler
+from torch import profiler
 import math
 import random
 import copy
@@ -66,47 +66,12 @@ class MMDL(nn.Module):
 
     def forward(self, inputs):
         """Apply MMDL to Layer Input.
-
-        Args:
-            inputs (torch.Tensor): Layer Input
-
-        Returns:
-            torch.Tensor: Layer Output
+        Args:inputs (torch.Tensor): Layer Input
+        Returns:torch.Tensor: Layer Output
         """
         with profiler.record_function("LINEAR PASS"):
-        outs = []
+            outs = []
         for i in range(len(inputs)):
-            # with profiler.record_function("UNI_{}".format(i)):
-            # outs.append(self.encoders[i](inputs[i]))
-        #     if i == 0:
-        #         outss = []
-        #         outss.append(torch.ones(64,256,1).to(device))
-        #         outsss = []
-        #         outsss.append(torch.ones(64,16,64,64).to(device))
-        #         outsss.append(torch.ones(64,32,32,32).to(device))
-        #         outsss.append(torch.ones(64,64,16,16).to(device))
-        #         outsss.append(torch.ones(64,64,8,8).to(device))
-        #         outsss.append(torch.ones(64,128,4,4).to(device))
-        #         outsss.append(torch.ones(64, 128, 2, 2).to(device))
-        #         outss.append(outsss)
-        #         outs.append(outss)
-        #         continue
-
-        #     if i == 3:
-        #         outss = []
-        #         outss.append(torch.ones(64,256,1).to(device))
-        #         outss.append(torch.ones(64, 32, 64, 64).to(device))
-        #         outss.append(torch.ones(64, 64, 32, 32).to(device))
-        #         outss.append(torch.ones(64, 64, 16, 16).to(device))
-        #         outss.append(torch.ones(64, 64, 8, 8).to(device))
-        #         outss.append(torch.ones(64, 128, 4, 4).to(device))
-        #         outss.append(torch.ones(64, 128, 2, 2).to(device))
-        #         outs.append(outss)
-        #         continue
-        #     if i == 4:
-        #         outs.append(torch.ones(64, 32).to(device))
-        #         continue
-        #     outs.append(torch.ones(64, 256, 1).to(device))
         self.reps = outs
         # with profiler.record_function("FUSION"):
         out = self.fuse(outs)
@@ -218,33 +183,3 @@ def _processinput(inp):
     else:
         return inp
 
-
-# print('start inference')
-# with torch.no_grad():
-#     prof = torch.profiler.profile(
-#         schedule=torch.profiler.schedule(wait=1, warmup=1, active=3, repeat=2),
-#         on_trace_ready=torch.profiler.tensorboard_trace_handler(
-#             './log/robotics_LRTF_agg'),
-#         record_shapes=True,
-#         with_stack=True)
-#     with prof as p:
-#         print(1)
-#         for j in valid_dataloader:
-#             model.eval()
-#             out = model([_processinput(i).to(device)
-#                                 for i in j[:-1]])
-#             p.step()
-#     # returns
-#     # CUDA
-#     prof.export_stacks("results/profiler_stacks.txt",
-#                         "self_cuda_time_total")
-#     os.system(
-#         'cd FlameGraph;./flamegraph.pl --title "CUDA time" --countname "us." ../results/profiler_stacks.txt > ../results/gpu_perf_viz_LRTF.svg')
-#     # CPU
-#     prof.export_stacks("results/profiler_stacks.txt",
-#                         "self_cpu_time_total")
-#     os.system(
-#         'cd FlameGraph;./flamegraph.pl --title "CPU time" --countname "us." ../results/profiler_stacks.txt > ../results/cpu_perf_viz_lr==LRTF.svg')
-#     # mem
-#     with open('./results/robotics_LRTF_agg.txt', 'w', encoding='utf-8') as f:
-#         f.write(prof.key_averages().table(sort_by="self_cpu_memory_usage"))
