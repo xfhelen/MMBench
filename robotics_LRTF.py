@@ -72,6 +72,7 @@ class MMDL(nn.Module):
         with profiler.record_function("LINEAR PASS"):
             outs = []
         for i in range(len(inputs)):
+            outs.append(self.encoders[i](inputs[i]))
         self.reps = outs
         # with profiler.record_function("FUSION"):
         out = self.fuse(outs)
