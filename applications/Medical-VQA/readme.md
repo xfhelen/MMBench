@@ -2,7 +2,7 @@
 This is a visual question answering model in medical imaging. More information can be found in [origin repo](https://github.com/sergiotasconmorales/consistency_vqa).
 The structure of the model is :
 
-<img src = "../../figures/vqa_structure.png" width = 80%>
+<img src = "../../figures/vqa_structure.png" width = 60%>
 </img>
 
 ## 2. How to prepare the dataset
