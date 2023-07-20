@@ -15,7 +15,7 @@ from models.eval_scripts.complexity import all_in_one_train
 
 sys.path.append('/home/zhuxiaozhi/MMBench')
 device=torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
- 
+
 class MMDL(nn.Module):
     """Implements MMDL classifier."""
     
@@ -113,35 +113,28 @@ def set_seeds(seed, use_cuda):
     else:
         torch.manual_seed(seed)
 
-class selfsupervised:
-    def __init__(self, configs):
-        use_cuda = True
-        self.configs = configs
-        self.device = torch.device("cuda" if use_cuda else "cpu")
-
-        set_seeds(configs["seed"], use_cuda)
-
-        self.encoders = [
-            ImageEncoder(configs['zdim'], alpha=configs['vision']),
-            ForceEncoder(configs['zdim'], alpha=configs['force']),
-            ProprioEncoder(configs['zdim'], alpha=configs['proprio']),
-            DepthEncoder(configs['zdim'], alpha=configs['depth']),
-            ActionEncoder(configs['action_dim']),
-        ]
-        self.fusion = Sequential2(roboticsConcat("noconcat"), LowRankTensorFusion([256, 256, 256, 256, 32], 200, 40))
-        self.head = MLP(200, 128, 2)
-        self.optimtype = optim.Adam
-        self.loss_contact_next = nn.BCEWithLogitsLoss()
-
-        self.val_loader = get_data(self.device, self.configs)
-
-    def train(self):
-        train(self.encoders, self.fusion, self.head, self.val_loader,total_epochs=1)
-
 def main():
     with open('applications/Vison&Touch/training_default.yaml') as f:
         configs = yaml.load(f)
+    use_cuda = True
+    configs = configs
+    device = torch.device("cuda" if use_cuda else "cpu")
 
-    selfsupervised(configs).train()
+    set_seeds(configs["seed"], use_cuda)
 
-main()
+    encoders = [
+        ImageEncoder(configs['zdim'], alpha=configs['vision']),
+        ForceEncoder(configs['zdim'], alpha=configs['force']),
+        ProprioEncoder(configs['zdim'], alpha=configs['proprio']),
+        DepthEncoder(configs['zdim'], alpha=configs['depth']),
+        ActionEncoder(configs['action_dim']),
+    ]
+    fusion = Sequential2(roboticsConcat("noconcat"), LowRankTensorFusion([256, 256, 256, 256, 32], 200, 40))
+    head = MLP(200, 128, 2)
+
+    val_loader = get_data(device, configs)
+
+    train(encoders, fusion, head, val_loader,total_epochs=1)
+
+if __name__ == "__main__":
+    main()
