@@ -1,0 +1,72 @@
+# logging
+comet_ml: False
+experiment_key:
+logs_dir: logs
+
+# dataset info
+dataset: idrid_regions_single
+path_img: data/dme_dataset_8_balanced/visual
+path_qa: data/dme_dataset_8_balanced/
+path_masks: data/dme_dataset_8_balanced/masks
+augment: True
+mainsub: True
+lambda: 1.0
+squint: True
+consistency_function: fcn2 # irrelevant in this case because squint is set to True 
+gamma: 0.5
+exp: False
+
+# text pre-processing
+process_qa_again: True # generate pickle files with processed qa even if they exist already
+num_answers: 5
+tokenizer: spacy # nltk, re or spacy
+max_question_length: 12 # length of question vectors. For VQA2 longest question has 22 words
+min_word_frequency: 0 # to control size of question word vocab
+
+# training and data-loading-related parameters
+loss: crossentropy # options are crossentropy, bce
+weighted_loss: True
+batch_size: 64
+num_workers: 4
+pin_memory: True
+data_parallel: True
+cuda: True
+learning_rate: 0.0001
+optimizer: adam # options are adam, adadelta, rmsprop, sgd
+epochs: 100
+train_from: scratch # whether or not to resume training from some checkpoint. Options are best, last, or scratch
+patience: 20 # patience for the early stopping condition
+metric_to_monitor: 'loss_val' # which metric to monitor to see when to consider change as improvement. eg loss_val, acc_val, auc_val, ap_val
+
+# ********************************************
+# model structure
+# ********************************************
+
+# general
+model: SQuINT # VQA Regions Single, others will be VQARC (complement) and VQARD (dual)
+visual_feature_size: 2048 # number of feature maps from the visual feature extractor
+question_feature_size: 1024 # size of embedded question (same as lstm_features)
+
+# visual feature extraction and pre-processing of images
+pre_extracted_visual_feat: False # must be false during visual feature extraction!
+size: 448
+imagenet_weights: True
+visual_extractor: resnet # options are resnet,
+
+# text feature extraction
+word_embedding_size: 300
+num_layers_LSTM: 1
+
+# attention
+attention: True
+attention_middle_size: 512 # size of the feature maps in the attention mechanism after the first operations (before internal fusion)
+number_of_glimpses: 2
+attention_dropout: 0.25
+attention_fusion: mul # options are cat, mul, sum
+
+# fusion
+fusion: cat # options are cat, mul, sum
+
+# classifier
+classifier_hidden_size: 1024
+classifier_dropout: 0.25
