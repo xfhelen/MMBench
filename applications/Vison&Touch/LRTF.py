@@ -4,6 +4,8 @@ import yaml
 import torch.nn as nn
 import torch
 import numpy as np
+import argparse
+import pickle
 from models.fusions.robotics.sensor_fusion import roboticsConcat
 from models.utils.helper_modules import Sequential2
 from datasets.robotics.get_data import get_data
@@ -11,6 +13,11 @@ from models.fusions.common_fusions import LowRankTensorFusion
 from models.unimodals.common_models import MLP
 from models.unimodals.robotics.encoders import (ProprioEncoder, ForceEncoder, ImageEncoder, DepthEncoder, ActionEncoder)
 from models.eval_scripts.complexity import all_in_one_train
+
+parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument('--options', default="normal", type=str, help='choose the model part') 
+args = parser.parse_args()
+options = args.options
 
 sys.path.append('/home/zhuxiaozhi/MMBench')
 device=torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -68,9 +75,28 @@ class MMDL(nn.Module):
         Args: inputs (torch.Tensor): Layer Input
         Returns: torch.Tensor: Layer Output
         """
-        encoder_out = self.encoder_part(inputs)
-        fusion_out = self.fusion_part(encoder_out)
-        header_out = self.header_part(fusion_out,encoder_out,inputs)
+        if options == 'normal':
+            encoder_out = self.encoder_part(inputs)
+            fusion_out = self.fusion_part(encoder_out)
+            header_out = self.header_part(fusion_out,encoder_out,inputs)
+        else:
+            prefix='/home/zhuxiaozhi/MMBench/datasets/robotics/inter_variable/'
+            with open(prefix+'encoder_out.pkl','rb') as f:
+                encoder_out = pickle.load(f)
+            with open(prefix+'fusion_out.pkl','rb') as f:
+                fusion_out = pickle.load(f)
+            with open(prefix+'header_out.pkl','rb') as f:
+                header_out = pickle.load(f)
+
+            if options == 'encoder':
+                self.encoder_part(inputs)
+            elif options == 'fusion':
+                self.fusion_part(encoder_out)
+            elif options == 'head':
+                self.header_part(fusion_out,encoder_out,inputs)
+            else:
+                print('Please choose the right options from normal, encoder, fusion, head')
+                exit()
         return header_out
         
 def train(encoders, fusion, head, valid_dataloader, total_epochs, is_packed=False,input_to_float=True, track_complexity=True):
