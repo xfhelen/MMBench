@@ -1,3 +1,4 @@
+import sys
 import random
 import yaml
 import torch.optim as optim
@@ -12,8 +13,9 @@ from models.unimodals.common_models import MLP
 from models.unimodals.robotics.encoders import (ProprioEncoder, ForceEncoder, ImageEncoder, DepthEncoder, ActionEncoder)
 from models.eval_scripts.complexity import all_in_one_train
 
+sys.path.append('/home/zhuxiaozhi/MMBench')
 device=torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
+ 
 class MMDL(nn.Module):
     """Implements MMDL classifier."""
     
@@ -33,36 +35,45 @@ class MMDL(nn.Module):
         self.fuseout = None
         self.reps = []
 
+    def encoder_part(self,inputs):
+        head_out = []
+        if self.has_padding:
+            for i in range(len(inputs[0])):
+                head_out.append(self.encoders[i]([inputs[0][i], inputs[1][i]]))
+        else:
+            for i in range(len(inputs)):
+                head_out.append(self.encoders[i](inputs[i]))
+        self.reps = head_out
+        return head_out
+    
+    def fusion_part(self, encoder_out):
+        if self.has_padding:
+            if isinstance(encoder_out[0], torch.Tensor):
+                fusion_out = self.fuse(encoder_out)
+            else:
+                fusion_out = self.fuse([i[0] for i in encoder_out])
+        else:
+            fusion_out = self.fuse(encoder_out)
+        self.fuseout = fusion_out
+        return fusion_out
+    
+    def header_part(self, fusion_out,encoder_out,inputs):
+        if type(fusion_out) is tuple:
+            fusion_out = fusion_out[0]
+        if self.has_padding and not isinstance(encoder_out[0], torch.Tensor):
+            return self.head([fusion_out, inputs[1][0]])
+        return self.head(fusion_out)
+
     def forward(self, inputs):
         """Apply MMDL to Layer Input.
         Args: inputs (torch.Tensor): Layer Input
         Returns: torch.Tensor: Layer Output
         """
-        outs = []
-        if self.has_padding:
-            for i in range(len(inputs[0])):
-                outs.append(self.encoders[i](
-                    [inputs[0][i], inputs[1][i]]))
-        else:
-            for i in range(len(inputs)):
-                outs.append(self.encoders[i](inputs[i]))
-        self.reps = outs
-        if self.has_padding:
-            
-            if isinstance(outs[0], torch.Tensor):
-                out = self.fuse(outs)
-            else:
-                out = self.fuse([i[0] for i in outs])
-        else:
-            out = self.fuse(outs)
-        self.fuseout = out
-        if type(out) is tuple:
-            out = out[0]
-        if self.has_padding and not isinstance(outs[0], torch.Tensor):
-            return self.head([out, inputs[1][0]])
-        return self.head(out)
+        encoder_out = self.encoder_part(inputs)
+        fusion_out = self.fusion_part(encoder_out)
+        header_out = self.header_part(fusion_out,encoder_out,inputs)
+        return header_out
         
-
 def train(encoders, fusion, head, valid_dataloader, total_epochs, is_packed=False,input_to_float=True, track_complexity=True):
 
     model = MMDL(encoders, fusion, head, has_padding=is_packed).to(device)

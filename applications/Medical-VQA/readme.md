@@ -1,9 +1,10 @@
 ## 1.Introduction
 This is a visual question answering model in medical imaging. More information can be found in [origin repo](https://github.com/sergiotasconmorales/consistency_vqa).
 The structure of the model is :
-
-<img src = "../../figures/vqa_structure.png" width = 80%>
+<center>
+<img src = "../../figures/vqa_structure.png" width = 60%>
 </img>
+</center>
 
 ## 2. How to prepare the dataset
 1. Download [raw medica_vqa dataset](https://zenodo.org/record/6784358). 
