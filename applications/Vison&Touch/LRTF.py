@@ -76,7 +76,7 @@ class MMDL(nn.Module):
         Returns: torch.Tensor: Layer Output
         """
         if options == 'normal':
-            encoder_out = self.encoder_part(inputs)
+            encoder_out = self.encoder_part(inputs) 
             fusion_out = self.fusion_part(encoder_out)
             header_out = self.header_part(fusion_out,encoder_out,inputs)
         else:
@@ -112,12 +112,20 @@ def train(encoders, fusion, head, valid_dataloader, total_epochs, is_packed=Fals
 
         for _ in range(total_epochs):
             model.eval()
-            with torch.no_grad():
-                for j in valid_dataloader:
-                    if is_packed:
-                        _ = model([[_processinput(i).to(device) for i in j[0]], j[1]])
-                    else:
-                        _ = model([_processinput(i).to(device) for i in j[:-1]])
+            with torch.profiler.profile(
+                schedule=torch.profiler.schedule(wait=1, warmup=1, active=3, repeat=2),
+                on_trace_ready=torch.profiler.tensorboard_trace_handler('./log/Vision&Touch'),
+                record_shapes=True,
+                profile_memory=True,
+                with_stack=True
+            ) as prof:
+                with torch.no_grad():
+                    for j in valid_dataloader:
+                        if is_packed:
+                            _ = model([[_processinput(i).to(device) for i in j[0]], j[1]])
+                        else:
+                            _ = model([_processinput(i).to(device) for i in j[:-1]])
+                        prof.step()
 
     if track_complexity:
         all_in_one_train(_trainprocess, [model])
