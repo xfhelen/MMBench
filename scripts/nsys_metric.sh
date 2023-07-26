@@ -1,6 +1,6 @@
 #!/bin/bash
 
-nsys profile --stats=true python "$1" > "scripts/temp_file1.txt"
+nsys profile --stats=true python "$1" > "scripts/nsys_temp_file.txt"
 
 rm report*.nsys-rep
 rm report*.sqlite

@@ -47,4 +47,14 @@ for item in extracted_data:
 for metric, total_value in metric_data.items():
     count = count_data[metric]
     average_value = total_value / count
-    print("Metric: {}, Average Value: {}".format(metric, average_value))
+    if metric == 'dram__throughput.avg.pct_of_peak_sustained_elapsed':
+        metric_name = 'DRAM utilization'
+    if metric == 'sm__warps_active.avg.pct_of_peak_sustained_active':
+        metric_name = 'achieved occupancy'
+    if metric == 'smsp__inst_executed.avg.per_cycle_active':
+        metric_name = 'IPC'
+    if metric == 'smsp__sass_average_data_bytes_per_sector_mem_global_op_ld.pct':
+        metric_name = 'GLD efficiency (global load efficiency)'
+    if metric == 'smsp__sass_average_data_bytes_per_sector_mem_global_op_st.pct':
+        metric_name = 'GST efficiency (global store efficiency)'
+    print("Metric: {}, Average Value: {}".format(metric_name, average_value))

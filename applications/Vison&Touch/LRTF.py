@@ -114,7 +114,7 @@ def train(encoders, fusion, head, valid_dataloader, total_epochs, is_packed=Fals
             model.eval()
             with torch.profiler.profile(
                 schedule=torch.profiler.schedule(wait=1, warmup=1, active=3, repeat=2),
-                on_trace_ready=torch.profiler.tensorboard_trace_handler('./log/Vision&Touch'),
+                on_trace_ready=torch.profiler.tensorboard_trace_handler('/home/zhuxiaozhi/MMBench/applications/Vison&Touch/log'),
                 record_shapes=True,
                 profile_memory=True,
                 with_stack=True
