@@ -1,6 +1,7 @@
 ## 1.Introduction
 This is a visual question answering model in medical imaging. More information can be found in [origin repo](https://github.com/sergiotasconmorales/consistency_vqa).
 The structure of the model is :
+
 <center>
 <img src = "../../figures/vqa_structure.png" width = 60%>
 </img>
