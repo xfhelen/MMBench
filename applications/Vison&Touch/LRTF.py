@@ -5,7 +5,6 @@ import torch.nn as nn
 import torch
 import numpy as np
 import argparse
-import pickle
 from models.fusions.robotics.sensor_fusion import roboticsConcat
 from models.utils.helper_modules import Sequential2
 from datasets.robotics.get_data import get_data
@@ -70,34 +69,56 @@ class MMDL(nn.Module):
             return self.head([fusion_out, inputs[1][0]])
         return self.head(fusion_out)
 
+    def manual_encoder_out(self,inputs):
+        outs = []
+        for i in range(len(inputs)):
+            if i == 0:
+                outss = []
+                outss.append(torch.ones(64,256,1).to(device))
+                outsss = []
+                outsss.append(torch.ones(64,16,64,64).to(device))
+                outsss.append(torch.ones(64,32,32,32).to(device))
+                outsss.append(torch.ones(64,64,16,16).to(device))
+                outsss.append(torch.ones(64,64,8,8).to(device))
+                outsss.append(torch.ones(64,128,4,4).to(device))
+                outsss.append(torch.ones(64, 128, 2, 2).to(device))
+                outss.append(outsss)
+                outs.append(outss)
+                continue
+            if i == 3:
+                outss = []
+                outss.append(torch.ones(64,256,1).to(device))
+                outss.append(torch.ones(64, 32, 64, 64).to(device))
+                outss.append(torch.ones(64, 64, 32, 32).to(device))
+                outss.append(torch.ones(64, 64, 16, 16).to(device))
+                outss.append(torch.ones(64, 64, 8, 8).to(device))
+                outss.append(torch.ones(64, 128, 4, 4).to(device))
+                outss.append(torch.ones(64, 128, 2, 2).to(device))
+                outs.append(outss)
+                continue
+            if i == 4:
+                outs.append(torch.ones(64, 32).to(device))
+                continue
+            outs.append(torch.ones(64, 256, 1).to(device))
+        return outs
+
     def forward(self, inputs):
-        """Apply MMDL to Layer Input.
-        Args: inputs (torch.Tensor): Layer Input
-        Returns: torch.Tensor: Layer Output
-        """
         if options == 'normal':
             encoder_out = self.encoder_part(inputs) 
             fusion_out = self.fusion_part(encoder_out)
-            header_out = self.header_part(fusion_out,encoder_out,inputs)
+            return self.header_part(fusion_out,encoder_out,inputs)
+        elif options == 'encoder':
+            return self.encoder_part(inputs)
+        elif options == 'fusion':
+            encoder_out = self.manual_encoder_out(inputs)
+            return self.fusion_part(encoder_out)
+        elif options == 'head':
+            fusion_out = torch.zeros(64,200).to(device)
+            encoder_out = self.manual_encoder_out(inputs)
+            return self.header_part(fusion_out,encoder_out,inputs)
         else:
-            prefix='/home/zhuxiaozhi/MMBench/datasets/robotics/inter_variable/'
-            with open(prefix+'encoder_out.pkl','rb') as f:
-                encoder_out = pickle.load(f)
-            with open(prefix+'fusion_out.pkl','rb') as f:
-                fusion_out = pickle.load(f)
-            with open(prefix+'header_out.pkl','rb') as f:
-                header_out = pickle.load(f)
-
-            if options == 'encoder':
-                self.encoder_part(inputs)
-            elif options == 'fusion':
-                self.fusion_part(encoder_out)
-            elif options == 'head':
-                self.header_part(fusion_out,encoder_out,inputs)
-            else:
-                print('Please choose the right options from normal, encoder, fusion, head')
-                exit()
-        return header_out
+            print('Please choose the right options from normal, encoder, fusion, head')
+            exit()
         
 def train(encoders, fusion, head, valid_dataloader, total_epochs, is_packed=False,input_to_float=True, track_complexity=True):
 

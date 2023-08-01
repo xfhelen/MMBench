@@ -23,11 +23,12 @@ import torch.nn as nn
 import torch
 import numpy as np
 import time
-from torch import profiler
+import torch.profiler
 import math
 import random
 import copy
 import time
+
 def set_seeds(seed, use_cuda):
     """Set Seeds
 
@@ -66,35 +67,94 @@ class MMDL(nn.Module):
 
     def forward(self, inputs):
         """Apply MMDL to Layer Input.
-        Args:inputs (torch.Tensor): Layer Input
-        Returns:torch.Tensor: Layer Output
+
+        Args:
+            inputs (torch.Tensor): Layer Input
+
+        Returns:
+            torch.Tensor: Layer Output
         """
-        with profiler.record_function("LINEAR PASS"):
+        # with profiler.record_function("LINEAR PASS"):
+        options = 'head'
+
+        if options == 'encoder' :
             outs = []
-        for i in range(len(inputs)):
-            outs.append(self.encoders[i](inputs[i]))
-        self.reps = outs
-        # with profiler.record_function("FUSION"):
-        out = self.fuse(outs)
-#         return out
-        self.fuseout = out
-        if type(out) is tuple:
-            out = out[0]
-        # with profiler.record_function("HEAD"):
-        # print(out.shape)
-#         out = torch.zeros(64,200).to(device)
-        return self.head(out)
+            for i in range(len(inputs)):
+            # with profiler.record_function("UNI_{}".format(i)):
+                outs.append(self.encoders[i](inputs[i]))
+            return outs
+        
+        if options == 'fusion':
+            outs = []
+            for i in range(len(inputs)):
+            #     # with profiler.record_function("UNI_{}".format(i)):
+            #     outs.append(self.encoders[i](inputs[i]))
+                if i == 0:
+                    outss = []
+                    outss.append(torch.ones(64,256,1).to(device))
+                    outsss = []
+                    outsss.append(torch.ones(64,16,64,64).to(device))
+                    outsss.append(torch.ones(64,32,32,32).to(device))
+                    outsss.append(torch.ones(64,64,16,16).to(device))
+                    outsss.append(torch.ones(64,64,8,8).to(device))
+                    outsss.append(torch.ones(64,128,4,4).to(device))
+                    outsss.append(torch.ones(64, 128, 2, 2).to(device))
+                    outss.append(outsss)
+                    outs.append(outss)
+                    continue
+
+                if i == 3:
+                    outss = []
+                    outss.append(torch.ones(64,256,1).to(device))
+                    outss.append(torch.ones(64, 32, 64, 64).to(device))
+                    outss.append(torch.ones(64, 64, 32, 32).to(device))
+                    outss.append(torch.ones(64, 64, 16, 16).to(device))
+                    outss.append(torch.ones(64, 64, 8, 8).to(device))
+                    outss.append(torch.ones(64, 128, 4, 4).to(device))
+                    outss.append(torch.ones(64, 128, 2, 2).to(device))
+                    outs.append(outss)
+                    continue
+                if i == 4:
+                    outs.append(torch.ones(64, 32).to(device))
+                    continue
+                outs.append(torch.ones(64, 256, 1).to(device))
+            # self.reps = outs
+            # # with profiler.record_function("FUSION"):
+            out = self.fuse(outs)
+            return out
+
+        if options == 'head':
+            out = torch.zeros(64,200).to(device)
+            return self.head(out)
+
+        if options == 'normal' :  
+            outs = []
+            for i in range(len(inputs)):
+                # with profiler.record_function("UNI_{}".format(i)):
+                outs.append(self.encoders[i](inputs[i]))
+            self.reps = outs
+            # with profiler.record_function("FUSION"):
+            out = self.fuse(outs)
+            self.fuseout = out
+            if type(out) is tuple:
+                out = out[0]
+            # with profiler.record_function("HEAD"):
+            # print(out.shape)
+            # out = torch.zeros(64,200).to(device)
+            return self.head(out)
+
+
 
 use_cuda = True
 with open('training_default.yaml') as f:
     configs = yaml.load(f,Loader=yaml.FullLoader)
 set_seeds(configs["seed"], use_cuda)
 device = torch.device("cuda" if use_cuda else "cpu")
-# Parse args
-# train_dataloader, valid_dataloader = get_data(
-    # device, configs, "./datasets/robotics/triangle_real_data")
-valid_dataloader = get_data(
-    device, configs, "./datasets/robotics/triangle_real_data")
+
+
+valid_dataloader = get_data(device, configs, "./datasets/robotics/triangle_real_data")
+
+
 
 encoders = [
     ImageEncoder(configs['zdim'], alpha=configs['vision']),
@@ -143,6 +203,8 @@ def deal_with_objective(objective, pred, truth, args):
     else:
         return objective(pred, truth, args)
 def _trainprocess():
+
+    options = 'encoder'
     additional_params = []
     for m in additional_optimizing_modules:
         additional_params.extend(
@@ -154,6 +216,8 @@ def _trainprocess():
     bestf1 = 0
     patience = 0
 
+
+
     def _processinput(inp):
         if input_to_float:
             return inp.float()
@@ -161,22 +225,103 @@ def _trainprocess():
             return inp
 
     for epoch in range(total_epochs):
+        # totalloss = 0.0
+        # totals = 0
+        # model.train()
+        # for j in train_dataloader:
+        #     if j == 1:
+        #         print('down')
+        #     j=j+1
+        #     op.zero_grad()
+        
+        #     model.train()
+        #     out = model([_processinput(i).to(device)
+        #                 for i in j[:-1]])
+        
+        #     if not (objective_args_dict is None):
+        #         objective_args_dict['reps'] = model.reps
+        #         objective_args_dict['fused'] = model.fuseout
+        #         objective_args_dict['inputs'] = j[:-1]
+        #         objective_args_dict['training'] = True
+        #         objective_args_dict['model'] = model
+        #     loss = deal_with_objective(
+        #         objective, out, j[-1], objective_args_dict)
+
+        #     totalloss += loss * len(j[-1])
+        #     totals += len(j[-1])
+        #     loss.backward()
+        #     torch.nn.utils.clip_grad_norm_(model.parameters(), clip_val)
+        #     op.step()
+        # print("Epoch "+str(epoch)+" train loss: "+str(totalloss/totals))
+        # validstarttime = time.time()
+        # if validtime:
+        #     print("train total: "+str(totals))
         model.eval()
+        
         with torch.no_grad():
             totalloss = 0.0
             pred = []
             true = []
             pts = []
             cat = 0
-            for j in valid_dataloader:
-                if cat == 10 :
-                    break
-                cat = cat + 1
-                out = model([_processinput(i).to(device)
-                                for i in j[:-1]])
-            print('down')
-            
+            # for j in valid_dataloader:
+            #     # if cat == 10 :
+            #     #     break
+            #     # cat = cat + 1
+            #     out = model([_processinput(i).to(device)
+            #                     for i in j[:-1]])
+
+            for j in range(50):
+                # if cat == 10 :
+                #     break
+                # cat = cat + 1
+                out = model(np.array([1,2,3,4,5]))
+
+
+        #         if not (objective_args_dict is None):
+        #             objective_args_dict['reps'] = model.reps
+        #             objective_args_dict['fused'] = model.fuseout
+        #             objective_args_dict['inputs'] = j[:-1]
+        #             objective_args_dict['training'] = False
+        #         loss = deal_with_objective(
+        #             objective, out, j[-1], objective_args_dict)
+        #         totalloss += loss*len(j[-1])
+                
+        #         if task == "classification":
+        #             pred.append(torch.argmax(out, 1))
+                    
+        #         true.append(j[-1])
+        #         if auprc:
+        #             # pdb.set_trace()
+        #             sm = softmax(out)
+        #             pts += [(sm[i][1].item(), j[-1][i].item())
+        #                     for i in range(j[-1].size(0))]
+        # if pred:
+        #     pred = torch.cat(pred, 0)
+        # true = torch.cat(true, 0)
+        # totals = true.shape[0]
+        # valloss = totalloss/totals
+        # if task == "classification":
+        #     acc = accuracy(true, pred)
+        #     print("Epoch "+str(epoch)+" valid loss: "+str(valloss) +
+        #             " acc: "+str(acc))
+        #     if acc > bestacc:
+        #         patience = 0
+        #         bestacc = acc
+        #         print("Saving Best")
+        #         torch.save(model, save)
+        #     else:
+        #         patience += 1
+        # if early_stop and patience > 7:
+        #     break
+        # if auprc:
+        #     print("AUPRC: "+str(AUPRC(pts)))
+        # validendtime = time.time()
+        # if validtime:
+        #     print("valid time:  "+str(validendtime-validstarttime))
+        #     print("Valid total: "+str(totals))    
 _trainprocess()
+
 
 def _processinput(inp):
     if input_to_float:
@@ -184,3 +329,33 @@ def _processinput(inp):
     else:
         return inp
 
+
+print('start inference')
+with torch.no_grad():
+    prof = torch.profiler.profile(
+        schedule=torch.profiler.schedule(wait=1, warmup=1, active=3, repeat=2),
+        on_trace_ready=torch.profiler.tensorboard_trace_handler(
+            './log/robotics_LRTF_agg'),
+        record_shapes=True,
+        with_stack=True)
+    with prof as p:
+        # print(1)
+        for j in valid_dataloader:
+            model.eval()
+            out = model([_processinput(i).to(device)
+                                for i in j[:-1]])
+            p.step()
+    # returns
+    # CUDA
+    prof.export_stacks("results/profiler_stacks.txt",
+                        "self_cuda_time_total")
+    os.system(
+        'cd FlameGraph;./flamegraph.pl --title "CUDA time" --countname "us." ../results/profiler_stacks.txt > ../results/gpu_perf_viz_LRTF.svg')
+    # CPU
+    prof.export_stacks("results/profiler_stacks.txt",
+                        "self_cpu_time_total")
+    os.system(
+        'cd FlameGraph;./flamegraph.pl --title "CPU time" --countname "us." ../results/profiler_stacks.txt > ../results/cpu_perf_viz_lr==LRTF.svg')
+    # mem
+    with open('./results/robotics_LRTF_agg.txt', 'w', encoding='utf-8') as f:
+        f.write(prof.key_averages().table(sort_by="self_cpu_memory_usage"))

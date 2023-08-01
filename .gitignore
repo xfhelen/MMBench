@@ -6,5 +6,5 @@ __pycache__/
 
 # ZhuXiaozhi
 test/
-# datasets/robotics/triangle_real_data/
+datasets/robotics/triangle_real_data
 applications/Vison&Touch/log
