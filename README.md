@@ -6,9 +6,9 @@
 
 ​																          				***Multimodal DNN***
 
-​               <img src=".\figures\image-20230726131917741.png" alt="image-20230726131917741" style="zoom:25%;" /><img src=".\figures\image-20230726132014952.png" alt="image-20230726132014952" style="zoom:25%;" /><img src=".\figures\image-20230726132026796.png" alt="image-20230726132026796" style="zoom:25%;" /><img src=".\figures\image-20230726132039464.png" alt="image-20230726132039464" style="zoom:25%;" />
+​               <img src=".\figures\image-20230726131917741.png" alt="image-20230726131917741" width = 24%  /> <img src=".\figures\image-20230726132014952.png" alt="image-20230726132014952" width = 24% /><img src=".\figures\image-20230726132026796.png" alt="image-20230726132026796" width = 24% /><img src=".\figures\image-20230726132039464.png" alt="image-20230726132039464" width = 24% />
 
-​                                 *Self-driving                           Medical                     Multimedia                   Robotic*
+​      *Self-driving &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;             Medical  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;                Multimedia    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                Robotic*
 
 ​	To understand the implications of multi-modal DNNs on hardware-software co-designs, we have developed MMBench, an end-to-end benchmarking tool designed to evaluate the performance of multi-modal DNNs at both architecture and system levels.
 
