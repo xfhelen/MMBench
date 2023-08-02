@@ -14,5 +14,6 @@ The structure of the model is :
 ## 3. How to run the code
 run command:
 ```bash 
-python inference.py --config config/idrid_regions/single/default_consistency.yaml --options normal/encoder/fusion/head
+python inference.py --options normal/encoder/fusion/head
+(you can use [--config] to set the config file)
 ```
