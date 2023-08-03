@@ -8,3 +8,7 @@ __pycache__/
 test/
 datasets/robotics/triangle_real_data
 applications/Vison&Touch/log
+
+*.pkl
+*.pt
+*.csd
