@@ -1,4 +1,4 @@
-## Run ncu script
+## Run Nsight Compute(ncu) script
 This script uses ncu to measure hardware utilization. The first argument of the script is the path to the Python code, and the second argument is the path to the output file. The script can also calculate and output the average values of the desired hardware metrics.
 
 Please make sure to replace the Python path in the script with your own before using.
@@ -24,7 +24,7 @@ There are also optional parameters (normal/encoder/fusion/head, with normal bein
 ./scripts/ncu_metric.sh applications/Vison\&Touch/LRTF.py applications/Vison\&Touch/ncu_info_encoder.csv --options encoder
 ```
 
-## nsys script
+## Run Nsight System(sys) script
 This script uses nsys to measure GPU data. The argument of the script is the Python code to be executed.
 
 ### Usage Example
