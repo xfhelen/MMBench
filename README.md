@@ -58,7 +58,9 @@ MMBench provides profiling tools based on integrated profilers in both CPU and N
 
 ## Ⅳ. Profiling Code
 
-Porifing codes are introduced in the [scripts](https://github.com/xfhelen/MMBench/tree/main/scripts) folder.
+Nsight System, and Nsight Computeare measurement scripts are  provided in the [scripts](https://github.com/xfhelen/MMBench/tree/main/scripts) folder.
+
+The code for measuring using the Pytorch Profiler is contained within each application's own folder.
 
 ## Ⅴ. Acknowledgement
 
