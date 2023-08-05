@@ -37,15 +37,15 @@ MMBench provides profiling tools based on integrated profilers in both CPU and N
 
 | **Application**      |     **Domain**      | **Size** | **Modalities**                        | **Unimodal models**      | **Fusion models**          | **Task** **type** |
 | -------------------- | :-----------------: | -------- | ------------------------------------- | ------------------------ | -------------------------- | ----------------- |
-| Avmnist              |     Multimedia      | Small    | Image<br />Audio                      | CNN                      | Concate/Tensor             | Classification    |
-| MMimdb               |     Multimedia      | Medium   | Image <br />Text                      | CNN+transformer          | Concate/Tensor             | Classification    |
-| CMU-MOSEI            | Affective computing | Large    | Language<br />Vision<br />Audio       | CNN+transformer          | Concate/Tensor/Transformer | Regression        |
-| Sarcasm              | Affective computing | Small    | Language<br />Vision<br />Audio       | CNN+transformer          | Concate/Tensor/Transformer | Classification    |
-| Medical VQA          |       Medical       | Large    | Image<br />Text                       | CNN+transformer          | Transformer                | Generation        |
-| Medical Segmentation |       Medical       | Large    | MRI scans<br /> (T1, T1c, T2, FLAIR)  | CNN+transformer          | Transformer                | Segmentation      |
-| MuJoCo Push          |      Robotics       | Medium   | Image, force, proprioception, control | CNN+RNN                  | Concate/Tensor/Transformer | Classification    |
-| Vison & Touch        |      Robotics       | Large    | Image, force, proprioception, depth   | CNN+RNN                  | Concate/Tensor             | Classification    |
-| TransFuser           |  Automatic driving  | Large    | Image<br />LiDAR                      | ResNet-34<br />ResNet-18 | Transformer                | Classification    |
+| [Avmnist](https://github.com/xfhelen/MMBench/tree/main/applications/Avmnist)              |     Multimedia      | Small    | Image<br />Audio                      | CNN                      | Concate/Tensor             | Classification    |
+| [MMimdb](https://github.com/xfhelen/MMBench/tree/main/applications/MMimdb)               |     Multimedia      | Medium   | Image <br />Text                      | CNN+transformer          | Concate/Tensor             | Classification    |
+| [CMU-MOSEI](https://github.com/xfhelen/MMBench/tree/main/applications/CMU-MOSEI)             | Affective computing | Large    | Language<br />Vision<br />Audio       | CNN+transformer          | Concate/Tensor/Transformer | Regression        |
+| [Sarcasm](https://github.com/xfhelen/MMBench/tree/main/applications/Sarcasm)               | Affective computing | Small    | Language<br />Vision<br />Audio       | CNN+transformer          | Concate/Tensor/Transformer | Classification    |
+| [Medical VQA](https://github.com/xfhelen/MMBench/tree/main/applications/Medical-VQA)           |       Medical       | Large    | Image<br />Text                       | CNN+transformer          | Transformer                | Generation        |
+| [Medical Segmentation](https://github.com/xfhelen/MMBench/tree/main/applications/Medical-Segmentation)  |       Medical       | Large    | MRI scans<br /> (T1, T1c, T2, FLAIR)  | CNN+transformer          | Transformer                | Segmentation      |
+| [MuJoCo Push](https://github.com/xfhelen/MMBench/tree/main/applications/MuJoCo-Push)           |      Robotics       | Medium   | Image, force, proprioception, control | CNN+RNN                  | Concate/Tensor/Transformer | Classification    |
+| [Vison & Touch](https://github.com/xfhelen/MMBench/tree/main/applications/Vison%26Touch)         |      Robotics       | Large    | Image, force, proprioception, depth   | CNN+RNN                  | Concate/Tensor             | Classification    |
+| [TransFuser](https://github.com/xfhelen/MMBench/tree/main/applications/TransFuser)            |  Automatic driving  | Large    | Image<br />LiDAR                      | ResNet-34<br />ResNet-18 | Transformer                | Classification    |
 
 <img src=".\figures\image-20230726132314122.png" alt="image-20230726132314122" style="zoom:25%;" />
 
@@ -56,15 +56,16 @@ MMBench provides profiling tools based on integrated profilers in both CPU and N
 <img src=".\figures\image-20230726132334520.png" alt="image-20230726132334520" style="zoom:25%;" />
 
 
+## Ⅳ. Profiling Code
 
+Porifing codes are introduced in the [scripts](https://github.com/xfhelen/MMBench/tree/main/scripts) folder.
 
-
-## Ⅳ. Acknowledgement
+## Ⅴ. Acknowledgement
 
 Some codes and applications were adapted from the [MultiBench](https://github.com/pliang279/MultiBench).
 
 
-## Ⅴ. Contributors
+## Ⅵ. Contributors
 
 Correspondence to: 
 
@@ -80,7 +81,7 @@ Correspondence to:
   - [Tianyu Zang](mijiurushi@sjtu.edu.cn) (mijiurushi@sjtu.edu.cn)
   - [Xiaofeng Hou](	houxiaofeng@ust.hk) (houxiaofeng@ust.hk)
 
-## Ⅵ. Related Publications
+## Ⅶ. Related Publications
 
 [**Characterizing and Understanding End-to-End
 Multi-modal Neural Networks on GPUs**](https://ieeexplore.ieee.org/abstract/document/9924614)<br>
