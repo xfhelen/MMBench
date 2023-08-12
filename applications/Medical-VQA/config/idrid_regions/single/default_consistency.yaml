@@ -5,9 +5,9 @@ logs_dir: logs
 
 # dataset info
 dataset: idrid_regions_single
-path_img: ../consistency_vqa/dme_vqa/visual
-path_qa: ../consistency_vqa/dme_vqa/
-path_masks: ../consistency_vqa/dme_vqa/masks
+path_img: datasets/dme_vqa/visual 
+path_qa: datasets/dme_vqa/
+path_masks: datasets/dme_vqa/masks
 augment: True
 mainsub: True
 lambda: 0.5

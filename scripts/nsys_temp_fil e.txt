@@ -1,0 +1,147 @@
+Tokenizing questions...
+Adding UNK tokens...
+Encoding questions...
+Encoding answers...
+Building pairs
+Building pairs
+finished
+Generating '/tmp/nsys-report-ea6e.qdstrm'
+[1/8] [0%                          ] report1.nsys-rep[1/8] [0%                          ] report1.nsys-rep[1/8] [1%                          ] report1.nsys-rep[1/8] [3%                          ] report1.nsys-rep[1/8] [2%                          ] report1.nsys-rep[1/8] [1%                          ] report1.nsys-rep[1/8] [2%                          ] report1.nsys-rep[1/8] [1%                          ] report1.nsys-rep[1/8] [0%                          ] report1.nsys-rep[1/8] [1%                          ] report1.nsys-rep[1/8] [2%                          ] report1.nsys-rep[1/8] [3%                          ] report1.nsys-rep[1/8] [4%                          ] report1.nsys-rep[1/8] [5%                          ] report1.nsys-rep[1/8] [6%                          ] report1.nsys-rep[1/8] [7%                          ] report1.nsys-rep[1/8] [8%                          ] report1.nsys-rep[1/8] [9%                          ] report1.nsys-rep[1/8] [10%                         ] report1.nsys-rep[1/8] [11%                         ] report1.nsys-rep[1/8] [12%                         ] report1.nsys-rep[1/8] [13%                         ] report1.nsys-rep[1/8] [14%                         ] report1.nsys-rep[1/8] [=15%                        ] report1.nsys-rep[1/8] [=16%                        ] report1.nsys-rep[1/8] [=17%                        ] report1.nsys-rep[1/8] [==18%                       ] report1.nsys-rep[1/8] [==19%                       ] report1.nsys-rep[1/8] [==20%                       ] report1.nsys-rep[1/8] [==21%                       ] report1.nsys-rep[1/8] [===22%                      ] report1.nsys-rep[1/8] [===23%                      ] report1.nsys-rep[1/8] [===24%                      ] report1.nsys-rep[1/8] [====25%                     ] report1.nsys-rep[1/8] [====26%                     ] report1.nsys-rep[1/8] [====27%                     ] report1.nsys-rep[1/8] [====28%                     ] report1.nsys-rep[1/8] [=====29%                    ] report1.nsys-rep[1/8] [=====30%                    ] report1.nsys-rep[1/8] [=====31%                    ] report1.nsys-rep[1/8] [=====32%                    ] report1.nsys-rep[1/8] [======33%                   ] report1.nsys-rep[1/8] [======34%                   ] report1.nsys-rep[1/8] [======35%                   ] report1.nsys-rep[1/8] [=======36%                  ] report1.nsys-rep[1/8] [=============59%            ] report1.nsys-rep[1/8] [=============60%            ] report1.nsys-rep[1/8] [==============61%           ] report1.nsys-rep[1/8] [==============62%           ] report1.nsys-rep[1/8] [==============63%           ] report1.nsys-rep[1/8] [==============64%           ] report1.nsys-rep[1/8] [===============65%          ] report1.nsys-rep[1/8] [===============66%          ] report1.nsys-rep[1/8] [===============67%          ] report1.nsys-rep[1/8] [================68%         ] report1.nsys-rep[1/8] [================69%         ] report1.nsys-rep[1/8] [================70%         ] report1.nsys-rep[1/8] [================71%         ] report1.nsys-rep[1/8] [=================72%        ] report1.nsys-rep[1/8] [=================73%        ] report1.nsys-rep[1/8] [=================74%        ] report1.nsys-rep[1/8] [==================75%       ] report1.nsys-rep[1/8] [==================76%       ] report1.nsys-rep[1/8] [==================77%       ] report1.nsys-rep[1/8] [==================78%       ] report1.nsys-rep[1/8] [===================79%      ] report1.nsys-rep[1/8] [===================80%      ] report1.nsys-rep[1/8] [===================81%      ] report1.nsys-rep[1/8] [===================82%      ] report1.nsys-rep[1/8] [====================83%     ] report1.nsys-rep[1/8] [========================100%] report1.nsys-rep[1/8] [========================100%] report1.nsys-rep
+[2/8] [0%                          ] report1.sqlite[2/8] [1%                          ] report1.sqlite[2/8] [2%                          ] report1.sqlite[2/8] [3%                          ] report1.sqlite[2/8] [4%                          ] report1.sqlite[2/8] [5%                          ] report1.sqlite[2/8] [6%                          ] report1.sqlite[2/8] [7%                          ] report1.sqlite[2/8] [8%                          ] report1.sqlite[2/8] [9%                          ] report1.sqlite[2/8] [10%                         ] report1.sqlite[2/8] [11%                         ] report1.sqlite[2/8] [12%                         ] report1.sqlite[2/8] [13%                         ] report1.sqlite[2/8] [14%                         ] report1.sqlite[2/8] [=15%                        ] report1.sqlite[2/8] [=16%                        ] report1.sqlite[2/8] [=17%                        ] report1.sqlite[2/8] [==18%                       ] report1.sqlite[2/8] [==19%                       ] report1.sqlite[2/8] [==20%                       ] report1.sqlite[2/8] [==21%                       ] report1.sqlite[2/8] [===22%                      ] report1.sqlite[2/8] [===23%                      ] report1.sqlite[2/8] [===24%                      ] report1.sqlite[2/8] [====25%                     ] report1.sqlite[2/8] [====26%                     ] report1.sqlite[2/8] [====27%                     ] report1.sqlite[2/8] [====28%                     ] report1.sqlite[2/8] [=====29%                    ] report1.sqlite[2/8] [=====30%                    ] report1.sqlite[2/8] [=====31%                    ] report1.sqlite[2/8] [=====32%                    ] report1.sqlite[2/8] [======33%                   ] report1.sqlite[2/8] [======34%                   ] report1.sqlite[2/8] [======35%                   ] report1.sqlite[2/8] [=======36%                  ] report1.sqlite[2/8] [=======37%                  ] report1.sqlite[2/8] [=======38%                  ] report1.sqlite[2/8] [=======39%                  ] report1.sqlite[2/8] [========40%                 ] report1.sqlite[2/8] [========41%                 ] report1.sqlite[2/8] [========42%                 ] report1.sqlite[2/8] [=========43%                ] report1.sqlite[2/8] [=========44%                ] report1.sqlite[2/8] [=========45%                ] report1.sqlite[2/8] [=========46%                ] report1.sqlite[2/8] [==========47%               ] report1.sqlite[2/8] [==========48%               ] report1.sqlite[2/8] [==========49%               ] report1.sqlite[2/8] [===========50%              ] report1.sqlite[2/8] [===========51%              ] report1.sqlite[2/8] [===========52%              ] report1.sqlite[2/8] [===========53%              ] report1.sqlite[2/8] [============54%             ] report1.sqlite[2/8] [============55%             ] report1.sqlite[2/8] [============56%             ] report1.sqlite[2/8] [============57%             ] report1.sqlite[2/8] [=============58%            ] report1.sqlite[2/8] [=============59%            ] report1.sqlite[2/8] [=============60%            ] report1.sqlite[2/8] [==============61%           ] report1.sqlite[2/8] [==============62%           ] report1.sqlite[2/8] [==============63%           ] report1.sqlite[2/8] [==============64%           ] report1.sqlite[2/8] [===============65%          ] report1.sqlite[2/8] [===============66%          ] report1.sqlite[2/8] [===============67%          ] report1.sqlite[2/8] [================68%         ] report1.sqlite[2/8] [================69%         ] report1.sqlite[2/8] [================70%         ] report1.sqlite[2/8] [================71%         ] report1.sqlite[2/8] [=================72%        ] report1.sqlite[2/8] [=================73%        ] report1.sqlite[2/8] [=================74%        ] report1.sqlite[2/8] [==================75%       ] report1.sqlite[2/8] [==================76%       ] report1.sqlite[2/8] [==================77%       ] report1.sqlite[2/8] [==================78%       ] report1.sqlite[2/8] [===================79%      ] report1.sqlite[2/8] [===================80%      ] report1.sqlite[2/8] [===================81%      ] report1.sqlite[2/8] [===================82%      ] report1.sqlite[2/8] [====================83%     ] report1.sqlite[2/8] [====================84%     ] report1.sqlite[2/8] [====================85%     ] report1.sqlite[2/8] [=====================86%    ] report1.sqlite[2/8] [=====================87%    ] report1.sqlite[2/8] [=====================88%    ] report1.sqlite[2/8] [=====================89%    ] report1.sqlite[2/8] [======================90%   ] report1.sqlite[2/8] [======================91%   ] report1.sqlite[2/8] [======================92%   ] report1.sqlite[2/8] [=======================93%  ] report1.sqlite[2/8] [=======================94%  ] report1.sqlite[2/8] [=======================95%  ] report1.sqlite[2/8] [=======================96%  ] report1.sqlite[2/8] [========================97% ] report1.sqlite[2/8] [========================98% ] report1.sqlite[2/8] [========================99% ] report1.sqlite[2/8] [========================100%] report1.sqlite[2/8] [========================100%] report1.sqlite
+[3/8] Executing 'nvtxsum' stats report
+[4/8] Executing 'osrtsum' stats report
+
+Operating System Runtime API Statistics:
+
+ Time (%)  Total Time (ns)  Num Calls    Avg (ns)       Med (ns)     Min (ns)     Max (ns)       StdDev (ns)             Name         
+ --------  ---------------  ---------  -------------  -------------  --------  --------------  ---------------  ----------------------
+     43.2  201,666,712,708      1,421  141,918,868.9  136,566,110.0    23,983   1,446,550,733     97,382,021.3  sem_wait              
+     23.1  107,978,917,948        519  208,051,865.0  100,062,779.0    17,742  10,000,128,618  1,023,944,100.4  sem_timedwait         
+     19.7   91,862,808,463      1,957   46,940,627.7   27,540,944.0     1,824   1,102,599,885     48,766,765.3  poll                  
+     12.6   58,664,535,386     68,556      855,717.0       18,714.5     1,167     551,911,983     19,943,727.7  pthread_cond_timedwait
+      0.6    2,965,131,571      9,277      319,621.8       11,567.0     1,442       8,126,541        565,857.8  munmap                
+      0.3    1,536,826,463     78,331       19,619.6        5,739.0     1,000      46,614,504        298,432.1  read                  
+      0.1      440,901,054          9   48,989,006.0   51,995,278.0   453,345      71,057,427     19,282,717.4  fork                  
+      0.1      434,128,299     49,457        8,777.9        8,020.0     1,069         112,197          3,148.7  write                 
+      0.1      238,223,336     15,029       15,850.9        2,041.0     1,000      18,421,198        220,023.4  ioctl                 
+      0.0      218,084,843     67,242        3,243.3        3,260.0     1,000          94,564          1,428.8  pthread_cond_signal   
+      0.0      206,958,931      8,304       24,922.8       29,156.5     2,932      13,045,732        143,547.4  recvmsg               
+      0.0      130,936,706      8,305       15,766.0       14,399.0     6,348         588,797          7,305.1  connect               
+      0.0       96,529,407         39    2,475,113.0        5,958.0     1,920      95,852,260     15,345,853.1  pthread_join          
+      0.0       94,458,824      9,123       10,353.9        8,768.0     1,000       5,124,007         72,247.9  mmap64                
+      0.0       70,112,866      8,307        8,440.2        7,764.0     2,771          44,423          2,041.8  socket                
+      0.0       55,328,301     19,332        2,862.0        1,564.0     1,411          25,007          1,512.2  writev                
+      0.0       47,866,458         98      488,433.2       43,695.0    13,365      43,260,701      4,365,246.8  pthread_create        
+      0.0       35,100,954      5,071        6,921.9        2,362.0     1,000       1,158,685         27,600.6  pthread_mutex_lock    
+      0.0       20,018,929         28      714,961.8       19,612.0     1,379       2,828,395        911,141.7  pthread_rwlock_wrlock 
+      0.0       18,167,743         52      349,379.7        2,678.5     1,398      17,826,622      2,471,244.0  fopen                 
+      0.0       17,619,338      8,253        2,134.9        2,085.0     1,006          12,751            392.2  fcntl                 
+      0.0       15,120,627      8,219        1,839.7        1,802.0     1,000          51,689            679.8  dup                   
+      0.0       10,641,644      1,831        5,811.9        4,186.0     2,091         398,128         11,715.1  open64                
+      0.0        2,720,603         21      129,552.5        9,487.0     1,274       1,984,572        438,377.3  waitpid               
+      0.0        2,533,740         41       61,798.5       61,371.0    54,746          64,923          1,755.4  sleep                 
+      0.0        1,807,009         61       29,623.1       39,710.0     2,260          77,001         20,138.7  fgets                 
+      0.0          776,256        111        6,993.3        5,526.0     1,475          35,684          5,473.9  mmap                  
+      0.0          247,158        165        1,497.9        1,153.0     1,000          13,780          1,649.8  fflush                
+      0.0          189,043          7       27,006.1       12,393.0     1,948          80,920         33,927.0  fopen64               
+      0.0          145,775         29        5,026.7        5,043.0     2,570          13,750          2,299.0  pipe2                 
+      0.0          133,143          6       22,190.5       19,950.5    13,028          32,884          7,627.7  pthread_cond_wait     
+      0.0          118,999         32        3,718.7        2,500.0     1,793          17,844          3,418.8  waitid                
+      0.0           91,557         50        1,831.1        1,243.5     1,032           6,810          1,253.9  fclose                
+      0.0           42,756          6        7,126.0        7,683.5     2,689          10,773          3,437.6  open                  
+      0.0           18,111          2        9,055.5        9,055.5     2,648          15,463          9,061.6  fread                 
+      0.0           14,485          1       14,485.0       14,485.0    14,485          14,485              0.0  fputs_unlocked        
+      0.0           14,268          4        3,567.0        1,591.5     1,062          10,023          4,315.0  sigaction             
+      0.0            8,173          2        4,086.5        4,086.5     2,434           5,739          2,337.0  bind                  
+      0.0            3,499          1        3,499.0        3,499.0     3,499           3,499              0.0  futex                 
+      0.0            2,852          2        1,426.0        1,426.0     1,399           1,453             38.2  pthread_mutex_trylock 
+      0.0            1,953          1        1,953.0        1,953.0     1,953           1,953              0.0  prctl                 
+      0.0            1,251          1        1,251.0        1,251.0     1,251           1,251              0.0  listen                
+
+[5/8] Executing 'cudaapisum' stats report
+
+CUDA API Statistics:
+
+ Time (%)  Total Time (ns)  Num Calls    Avg (ns)    Med (ns)   Min (ns)    Max (ns)      StdDev (ns)               Name            
+ --------  ---------------  ---------  ------------  ---------  --------  -------------  -------------  ----------------------------
+     53.3   12,793,756,642      7,831   1,633,732.2  139,149.0     1,850     12,891,855    3,477,333.6  cudaStreamSynchronize       
+     27.6    6,627,214,870    976,294       6,788.1    6,301.0     3,700      9,463,073       14,303.1  cudaLaunchKernel            
+     13.2    3,168,642,905         70  45,266,327.2  145,563.5     5,077  3,157,933,220  377,426,673.7  cudaMalloc                  
+      3.1      734,517,939    472,312       1,555.2    1,456.0       544      2,066,467        4,516.7  cudaEventRecord             
+      0.9      204,443,443     16,097      12,700.7    7,063.0     3,928      4,313,733       67,046.5  cudaMemcpyAsync             
+      0.8      199,883,565         11  18,171,233.2   26,471.0       845    102,584,200   40,335,207.4  cudaFree                    
+      0.3       72,443,622     16,524       4,384.1    4,015.0     3,074         40,210        1,346.1  cudaBindTexture             
+      0.2       39,238,704         55     713,431.0   35,861.0     5,947      5,565,409    1,190,366.5  cudaHostAlloc               
+      0.1       35,177,707     41,358         850.6      700.0       392         24,221          907.4  cudaEventCreateWithFlags    
+      0.1       28,376,946      6,885       4,121.6    2,769.0     2,344         38,121        2,846.9  cudaStreamDestroy           
+      0.1       24,625,564      1,377      17,883.5   15,054.0     7,466        221,862       11,220.2  cudaStreamCreate            
+      0.1       23,741,087     20,655       1,149.4      897.0       670         20,698          916.7  cudaStreamWaitEvent         
+      0.1       23,502,215     41,328         568.7      487.0       386         21,720          541.0  cudaEventDestroy            
+      0.1       17,530,161      5,512       3,180.4    2,741.0     1,824         35,454        1,671.0  cudaStreamCreateWithPriority
+      0.1       15,805,498     16,524         956.5      876.0       729         20,730          749.6  cudaUnbindTexture           
+      0.0       10,801,117      4,131       2,614.6    2,468.0     1,616         35,959        1,246.9  cudaEventQuery              
+      0.0          211,117          8      26,389.6    3,124.5     2,431        174,427       60,077.9  cudaStreamCreateWithFlags   
+      0.0           61,232          4      15,308.0    7,979.0     6,489         38,785       15,668.6  cudaMemsetAsync             
+      0.0           42,574          2      21,287.0   21,287.0    20,650         21,924          900.9  cudaMemcpy                  
+      0.0           33,487          4       8,371.8    2,908.0     1,453         26,218       11,942.4  cudaDeviceSynchronize       
+      0.0            4,850          2       2,425.0    2,425.0     2,415          2,435           14.1  cuInit                      
+
+[6/8] Executing 'gpukernsum' stats report
+
+CUDA Kernel Statistics:
+
+ Time (%)  Total Time (ns)  Instances  Avg (ns)   Med (ns)   Min (ns)  Max (ns)  StdDev (ns)                                                  Name                                                
+ --------  ---------------  ---------  ---------  ---------  --------  --------  -----------  ----------------------------------------------------------------------------------------------------
+     21.4    9,350,111,978     60,588  154,322.8  152,798.0   146,110   170,334      3,950.2  volta_scudnn_winograd_128x128_ldg1_ldg4_relu_tile148t_nt_v1                                         
+     19.3    8,429,004,851     67,473  124,924.1  122,239.0    32,608   231,358     27,508.8  volta_scudnn_128x64_relu_interior_nn_v1                                                             
+     16.2    7,063,849,212     63,342  111,519.2  110,847.0    92,031   213,918     17,946.9  volta_scudnn_128x128_relu_interior_nn_v1                                                            
+     10.2    4,443,122,824    213,435   20,817.2   13,184.0     5,087   134,399     20,184.2  void cudnn::detail::bn_fw_inf_1C11_kernel_NCHW<float, float, (bool)1, (int)1>(T2, T2, cudnnTensorSt…
+      7.6    3,331,468,594     68,850   48,387.3   38,015.0    13,728   143,039     27,571.2  void at::native::vectorized_elementwise_kernel<(int)4, at::native::AddFunctor<float>, at::detail::A…
+      7.5    3,290,536,939    210,681   15,618.6    4,896.0     2,912    97,759     18,387.5  void at::native::vectorized_elementwise_kernel<(int)4, void at::native::threshold_kernel_impl<float…
+      4.3    1,896,263,891      6,885  275,419.6  192,606.0   191,486   533,499    128,391.5  volta_scudnn_128x64_relu_small_nn_v1                                                                
+      4.3    1,884,189,542     11,016  171,041.2  148,831.0   147,678   333,693     58,823.0  void cudnn::detail::implicit_convolve_sgemm<float, float, (int)128, (int)6, (int)7, (int)3, (int)3,…
+      2.2      939,321,068     60,588   15,503.4   14,624.0     5,376    65,951     10,359.9  void cudnn::winograd::generateWinogradTilesKernel<(int)0, float, float>(cudnn::winograd::GenerateWi…
+      2.1      909,978,515      5,508  165,210.3  208,414.0    32,479   218,942     76,214.9  void cudnn::detail::implicit_convolve_sgemm<float, float, (int)1024, (int)5, (int)5, (int)3, (int)3…
+      1.4      598,911,967     16,524   36,245.0   34,944.0    33,599    58,560      4,005.2  void gemmSN_NN_kernel<float, (int)256, (int)4, (int)2, (int)8, (int)2, (int)4, cublasGemvTensorStri…
+      0.9      414,629,126    139,077    2,981.3    3,072.0     2,464    13,823        254.2  cudnn::gemm::computeOffsetsKernel(cudnn::gemm::ComputeOffsetsParams)                                
+      0.7      292,077,436      1,377  212,111.4  211,774.0   210,750   216,574        875.8  volta_scudnn_128x64_relu_medium_nn_v1                                                               
+      0.5      212,628,606      2,754   77,207.2   81,119.0    23,007    95,902     18,318.0  void transpose_readWrite_alignment_kernel<float, float, (int)1, (bool)0, (int)6, (int)5, (int)3>(cu…
+      0.3      120,307,064      1,377   87,369.0   87,359.0    86,464    88,128        202.7  void at::native::<unnamed>::max_pool_forward_nchw<float, float>(int, const T1 *, int, int, int, int…
+      0.2      105,258,233      1,377   76,440.3   76,416.0    74,688    78,847        624.5  volta_sgemm_64x32_sliced1x4_tn                                                                      
+      0.2       76,216,406     16,524    4,612.5    4,257.0     3,872    11,776        786.1  void LSTM_elementWise_fp<float, float, float, (cudnnRNNBiasMode_t)2>(int, int, int, int, const T1 *…
+      0.2       65,939,225      4,131   15,962.0   18,784.0     5,280    24,607      7,559.4  void at::native::unrolled_elementwise_kernel<at::native::MulFunctor<float>, at::detail::Array<char …
+      0.1       64,846,285      4,132   15,693.7    2,592.0     2,367    46,271     18,618.0  void at::native::vectorized_elementwise_kernel<(int)4, at::native::FillFunctor<float>, at::detail::…
+      0.1       48,551,658      1,377   35,259.0   34,303.0    20,896    67,519      5,745.9  volta_sgemm_64x32_sliced1x4_nn                                                                      
+      0.1       33,728,951      1,377   24,494.5   24,480.0    23,712    25,120        201.7  void at::native::reduce_kernel<(int)512, (int)1, at::native::ReduceOp<float, at::native::func_wrapp…
+      0.1       24,353,427      5,508    4,421.5    4,544.0     3,264     5,408        569.3  void at::native::unrolled_elementwise_kernel<at::native::copy_device_to_device(at::TensorIterator &…
+      0.0       21,569,503      1,377   15,664.1   15,648.0    15,200    16,224        147.1  volta_sgemm_128x32_tn                                                                               
+      0.0       16,151,953      4,131    3,909.9    3,777.0     3,423    10,528        350.2  void splitKreduce_kernel<float, float, float>(cublasSplitKParams<T3>, const T1 *, const T2 *, T2 *,…
+      0.0        8,802,418      1,377    6,392.5    6,368.0     6,303     7,136        105.7  volta_sgemm_32x32_sliced1x4_tn                                                                      
+      0.0        6,869,537      1,377    4,988.8    4,960.0     4,288     9,760        189.7  void at::native::unrolled_elementwise_kernel<at::native::AddFunctor<float>, at::detail::Array<char …
+      0.0        6,137,389      1,377    4,457.1    4,320.0     4,127     7,136        455.9  void at::native::<unnamed>::indexSelectLargeIndex<float, long, unsigned int, (int)2, (int)2, (int)-…
+      0.0        5,552,368      1,377    4,032.2    4,000.0     3,935     4,416         69.6  void at::native::<unnamed>::CatArrayBatchedCopy<float, unsigned int, (int)2, (int)128, (int)1>(T1 *…
+      0.0        5,546,064      1,377    4,027.6    4,031.0     3,968     4,384         50.1  void <unnamed>::softmax_warp_forward<float, float, float, (int)8, (bool)0>(T2 *, const T1 *, int, i…
+
+[7/8] Executing 'gpumemtimesum' stats report
+
+CUDA Memory Operation Statistics (by time):
+
+ Time (%)  Total Time (ns)  Count  Avg (ns)  Med (ns)  Min (ns)  Max (ns)   StdDev (ns)      Operation     
+ --------  ---------------  -----  --------  --------  --------  ---------  -----------  ------------------
+     84.7      781,066,423  7,833  99,714.9   2,272.0     1,087  4,181,559    166,925.0  [CUDA memcpy HtoD]
+     15.3      140,730,511  8,266  17,025.2   3,392.0     2,528     69,599     23,184.6  [CUDA memcpy DtoD]
+      0.0           12,415      4   3,103.8   3,071.5     3,040      3,232         90.5  [CUDA memset]     
+
+[8/8] Executing 'gpumemsizesum' stats report
+
+CUDA Memory Operation Statistics (by size):
+
+ Total (MB)  Count  Avg (MB)  Med (MB)  Min (MB)  Max (MB)  StdDev (MB)      Operation     
+ ----------  -----  --------  --------  --------  --------  -----------  ------------------
+ 29,959.864  8,266     3.624     0.016     0.008    16.777        6.150  [CUDA memcpy DtoD]
+  9,134.552  7,833     1.166     0.000     0.000    20.972        1.836  [CUDA memcpy HtoD]
+      0.052      4     0.013     0.013     0.013     0.013        0.000  [CUDA memset]     
+
+Generated:
+    /home/zhuxiaozhi/MMBench/report1.nsys-rep
+    /home/zhuxiaozhi/MMBench/report1.sqlite

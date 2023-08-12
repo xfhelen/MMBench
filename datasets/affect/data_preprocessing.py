@@ -218,7 +218,7 @@ def data_preprocess_fast(label_path,audio_path,vision_path,text_path,output_file
     output_id=output_list_id
     # output_label=np.repeat(output_label,10,axis=0)
     # output_id=output_id*10
-    print("output_label.shape={}".format(output_label.shape))
+    # print("output_label.shape={}".format(output_label.shape))
 
     with h5py.File(audio_path, 'r') as file:
         output_list_audio = []
@@ -230,7 +230,7 @@ def data_preprocess_fast(label_path,audio_path,vision_path,text_path,output_file
             output_list_audio.append(reshaped_arr)
     output_audio = np.concatenate(output_list_audio, axis=0)
     # output_audio=np.repeat(output_audio,10,axis=0)
-    print("output_audio.shape={}".format(output_audio.shape))
+    # print("output_audio.shape={}".format(output_audio.shape))
 
     with h5py.File(vision_path,'r') as file:
         output_list_vision=[]
@@ -241,7 +241,7 @@ def data_preprocess_fast(label_path,audio_path,vision_path,text_path,output_file
             output_list_vision.append(reshaped_arr)
     output_vision=np.concatenate(output_list_vision,axis=0)
     # output_vision=np.repeat(output_vision,10,axis=0)
-    print("output_vision.shape={}".format(output_vision.shape))
+    # print("output_vision.shape={}".format(output_vision.shape))
 
     with h5py.File(text_path,'r') as file:
         output_list_text=[]
@@ -252,7 +252,7 @@ def data_preprocess_fast(label_path,audio_path,vision_path,text_path,output_file
             output_list_text.append(reshaped_arr)
     output_text=np.concatenate(output_list_text,axis=0)
     # output_text=np.repeat(output_text,10,axis=0)
-    print("output_text.shape={}".format(output_text.shape))
+    # print("output_text.shape={}".format(output_text.shape))
 
     output_dict = {
         'train': {

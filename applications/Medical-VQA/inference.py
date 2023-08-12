@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser(
     description='Read config file name',
     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-parser.add_argument('--path_config', default='config/idrid_regions/single/default_consistency.yaml', type=str, help='path to a yaml options file') 
+parser.add_argument('--path_config', default='applications/Medical-VQA/config/idrid_regions/single/default_consistency.yaml', type=str, help='path to a yaml options file') 
 parser.add_argument('--need_data', default=1, type=int, help='choose whether to use real data') 
 parser.add_argument('--options', default="normal", type=str, help='choose the model part') 
 args = parser.parse_args()

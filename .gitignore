@@ -15,3 +15,6 @@ applications/Vison&Touch/log
 
 applications/*/log/
 ncu_*.csv
+datasets/dme_vqa
+datasets/medical-segmentation
+sailgpu1*

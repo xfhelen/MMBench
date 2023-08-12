@@ -23,7 +23,7 @@ from data.transforms import *
 from data.datasets_nii import Brats_loadall_nii, Brats_loadall_test_nii
 from data.data_utils import init_fn
 
-src_path = './Training'
+src_path = 'datasets/medical-segmentation/Training'
 tar_path = './BRATS2018_Training_none_npy'
 
 class _RepeatSampler(object):
