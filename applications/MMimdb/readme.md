@@ -5,10 +5,10 @@ This is a multimodal dataset about movies, which includes various modal informat
 2. unzip the raw mmimdb dataset
 3. Create the `list.txt` file: 
    ```bash
-   ls ABSOLUTE_PATH_TO/mmimdb/dataset/*.json > list.txt
+   ls ABSOLUTE_PATH_TO/mmimdb//*.json > list.txt
    ```
    Use the absolute path so that you can always find the raw data.
 ## 3. How to run the code
 ```bash
-   python3 multi_model_end2end_test.py
+   python inference.py --model_name mmimdb_simple_late_fusion --options encoder/fusion/head/normal
 ```
