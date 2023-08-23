@@ -1,5 +1,10 @@
 ## 1.Introduction
 This is a multimodal dataset about movies, which includes various modal information such as movie information, stills, movie dialogues, and emotional analysis.
+
+The structure of the model is :
+
+<img src = "../../figures/mmimdb.png" width = 55%>
+
 ## 2. How to prepare the dataset
 1. Download [raw mmimdb dataset](https://archive.org/download/mmimdb/mmimdb.tar.gz)(https://archive.org/download/mmimdb/mmimdb.tar.gz)
 2. unzip the raw mmimdb dataset
