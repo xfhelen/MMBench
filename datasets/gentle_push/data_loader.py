@@ -17,8 +17,6 @@ import torch
 
 from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
-from robustness.visual_robust import add_visual_noise
-from robustness.timeseries_robust import add_timeseries_noise
 
 dataset_urls = {
     # Mujoco URLs
@@ -95,34 +93,35 @@ class PushTask():
             tuple: Tuple of training dataloader, validation dataloader, and test dataloader
         """
         # Load trajectories into memory
-        train_trajectories = cls.get_train_trajectories(**dataset_args)
+        # train_trajectories = cls.get_train_trajectories(**dataset_args)
         val_trajectories = cls.get_eval_trajectories(**dataset_args)
-        test_trajectories = cls.get_test_trajectories(
-            modalities, **dataset_args)
-        train_loader = DataLoader(
-            SubsequenceDataset(train_trajectories,
-                               subsequence_length, modalities),
-            batch_size=batch_size,
-            shuffle=True,
-            drop_last=drop_last,
-        )
+        # test_trajectories = cls.get_test_trajectories(
+        #     modalities, **dataset_args)
+        # train_loader = DataLoader(
+        #     SubsequenceDataset(train_trajectories,
+        #                        subsequence_length, modalities),
+        #     batch_size=batch_size,
+        #     shuffle=True,
+        #     drop_last=drop_last,
+        # )
         val_loader = DataLoader(
             SubsequenceDataset(
                 val_trajectories, subsequence_length, modalities),
             batch_size=batch_size,
             shuffle=True,
         )
-        test_loader = dict()
-        for modality, trajectories in test_trajectories.items():
-            test_loader[modality] = []
-            for traj in trajectories:
-                test_loader[modality].append(DataLoader(
-                    SubsequenceDataset(traj, subsequence_length, modalities),
-                    batch_size=batch_size,
-                    shuffle=False,
-                )
-                )
-        return train_loader, val_loader, test_loader
+        # test_loader = dict()
+        # for modality, trajectories in test_trajectories.items():
+        #     test_loader[modality] = []
+        #     for traj in trajectories:
+        #         test_loader[modality].append(DataLoader(
+        #             SubsequenceDataset(traj, subsequence_length, modalities),
+        #             batch_size=batch_size,
+        #             shuffle=False,
+        #         )
+        #         )
+        # return train_loader, val_loader, test_loader
+        return val_loader
 
     @classmethod
     def get_train_trajectories(
@@ -250,14 +249,15 @@ def _load_trajectories(
     assert image_blackout_ratio == 0 or sequential_image_rate == 1
 
     for name in input_files:
+
         max_trajectory_count = sys.maxsize
         if type(name) == tuple:
             name, max_trajectory_count = name
         assert type(max_trajectory_count) == int
 
+
         # Load trajectories file into memory, all at once
-        with fannypack.data.TrajectoriesFile(
-            fannypack.data.cached_drive_file(name, dataset_urls[name])
+        with fannypack.data.TrajectoriesFile(name
         ) as f:
             raw_trajectories = list(f)
 
