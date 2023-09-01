@@ -16,7 +16,7 @@ sys.path.append("C:\\Users\\29296\\Desktop\\MMBench-main\\datasets")
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 from models.unimodals.common_models import GRU, MLP, Sequential, Identity,GRUWithLinear  # noqa
-from models.training_structures.Supervised_Learning import train, test  # noqa
+from models.examples.affect.Supervised_Learning_2 import train, test  # noqa
 from datasets.affect.get_data import get_dataloader  # noqa
 from models.fusions.common_fusions import ConcatEarly  # noqa
 #from private_test_scripts.all_in_one import all_in_one_train, all_in_one_test # noqa
