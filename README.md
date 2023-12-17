@@ -84,13 +84,23 @@ Correspondence to:
   - [Xiaozhi Zhu](zhuxiaozhi@sjtu.edu.cn) (zhuxiaozhi@sjtu.edu.cn)
   - [Mo Niu](2929629852@sjtu.edu.cn) (2929629852@sjtu.edu.cn)
   - [Tianyu Zang](mijiurushi@sjtu.edu.cn) (mijiurushi@sjtu.edu.cn)
-  - [Xiaofeng Hou](	houxiaofeng@ust.hk) (houxiaofeng@ust.hk)
+  - [Xiaofeng Hou](hou-xf@cs.sjtu.edu.cn) (hou-xf@cs.sjtu.edu.cn)
+  - [Chao Li](lichao@cs.sjtu.edu.cn) (lichao@cs.sjtu.edu.cn)
+  - [Minyi Guo](guo-my@cs.sjtu.edu.cn) (guo-my@cs.sjtu.edu.cn)
+  - [Jieping Ye](yejieping.ye@alibaba-inc.com) (yejieping.ye@alibaba-inc.com)
+  - [Gungya Li](donald.lee@wondersgroup.com) (donald.lee@wondersgroup.com)
 
 ## Ⅶ. Related Publications
 
 [**Characterizing and Understanding End-to-End
 Multi-modal Neural Networks on GPUs**](https://ieeexplore.ieee.org/abstract/document/9924614)<br>
 Xiaofeng Hou, Cheng Xu, Jiacheng Liu, Xuehan Tang, Lingyu Sun, Chao Li and Kwang-Ting Cheng<br>*IEEE Computer Architecture Letters (CAL)*
+
+[**MMBench: Benchmarking End-to-End Multi-modal DNNs and Understanding Their Hardware-Software Implications.**]([https://ieeexplore.ieee.org/abstract/document/9924614](https://ieeexplore.ieee.org/document/10289409/))<br>
+Cheng Xu, Xiaofeng Hou, Jiacheng Liu, Chao Li, Tianhao Huang, Xiaozhi Zhu, Mo Niu, Lingyu Sun, Peng Tang, Tongqiao Xu, Kwang-Ting Cheng, Minyi Guo<br>*IEEE International Symposium on Workload Characterization (IISWC)*
+
+
+
 
 If you find this repository useful, please cite our paper:
 
@@ -100,5 +110,12 @@ If you find this repository useful, please cite our paper:
   author={Xiaofeng Hou and Cheng Xu and Jiacheng Liu and Xuehan Tang and Lingyu Sun and Chao Li and Kwang-Ting Cheng},
   journal={IEEE Computer Architecture Letters (CAL)},
   year={2022}
+}
+
+@INPROCEEDINGS{10289409,
+  author={Xu, Cheng and Hou, Xiaofeng and Liu, Jiacheng and Li, Chao and Huang, Tianhao and Zhu, Xiaozhi and Niu, Mo and Sun, Lingyu and Tang, Peng and Xu, Tongqiao and Cheng, Kwang-Ting and Guo, Minyi},
+  booktitle={2023 IEEE International Symposium on Workload Characterization (IISWC)}, 
+  title={MMBench: Benchmarking End-to-End Multi-modal DNNs and Understanding Their Hardware-Software Implications}, 
+  year={2023},
 }
 ```xxxxxxxxxx @article{hou2022characterizing,  title={Characterizing and Understanding End-to-End Multi-modal Neural Networks on GPUs},  author={Xiaofeng Hou and Cheng Xu and Jiacheng Liu and Xuehan Tang and Lingyu Sun and Chao Li and Kwang-Ting Cheng},  journal={IEEE Computer Architecture Letters (CAL)},  year={2022}}bibtex
