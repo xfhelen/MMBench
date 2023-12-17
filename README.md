@@ -88,7 +88,7 @@ Correspondence to:
   - [Chao Li](lichao@cs.sjtu.edu.cn) (lichao@cs.sjtu.edu.cn)
   - [Minyi Guo](guo-my@cs.sjtu.edu.cn) (guo-my@cs.sjtu.edu.cn)
   - [Jieping Ye](yejieping.ye@alibaba-inc.com) (yejieping.ye@alibaba-inc.com)
-  - [Gungya Li](donald.lee@wondersgroup.com) (donald.lee@wondersgroup.com)
+  - [Guangya Li](donald.lee@wondersgroup.com) (donald.lee@wondersgroup.com)
 
 ## Ⅶ. Related Publications
 
