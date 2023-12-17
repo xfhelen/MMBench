@@ -71,6 +71,7 @@ Some codes and applications were adapted from the [MultiBench](https://github.co
 
 
 ## Ⅵ. Contributors
+Our team has been working on related technologies since 2018. Thank you to everyone for contributing to this project. 
 
 Correspondence to: 
 
