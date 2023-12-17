@@ -77,18 +77,20 @@ Correspondence to:
   - [Cheng Xu](jerryxu@sjtu.edu.cn) (jerryxu@sjtu.edu.cn)
   - [Xuehan Tang](xuehantang00@gmail.com) (xuehantang00@gmail.com)
   - [Jiacheng Liu](liujiacheng@sjtu.edu.cn) (	liujiacheng@sjtu.edu.cn)
+  - [Xiaofeng Hou](hou-xf@cs.sjtu.edu.cn) (hou-xf@cs.sjtu.edu.cn)
+  - [Chao Li](lichao@cs.sjtu.edu.cn) (lichao@cs.sjtu.edu.cn)
+  - [Jieping Ye](yejieping.ye@alibaba-inc.com) (yejieping.ye@alibaba-inc.com)
   - [Lingyu Sun](sunlingyu@sjtu.edu.cn) (sunlingyu@sjtu.edu.cn)
   - [Tongqiao Xu](tqxu23@sjtu.edu.cn) (tqxu23@sjtu.edu.cn)
   - [Peng Tang](tttppp@sjtu.edu.cn) (tttppp@sjtu.edu.cn)
+  - [Guangya Li](donald.lee@wondersgroup.com) (donald.lee@wondersgroup.com)
   - [Tianhao Huang ](hth_2003@sjtu.edu.cn)(hth_2003@sjtu.edu.cn)
   - [Xiaozhi Zhu](zhuxiaozhi@sjtu.edu.cn) (zhuxiaozhi@sjtu.edu.cn)
   - [Mo Niu](2929629852@sjtu.edu.cn) (2929629852@sjtu.edu.cn)
   - [Tianyu Zang](mijiurushi@sjtu.edu.cn) (mijiurushi@sjtu.edu.cn)
-  - [Xiaofeng Hou](hou-xf@cs.sjtu.edu.cn) (hou-xf@cs.sjtu.edu.cn)
-  - [Chao Li](lichao@cs.sjtu.edu.cn) (lichao@cs.sjtu.edu.cn)
   - [Minyi Guo](guo-my@cs.sjtu.edu.cn) (guo-my@cs.sjtu.edu.cn)
-  - [Jieping Ye](yejieping.ye@alibaba-inc.com) (yejieping.ye@alibaba-inc.com)
-  - [Guangya Li](donald.lee@wondersgroup.com) (donald.lee@wondersgroup.com)
+  
+
 
 ## Ⅶ. Related Publications
 
