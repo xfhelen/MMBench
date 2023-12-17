@@ -96,7 +96,7 @@ Correspondence to:
 Multi-modal Neural Networks on GPUs**](https://ieeexplore.ieee.org/abstract/document/9924614)<br>
 Xiaofeng Hou, Cheng Xu, Jiacheng Liu, Xuehan Tang, Lingyu Sun, Chao Li and Kwang-Ting Cheng<br>*IEEE Computer Architecture Letters (CAL)*
 
-[**MMBench: Benchmarking End-to-End Multi-modal DNNs and Understanding Their Hardware-Software Implications.**]([https://ieeexplore.ieee.org/abstract/document/9924614](https://ieeexplore.ieee.org/document/10289409/)<br>
+[**MMBench: Benchmarking End-to-End Multi-modal DNNs and Understanding Their Hardware-Software Implications.**](https://ieeexplore.ieee.org/document/10289409/)<br>
 Cheng Xu, Xiaofeng Hou, Jiacheng Liu, Chao Li, Tianhao Huang, Xiaozhi Zhu, Mo Niu, Lingyu Sun, Peng Tang, Tongqiao Xu, Kwang-Ting Cheng, Minyi Guo<br>*IEEE International Symposium on Workload Characterization (IISWC)*
 
 
