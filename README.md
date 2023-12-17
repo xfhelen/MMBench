@@ -79,7 +79,7 @@ Correspondence to:
   - [Jiacheng Liu](liujiacheng@sjtu.edu.cn) (	liujiacheng@sjtu.edu.cn)
   - [Lingyu Sun](sunlingyu@sjtu.edu.cn) (sunlingyu@sjtu.edu.cn)
   - [Tongqiao Xu](tqxu19@fudan.edu.cn) (tqxu19@fudan.edu.cn)
-  - [Peng Tang](85704592@qq.com) (85704592@qq.com)
+  - [Peng Tang](85704592@qq.com) (tttppp@sjtu.edu.cn)
   - [Tianhao Huang ](hth_2003@sjtu.edu.cn)(hth_2003@sjtu.edu.cn)
   - [Xiaozhi Zhu](zhuxiaozhi@sjtu.edu.cn) (zhuxiaozhi@sjtu.edu.cn)
   - [Mo Niu](2929629852@sjtu.edu.cn) (2929629852@sjtu.edu.cn)
