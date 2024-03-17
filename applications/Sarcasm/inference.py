@@ -16,6 +16,9 @@ import torch.utils.data
 import torchvision
 from torch.nn import functional as F
 from tqdm import tqdm
+import sys
+sys.path.insert(1,os.getcwd())
+sys.path.append(os.path.dirname(os.path.dirname(os.getcwd())))
 
 import librosa
 import pickle
@@ -121,11 +124,11 @@ def main() -> None:
     DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     if options == 'encoder' or options == 'normal': 
 
-        utterence_videos_folder_path = "data/videos/utterances_final"
-        context_videos_folder_path = "data/videos/context_final"
-        utterance_frame_folder_path = "data/frames/utterences"
-        context_frame_folder_path = "data/frames/context"
-        audios_folder_path = "data/audios/utterances"
+        utterence_videos_folder_path = "applications/Sarcasm/data/videos/utterances_final"
+        context_videos_folder_path = "applications/Sarcasm/data/videos/context_final"
+        utterance_frame_folder_path = "applications/Sarcasm/data/frames/utterences"
+        context_frame_folder_path = "applications/Sarcasm/data/frames/context"
+        audios_folder_path = "applications/Sarcasm/data/audios/utterances"
         transforms = torchvision.transforms.Compose([
             torchvision.transforms.Resize(256),
             torchvision.transforms.CenterCrop(224),
@@ -134,13 +137,13 @@ def main() -> None:
         ])    
 
 
-        text = open("data/bert-input.txt").read()
+        text = open("applications/Sarcasm/data/bert-input.txt").read()
         sentences = text.split("\n") 
 
-        with open("data/sarcasm_data.json") as file:
+        with open("applications/Sarcasm/data/sarcasm_data.json") as file:
             videos_data_dict = json.load(file)
         
-        BERT_PATH = './bert-base-uncased'
+        BERT_PATH = 'applications/Sarcasm/bert-base-uncased'
 
         tokenizer = BertTokenizer.from_pretrained(BERT_PATH)
 
