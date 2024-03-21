@@ -1,6 +1,9 @@
 #!/bin/bash
 
-nsys profile --stats=true python "$1" > "scripts/nsys_temp_fil e.txt"
+PYTHON=$(which python)
+PYTHON_ARGS="${@:2}"
 
-rm report*.nsys-rep
-rm report*.sqlite
+sudo /usr/local/cuda-11.7/bin/nsys profile --stats=true $PYTHON "$1" $PYTHON_ARGS > "scripts/nsys_temp_file.txt"
+
+sudo rm report*.nsys-rep
+sudo rm report*.sqlite
