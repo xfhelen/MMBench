@@ -12,13 +12,14 @@ from models.fusions.common_fusions import LowRankTensorFusion
 from models.unimodals.common_models import MLP
 from models.unimodals.robotics.encoders import (ProprioEncoder, ForceEncoder, ImageEncoder, DepthEncoder, ActionEncoder)
 from models.eval_scripts.complexity import all_in_one_train
+import os
 
 parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('--options', default="normal", type=str, help='choose the model part') 
 args = parser.parse_args()
 options = args.options
 
-sys.path.append('/home/zhuxiaozhi/MMBench')
+sys.path.append(os.getcwd())
 device=torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 class MMDL(nn.Module):
@@ -135,7 +136,7 @@ def train(encoders, fusion, head, valid_dataloader, total_epochs, is_packed=Fals
             model.eval()
             with torch.profiler.profile(
                 schedule=torch.profiler.schedule(wait=1, warmup=1, active=3, repeat=2),
-                on_trace_ready=torch.profiler.tensorboard_trace_handler('/home/zhuxiaozhi/MMBench/applications/Vison&Touch/log'),
+                on_trace_ready=torch.profiler.tensorboard_trace_handler('applications/Vision-Touch/log'),
                 record_shapes=True,
                 profile_memory=True,
                 with_stack=True
@@ -168,8 +169,8 @@ def set_seeds(seed, use_cuda):
         torch.manual_seed(seed)
 
 def main():
-    with open('applications/Vison&Touch/training_default.yaml') as f:
-        configs = yaml.load(f)
+    with open('applications/Vision-Touch/training_default.yaml') as f:
+        configs = yaml.load(f,yaml.FullLoader)
     use_cuda = True
     configs = configs
     device = torch.device("cuda" if use_cuda else "cpu")

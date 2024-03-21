@@ -6,12 +6,12 @@ Please make sure to replace the Python path in the script with your own before u
 ### Usage Example
 (Note that the working directory is MMBench):
 ```bash
-./scripts/ncu_metric.sh applications/Vison\&Touch/LRTF.py applications/Vison\&Touch/ncu_info.csv
+./scripts/ncu_metric.sh applications/Vision-Touch/LRTF.py applications/Vision-Touch/ncu_info.csv
 ```
 
 Command line output:
 ```bash
-Output file path: applications/Vison&Touch/ncu_info.csv
+Output file path: applications/Vision-Touch/ncu_info.csv
 Metric: DRAM utilization, Average Value: 17.131235955056173
 Metric: achieved occupancy, Average Value: 37.859348314606784
 Metric: IPC, Average Value: 0.1575730337078654
@@ -21,7 +21,7 @@ Metric: GST efficiency (global store efficiency), Average Value: 89.537280898876
 
 There are also optional parameters (normal/encoder/fusion/head, with normal being the default) for measuring in different stages:
 ```bash
-./scripts/ncu_metric.sh applications/Vison\&Touch/LRTF.py applications/Vison\&Touch/ncu_info_encoder.csv --options encoder
+./scripts/ncu_metric.sh applications/Vision-Touch/LRTF.py applications/Vision-Touch/ncu_info_encoder.csv --options encoder
 ```
 
 ## Run Nsight System(sys) script
@@ -31,7 +31,7 @@ This script uses nsys to measure GPU data. The argument of the script is the Pyt
 (Note that the working directory is MMBench):
 
 ```bash
-./scripts/nsys_metric.sh applications/Vison\&Touch/LRTF.py
+./scripts/nsys_metric.sh applications/Vision-Touch/LRTF.py
 ```
 All the output data is stored in the `scripts/nsys_temp_file.txt` file.
 
@@ -43,12 +43,12 @@ All the output data is stored in the `scripts/nsys_temp_file.txt` file.
 ### 使用示例
 (请注意工作目录为MMBench)：
 ```bash
-./scripts/ncu_metric.sh applications/Vison\&Touch/LRTF.py applications/Vison\&Touch/ncu_info.csv
+./scripts/ncu_metric.sh applications/Vision-Touch/LRTF.py applications/Vision-Touch/ncu_info.csv
 ```
 
 命令行输出情况：
 ```bash
-Output file path: applications/Vison&Touch/ncu_info.csv
+Output file path: applications/Vision-Touch/ncu_info.csv
 Metric: DRAM utilization, Average Value: 17.131235955056173
 Metric: achieved occupancy, Average Value: 37.859348314606784
 Metric: IPC, Average Value: 0.1575730337078654
@@ -58,7 +58,7 @@ Metric: GST efficiency (global store efficiency), Average Value: 89.537280898876
 
 同时还有可选参数(normal/encoder/fusion/head，其中默认为normal)，能够实现分阶段测量：
 ```bash
-./scripts/ncu_metric.sh applications/Vison\&Touch/LRTF.py applications/Vison\&Touch/ncu_info_encoder.csv --options encoder
+./scripts/ncu_metric.sh applications/Vision-Touch/LRTF.py applications/Vision-Touch/ncu_info_encoder.csv --options encoder
 ```
 
 ## nsys脚本
@@ -67,7 +67,7 @@ Metric: GST efficiency (global store efficiency), Average Value: 89.537280898876
 ### 使用示例
 (请注意工作目录为MMBench)：
 ```bash
-./scripts/nsys_metric.sh applications/Vison\&Touch/LRTF.py
+./scripts/nsys_metric.sh applications/Vision-Touch/LRTF.py
 ```
 
 输出的全部数据存在 `scripts/nsys_temp_file.txt` 文件中。
