@@ -214,9 +214,6 @@ def main() -> None:
             
             if options == 'encoder':
                 break
-            print(video_feature.shape)
-            print(audio_feature.shape)
-            print(text_feature.shape)
             fused_feature = torch.cat((video_feature,audio_feature,text_feature),axis = 1)
 
             if train_input is None:
@@ -233,47 +230,6 @@ def main() -> None:
             train_input = train_input.to(torch.float32).detach()
             train_output  = torch.tensor(train_output, dtype=torch.long).to(DEVICE).detach()
 
-    ## train
-    # train_input, val_input, train_output, val_output = train_test_split(train_input, train_output, test_size=0.2, random_state=42)
-    # train_dataset = SarcasmDataset(train_input,train_output)
-    # val_dataset = SarcasmDataset(val_input,val_output)
-    # train_dataloader = DataLoader(train_dataset,32)
-    # val_dataloader = DataLoader(val_dataset,1)
-
-    # model = Sarcasm().to(DEVICE)
-
-    # criterion = nn.CrossEntropyLoss()
-    # optimizer = torch.optim.SGD(model.parameters(), lr=0.001)
-    # num_epochs = 1
-
-    # for epoch in range(num_epochs):
-    #     model.train()
-    #     for idx,(x,y) in enumerate(train_dataloader,0):
-    #         # 前向传播
-    #         output = model(x)
-
-    #         loss = criterion(output, y)
-
-    #         # 反向传播和优化
-    #         optimizer.zero_grad()
-    #         loss.backward()
-    #         optimizer.step()
-
-    #         if idx % 10 ==0:
-    #             print("epoch={}/{},{}/{} of train, loss={}".format(epoch, 5, idx, len(train_dataloader),loss.item()))
-            
-    #     model.eval()
-    #     total_loss = 0
-    #     for idx,(data_x,data_y) in enumerate(val_dataloader,0):
-    #         data_x = data_x
-    #         data_y = data_y
-    #         outputs = model(data_x)
-    #         loss = criterion(outputs, data_y)
-    #         total_loss += loss.item()
-    #     print("val_loss={}".format(total_loss / total_len))
-    # torch.save(model.state_dict(), 'model.pt')
-
-    # test
             test_dataset = SarcasmDataset(train_input,train_output)
             test_dataloader = DataLoader(test_dataset,1)
             model = Sarcasm().to(DEVICE)
