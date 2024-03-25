@@ -141,7 +141,7 @@ def main() -> None:
     with open("applications/Sarcasm/data/sarcasm_data.json") as file:
         videos_data_dict = json.load(file)
     
-    BERT_PATH = 'applications/Sarcasm/data/bert-base-uncased'
+    BERT_PATH = 'applications/Sarcasm/bert-base-uncased'
 
     tokenizer = BertTokenizer.from_pretrained(BERT_PATH)
 
@@ -151,7 +151,7 @@ def main() -> None:
     train_input = None
     train_output = []
     # total_len = len(os.listdir(utterence_videos_folder_path))
-    total_len = 16
+    total_len = 1
     for video_id in list(videos_data_dict):
 
         utterance_video_file_path = utterence_videos_folder_path + "/" + video_id + ".mp4"
