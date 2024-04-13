@@ -97,11 +97,11 @@ class MMDL(nn.Module):
                 for i in range(len(inputs[0])):
                     outs.append(self.encoders[i](
                         [inputs[0][i], inputs[1][i]]))
-                    print("shape", outs[i].shape)
+                    # print("shape", outs[i].shape)
             else:
                 for i in range(len(inputs)):
                     outs.append(self.encoders[i](inputs[i]))
-                    print("shape", outs[i].shape)
+                    # print("shape", outs[i].shape)
 
 
             self.reps = outs
@@ -117,7 +117,7 @@ class MMDL(nn.Module):
             if type(out) is tuple:
                 out = out[0]
     
-            print("out", out.shape)
+            # print("out", out.shape)
             if self.has_padding and not isinstance(outs[0], torch.Tensor):
                 return self.head([out, inputs[1][0]])
             return self.head(out)

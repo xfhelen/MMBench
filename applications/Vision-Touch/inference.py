@@ -5,6 +5,9 @@ import torch.nn as nn
 import torch
 import numpy as np
 import argparse
+import os
+sys.path.insert(1,os.getcwd())
+sys.path.append(os.path.dirname(os.path.dirname(os.getcwd())))
 from models.fusions.robotics.sensor_fusion import roboticsConcat
 from models.utils.helper_modules import Sequential2
 from datasets.robotics.get_data import get_data
@@ -12,7 +15,9 @@ from models.fusions.common_fusions import LowRankTensorFusion
 from models.unimodals.common_models import MLP
 from models.unimodals.robotics.encoders import (ProprioEncoder, ForceEncoder, ImageEncoder, DepthEncoder, ActionEncoder)
 from models.eval_scripts.complexity import all_in_one_train
-import os
+
+
+
 
 parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('--options', default="normal", type=str, help='choose the model part') 
@@ -143,6 +148,7 @@ def train(encoders, fusion, head, valid_dataloader, total_epochs, is_packed=Fals
             ) as prof:
                 with torch.no_grad():
                     for j in valid_dataloader:
+                        
                         if is_packed:
                             _ = model([[_processinput(i).to(device) for i in j[0]], j[1]])
                         else:
