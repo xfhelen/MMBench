@@ -18,3 +18,4 @@ ncu_*.csv
 datasets/dme_vqa
 datasets/medical-segmentation
 sailgpu1*
+log/

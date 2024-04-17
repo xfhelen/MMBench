@@ -133,10 +133,8 @@ class MultimodalManipulationDataset(Dataset):
 
         dataset.close()
         unpaired_dataset.close()
-
         if self.transform:
             sample = self.transform(sample)
-
         return sample
 
     def _init_paired_filenames(self):
@@ -354,7 +352,6 @@ class MultimodalManipulationDataset_robust(Dataset):
 
         if self.transform:
             sample = self.transform(sample)
-
         return sample
 
     def _init_paired_filenames(self):

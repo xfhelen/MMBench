@@ -247,7 +247,6 @@ def _load_trajectories(
 
     assert 1 > image_blackout_ratio >= 0
     assert image_blackout_ratio == 0 or sequential_image_rate == 1
-
     for name in input_files:
 
         max_trajectory_count = sys.maxsize
@@ -260,7 +259,6 @@ def _load_trajectories(
         with fannypack.data.TrajectoriesFile(name
         ) as f:
             raw_trajectories = list(f)
-
         # Iterate over each trajectory
         for raw_trajectory_index, raw_trajectory in enumerate(raw_trajectories):
             if raw_trajectory_index >= max_trajectory_count:
@@ -280,7 +278,6 @@ def _load_trajectories(
                 states[:, 1] = raw_trajectory["pos"][:, 2]
             else:
                 states[:, :2] = raw_trajectory["Cylinder0_pos"][:, :2]  # x, y
-
             # Pull out observations
             # This is currently consisted of:
             # > gripper_pos: end effector position
@@ -318,6 +315,7 @@ def _load_trajectories(
                     [observations["gripper_sensors"]], noise_level=haptics_noise, struct_drop=False)[0]
             assert observations["gripper_sensors"].shape[1] == 7
 
+            
             # Zero out proprioception or haptics if unused
             if not use_proprioception:
                 observations["gripper_pos"][:] = 0
@@ -334,6 +332,7 @@ def _load_trajectories(
                 observations["image"] = np.array(add_visual_noise(
                     observations["image"], noise_level=visual_noise))
             assert observations["image"].shape == (timesteps, 32, 32)
+
 
             # Mask image observations based on dataset args
             image_mask: np.ndarray
@@ -539,7 +538,6 @@ def _load_trajectories(
                     controls[start_timestep:],
                 )
             )
-
             # Reduce memory usage
             raw_trajectories[raw_trajectory_index] = None
             del raw_trajectory

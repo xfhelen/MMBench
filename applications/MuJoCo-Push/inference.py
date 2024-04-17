@@ -165,7 +165,6 @@ def run_multi(fusion_name):
 
 
     model = MMDL(encoders, fusion, head, has_padding=False).to(device)
-
     for j in val_loader:
         model.eval()
         out = model([i.float().to(device) for i in j[:-1]], options)

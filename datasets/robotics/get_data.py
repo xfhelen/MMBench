@@ -80,5 +80,5 @@ def get_data(device, configs, unimodal=None, output='contact_next'):
         pin_memory=True,
         drop_last=True,
     )
-    
+
     return dataloaders['val']

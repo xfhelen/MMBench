@@ -29,6 +29,7 @@ class VQA_Base(nn.Module):
         if not self.pre_visual:
             self.image = image.get_visual_feature_extractor(config)
 
+        
         # create module for text feature extraction
         self.text = text.get_text_feature_extractor(config, vocab_words)
 
