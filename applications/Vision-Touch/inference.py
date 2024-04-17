@@ -1,4 +1,7 @@
 import sys
+import os
+sys.path.append(os.getcwd())
+
 import random
 import yaml
 import torch.nn as nn
@@ -12,14 +15,14 @@ from models.fusions.common_fusions import LowRankTensorFusion
 from models.unimodals.common_models import MLP
 from models.unimodals.robotics.encoders import (ProprioEncoder, ForceEncoder, ImageEncoder, DepthEncoder, ActionEncoder)
 from models.eval_scripts.complexity import all_in_one_train
-import os
+
 
 parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('--options', default="normal", type=str, help='choose the model part') 
 args = parser.parse_args()
 options = args.options
 
-sys.path.append(os.getcwd())
+
 device=torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 class MMDL(nn.Module):
