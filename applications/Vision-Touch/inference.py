@@ -1,23 +1,24 @@
 import sys
 import os
 sys.path.append(os.getcwd())
-
+sys.path.append(os.path.dirname(os.path.dirname(os.getcwd())))
 import random
 import yaml
 import torch.nn as nn
 import torch
 import numpy as np
 import argparse
-import os
-sys.path.insert(1,os.getcwd())
-sys.path.append(os.path.dirname(os.path.dirname(os.getcwd())))
+import onnx
 from models.fusions.robotics.sensor_fusion import roboticsConcat
 from models.utils.helper_modules import Sequential2
 from datasets.robotics.get_data import get_data
 from models.fusions.common_fusions import LowRankTensorFusion
+from models.fusions.common_fusions import Concat
 from models.unimodals.common_models import MLP
+from models.unimodals.common_models import Identity
 from models.unimodals.robotics.encoders import (ProprioEncoder, ForceEncoder, ImageEncoder, DepthEncoder, ActionEncoder)
 from models.eval_scripts.complexity import all_in_one_train
+
 
 
 
@@ -28,7 +29,8 @@ args = parser.parse_args()
 options = args.options
 
 
-device=torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+# device=torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+device=torch.device("cpu")
 
 class MMDL(nn.Module):
     """Implements MMDL classifier."""
@@ -156,6 +158,7 @@ def train(encoders, fusion, head, valid_dataloader, total_epochs, is_packed=Fals
                             _ = model([[_processinput(i).to(device) for i in j[0]], j[1]])
                         else:
                             _ = model([_processinput(i).to(device) for i in j[:-1]])
+                            # print(_processinput(j[0]).shape)
                         prof.step()
 
     if track_complexity:
@@ -200,5 +203,44 @@ def main():
 
     train(encoders, fusion, head, val_loader,total_epochs=1)
 
+#Function to Convert to ONNX 
+def Convert_ONNX(): 
+    with open('applications/Vision-Touch/training_default.yaml') as f:
+        configs = yaml.load(f,yaml.FullLoader)
+    use_cuda = True
+    configs = configs
+    device = torch.device("cuda" if use_cuda else "cpu")
+
+    set_seeds(configs["seed"], use_cuda)
+
+    encoders = [
+        ImageEncoder(configs['zdim'], alpha=configs['vision']),
+        ForceEncoder(configs['zdim'], alpha=configs['force']),
+        ProprioEncoder(configs['zdim'], alpha=configs['proprio']),
+        DepthEncoder(configs['zdim'], alpha=configs['depth']),
+        ActionEncoder(configs['action_dim']),
+    ]
+    fusion = Sequential2(roboticsConcat("noconcat"), LowRankTensorFusion([256, 256, 256, 256, 32], 200, 40))
+    fusion.eval()
+    # fusion = Sequential2(roboticsConcat("noconcat"), Concat())
+    head = MLP(200, 128, 2)
+    # head = Identity()
+    val_loader = get_data(device, configs)
+
+    model = MMDL(encoders, fusion, head).to(device)
+    model.eval() 
+
+    data = next(iter(val_loader))
+    true_input = [i.float().to(device) for i in data[:-1]]
+    dummy_input = [torch.randn(true_input[i].shape) for i in range(len(true_input))]
+    # dummy_input = [torch.randn(true_input[i].shape, requires_grad=False).to(device).detach() for i in range(len(true_input))]
+
+
+    # print("Exporting the model to ONNX format...")
+    
+    torch.onnx.export(model, true_input, "./applications/Vision-Touch/model.onnx", export_params=True, opset_version=12)
+
+
 if __name__ == "__main__":
-    main()
+    # main()
+    Convert_ONNX()
