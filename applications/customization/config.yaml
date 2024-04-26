@@ -1,0 +1,29 @@
+# total
+batch_size: 1
+
+# encoder
+have_time: False
+time_series_length: 10
+
+## img
+have_img: True
+channels: 3
+img_size_x: 256
+img_size_y: 256 
+image_encoder: "Lenet"
+## audio
+have_audio: True
+audio_init_file: "application/customization/raw_data/audio.aac"
+
+## text
+have_text: True
+text_init_file: "application/customization/raw_data/text.txt"
+text
+
+## video
+have_video: True
+video_init_file: "application/customization/raw_data/video.mp4"
+
+## sensor
+have_sensor: True
+sensor_length: 10
