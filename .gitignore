@@ -12,6 +12,7 @@ applications/Vison&Touch/log
 *.pkl
 *.pt
 *.csd
+*.onnx
 
 applications/*/log/
 ncu_*.csv

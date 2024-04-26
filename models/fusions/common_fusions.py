@@ -6,7 +6,8 @@ from torch.nn import functional as F
 import pdb
 from torch.autograd import Variable
 
-
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+# device = torch.device("cpu")
 
 class Concat(nn.Module):
     """Concatenation of input data on dimension 1."""
@@ -339,13 +340,13 @@ class LowRankTensorFusion(nn.Module):
         self.factors = []
         for input_dim in input_dims:
             factor = nn.Parameter(torch.Tensor(
-                self.rank, input_dim+1, self.output_dim)).to(torch.device("cuda:0" if torch.cuda.is_available() else "cpu"))
+                self.rank, input_dim+1, self.output_dim), requires_grad=False).to(device)
             nn.init.xavier_normal_(factor)
             self.factors.append(factor)
 
-        self.fusion_weights = nn.Parameter(torch.Tensor(1, self.rank)).to(torch.device("cuda:0" if torch.cuda.is_available() else "cpu"))
+        self.fusion_weights = nn.Parameter(torch.Tensor(1, self.rank), requires_grad=False).to(device)
         self.fusion_bias = nn.Parameter(
-            torch.Tensor(1, self.output_dim)).to(torch.device("cuda:0" if torch.cuda.is_available() else "cpu"))
+            torch.Tensor(1, self.output_dim), requires_grad=False).to(device)
         # init the fusion weights
         nn.init.xavier_normal_(self.fusion_weights)
         self.fusion_bias.data.fill_(0)
@@ -363,7 +364,7 @@ class LowRankTensorFusion(nn.Module):
         fused_tensor = 1
         for (modality, factor) in zip(modalities, self.factors):
             ones = Variable(torch.ones(batch_size, 1).type(
-                modality.dtype), requires_grad=False).to(torch.device("cuda:0" if torch.cuda.is_available() else "cpu"))
+                modality.dtype), requires_grad=False).to(device)
             if self.flatten:
                 modality_withones = torch.cat(
                     (ones, torch.flatten(modality, start_dim=1)), dim=1)
