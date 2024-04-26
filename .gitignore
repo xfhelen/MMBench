@@ -19,3 +19,5 @@ datasets/dme_vqa
 datasets/medical-segmentation
 sailgpu1*
 log/
+
+nsys_temp_file.txt
