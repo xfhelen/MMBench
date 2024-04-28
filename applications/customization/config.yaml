@@ -43,6 +43,6 @@ fusion_type: "concat"
 
 # head
 head_type: "MLP"
-input_dim: 128
+input_dim: 571
 hidden_dim: 128
-output_dim: 10
+output_dim: 1

@@ -15,6 +15,7 @@ from models.unimodals.common_models import LeNet, MLP
 from models.unimodals.robotics.encoders import (ProprioEncoder, ForceEncoder, ImageEncoder, DepthEncoder, ActionEncoder)
 from models.fusions.common_fusions import Concat
 from models.eval_scripts.complexity import all_in_one_train
+from models.utils.helper_modules import Sequential2
 
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -59,26 +60,27 @@ class MMDL(nn.Module):
             else:
                 for i in range(len(inputs)):
                     outs.append(self.encoders[i](inputs[i]))
-                    print("i={}, shape={}".format(i, outs[i].shape))
+                    # print("i={}, shape={}".format(i, outs[i].shape))
 
 
-            # self.reps = outs
-            # if self.has_padding:
-            #     if isinstance(outs[0], torch.Tensor):
-            #         out = self.fuse(outs)
-            #     else:
-            #         out = self.fuse([i[0] for i in outs])
-            # else:
-            #     out = self.fuse(outs)
+            self.reps = outs
+            if self.has_padding:
+                if isinstance(outs[0], torch.Tensor):
+                    out = self.fuse(outs)
+                else:
+                    out = self.fuse([i[0] for i in outs])
+            else:
+                out = self.fuse(outs)
+            # print("out", out.shape)
 
-            # self.fuseout = out
-            # if type(out) is tuple:
-            #     out = out[0]
+            self.fuseout = out
+            if type(out) is tuple:
+                out = out[0]
     
-            # # print("out", out.shape)
-            # if self.has_padding and not isinstance(outs[0], torch.Tensor):
-            #     return self.head([out, inputs[1][0]])
-            # return self.head(out)
+            # print("out", out.shape)
+            if self.has_padding and not isinstance(outs[0], torch.Tensor):
+                return self.head([out, inputs[1][0]])
+            return self.head(out.float())
             
         # TODO 后面这些还得改
         # elif options == "encoder" :
@@ -162,6 +164,16 @@ class Librosa_encoder(nn.Module):
         audio_feature = torch.tensor(temp_feature).to(device)
         return torch.mean(audio_feature, dim=1).view(1, -1)
         
+class Linear_out_Lenet(nn.Module):
+    def __init__(self, in_channels, args_channels, additional_layers):
+        super(Linear_out_Lenet, self).__init__()
+        self.lenet = LeNet(in_channels, args_channels, additional_layers)
+
+    def forward(self, x):
+        out = self.lenet(x)
+        out = torch.flatten(out, start_dim=1)
+        out = torch.mean(out, dim=0, keepdim=True)
+        return out
 
 transforms = torchvision.transforms.Compose([
                 torchvision.transforms.Resize(256),
@@ -220,7 +232,7 @@ def main():
             img = torch.zeros([1, config["channels"], config["img_size_x"], config["img_size_y"]]).to(device)
             if config["img_encoder"] == "Lenet":
                 Lenet_channels = 6
-                encoders.append(LeNet(config["channels"], Lenet_channels , 3).to(device))
+                encoders.append(Linear_out_Lenet(config["channels"], Lenet_channels , 3).to(device))
                 inputs.append(img)
             elif config["img_encoder"] == "Resnet":
                 img = transforms(img)
@@ -246,19 +258,19 @@ def main():
                 inputs.append(audio)
         if config['have_sensor']:
             if config["have_force"]:
-                force_data = torch.zeros([64, 6, 32]).to(device)
+                force_data = torch.zeros([1, 6, 32]).to(device)
                 encoders.append(ForceEncoder(config['zdim'], alpha=config['force']).to(device))
                 inputs.append(force_data)
             if config["have_proprio"]:
-                proprio_data = torch.zeros([64, 8]).to(device)
+                proprio_data = torch.zeros([1, 8]).to(device)
                 encoders.append(ProprioEncoder(config['zdim'], alpha=config['proprio']).to(device))
                 inputs.append(proprio_data)
             if config["have_depth"]:
-                depth_data = torch.zeros([64, 1, 128, 128]).to(device)
+                depth_data = torch.zeros([1, 1, 128, 128]).to(device)
                 encoders.append(DepthEncoder(config['zdim'], alpha=config['depth']).to(device))
                 inputs.append(depth_data)
             if config["have_action"]:
-                action_data = torch.zeros([64, 4]).to(device)
+                action_data = torch.zeros([1, 4]).to(device)
                 encoders.append(ActionEncoder(config['action_dim']).to(device))
                 inputs.append(action_data)
         inputs.append(torch.zeros(1)) # label
