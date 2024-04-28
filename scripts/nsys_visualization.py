@@ -19,7 +19,7 @@ tp=[0,0,0,0, 0, 0, 0, 0]
 
 
 # 打开文件并读取内容
-with open('nsys_temp_file.txt', 'r',encoding='utf-8') as file:
+with open('scripts/nsys_temp_file.txt', 'r',encoding='utf-8') as file:
     # 初始化标志变量
     reading = False
     content = []
@@ -143,6 +143,9 @@ from pyecharts.commons.utils import JsCode
 
 total = sum(tp)
 percentages = [(i / total * 100) for i in tp]
+# temp output, will be removed soon
+print(label)
+print(percentages)
 
 pie = (
     Pie()
