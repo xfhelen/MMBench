@@ -60,7 +60,8 @@ class MMDL(nn.Module):
             else:
                 for i in range(len(inputs)):
                     outs.append(self.encoders[i](inputs[i]))
-                    # print("i={}, shape={}".format(i, outs[i].shape))
+                    print("encoder stage")
+                    print("i={}, shape={}".format(i, outs[i].shape))
 
 
             self.reps = outs
@@ -71,7 +72,8 @@ class MMDL(nn.Module):
                     out = self.fuse([i[0] for i in outs])
             else:
                 out = self.fuse(outs)
-            # print("out", out.shape)
+            print("fusion stage")
+            print("out", out.shape)
 
             self.fuseout = out
             if type(out) is tuple:
@@ -83,38 +85,40 @@ class MMDL(nn.Module):
             return self.head(out.float())
             
         # TODO 后面这些还得改
-        # elif options == "encoder" :
-        #     outs = []
-        #     if self.has_padding:
-        #         for i in range(len(inputs[0])):
-        #             outs.append(self.encoders[i]([inputs[0][i], inputs[1][i]]))
-        #     else:
-        #         for i in range(len(inputs)):
-        #             outs.append(self.encoders[i](inputs[i]))
-        #     return outs
+        elif options == "encoder" :
+            outs = []
+            if self.has_padding:
+                for i in range(len(inputs[0])):
+                    outs.append(self.encoders[i]([inputs[0][i], inputs[1][i]]))
+            else:
+                for i in range(len(inputs)):
+                    outs.append(self.encoders[i](inputs[i]))
+            return outs
+                    
 
-        # elif options == "fusion" :
-        #     outs = []
-        #     outs.append(torch.zeros([40,48]).to(device))
-        #     outs.append(torch.zeros([40,192]).to(device))
-        #     if self.has_padding:
-                
-        #         if isinstance(outs[0], torch.Tensor):
-        #             out = self.fuse(outs)
-        #         else:
-        #             out = self.fuse([i[0] for i in outs])
-        #     else:
-        #         out = self.fuse(outs)
-        #         return out
+        elif options == "fusion" :
+            outs = []
+            outs.append(torch.zeros([1, 256]).to(device))
+            outs.append(torch.zeros([1, 283]).to(device))
+            outs.append(torch.zeros([1, 32]).to(device))
+            if self.has_padding:
+                if isinstance(outs[0], torch.Tensor):
+                    out = self.fuse(outs)
+                else:
+                    out = self.fuse([i[0] for i in outs])
+            else:
+                out = self.fuse(outs)
+                return out
         
-        # elif options == "head" :
-        #     outs = []
-        #     outs.append(torch.zeros([40,48]).to(device))
-        #     outs.append(torch.zeros([40,192]).to(device))
-        #     out = torch.zeros([40,96].to(device))
-        #     if self.has_padding and not isinstance(outs[0], torch.Tensor):
-        #         return self.head([out, inputs[1][0]])
-        #     return self.head(out)
+        elif options == "head" :
+            outs = []
+            outs.append(torch.zeros([1, 256]).to(device))
+            outs.append(torch.zeros([1, 283]).to(device))
+            outs.append(torch.zeros([1, 32]).to(device))
+            out = torch.zeros([1, 571]).to(device)
+            if self.has_padding and not isinstance(outs[0], torch.Tensor):
+                return self.head([out, inputs[1][0]])
+            return self.head(out)
 
 class Bert_encoder(nn.Module):
     def __init__(self):
