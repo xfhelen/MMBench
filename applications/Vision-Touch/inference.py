@@ -20,17 +20,13 @@ from models.unimodals.robotics.encoders import (ProprioEncoder, ForceEncoder, Im
 from models.eval_scripts.complexity import all_in_one_train
 
 
-
-
-
 parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('--options', default="normal", type=str, help='choose the model part') 
 args = parser.parse_args()
 options = args.options
 
 
-# device=torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-device=torch.device("cpu")
+device=torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 class MMDL(nn.Module):
     """Implements MMDL classifier."""
@@ -59,6 +55,7 @@ class MMDL(nn.Module):
         else:
             for i in range(len(inputs)):
                 head_out.append(self.encoders[i](inputs[i]))
+        print(head_out[-1].shape)
         self.reps = head_out
         return head_out
     
@@ -138,6 +135,7 @@ def train(encoders, fusion, head, valid_dataloader, total_epochs, is_packed=Fals
     def _trainprocess():
         def _processinput(inp):
             if input_to_float:
+                # print(inp)
                 return inp.float()
             else:
                 return inp
@@ -158,7 +156,6 @@ def train(encoders, fusion, head, valid_dataloader, total_epochs, is_packed=Fals
                             _ = model([[_processinput(i).to(device) for i in j[0]], j[1]])
                         else:
                             _ = model([_processinput(i).to(device) for i in j[:-1]])
-                            # print(_processinput(j[0]).shape)
                         prof.step()
 
     if track_complexity:
@@ -209,10 +206,15 @@ def Convert_ONNX():
         configs = yaml.load(f,yaml.FullLoader)
     use_cuda = True
     configs = configs
-    device = torch.device("cuda" if use_cuda else "cpu")
 
     set_seeds(configs["seed"], use_cuda)
 
+    # input data size
+    # torch.Size([64, 128, 128, 3])
+    # torch.Size([64, 6, 32])
+    # torch.Size([64, 8])
+    # torch.Size([64, 1, 128, 128])
+    # torch.Size([64, 4])
     encoders = [
         ImageEncoder(configs['zdim'], alpha=configs['vision']),
         ForceEncoder(configs['zdim'], alpha=configs['force']),
@@ -232,15 +234,13 @@ def Convert_ONNX():
 
     data = next(iter(val_loader))
     true_input = [i.float().to(device) for i in data[:-1]]
+    # for i in range(len(true_input)):
+    #     print(true_input[i].shape)
     dummy_input = [torch.randn(true_input[i].shape) for i in range(len(true_input))]
-    # dummy_input = [torch.randn(true_input[i].shape, requires_grad=False).to(device).detach() for i in range(len(true_input))]
 
-
-    # print("Exporting the model to ONNX format...")
-    
     torch.onnx.export(model, true_input, "./applications/Vision-Touch/model.onnx", export_params=True, opset_version=12)
 
 
 if __name__ == "__main__":
-    # main()
-    Convert_ONNX()
+    main()
+    # Convert_ONNX()
