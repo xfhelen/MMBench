@@ -1,0 +1,77 @@
+# total
+batch_size: 1
+
+# encoder
+have_time: False
+time_series_length: 10
+
+## img
+have_img: True
+channels: 3
+img_size_x: 256
+img_size_y: 256 
+img_encoder: "Lenet"
+
+### Lenet
+Lenet_channels: 6
+Lenet_output_dim:  256
+Lenet_additional_layers: 3
+
+## video
+have_video: False
+video_init_file: "applications/Customization/raw_data/video.mp4"
+num_frames: 16
+
+## audio
+have_audio: True
+audio_init_file: "applications/Customization/raw_data/audio.aac"
+audio_encoder: "Librosa"
+
+### Librosa
+Librosa_output_dim: 283
+
+
+## text
+have_text: True
+text_init_file: "applications/Customization/raw_data/text.txt"
+text_encoder: "Bert"
+
+### Bert
+Bert_output_dim: 768
+
+## sensor
+have_sensor: True
+# sensor_length: 10
+zdim: 128
+
+### force
+have_force: True
+force: 1.0
+force_output_dim : 256
+
+### proprio
+have_proprio: True
+proprio: 1.0
+proprio_output_dim : 256
+
+### depth
+have_depth: True
+depth: 1.0
+depth_output_dim : 256
+
+### action
+have_action: True
+action_dim: 4
+action_output_dim : 32
+
+
+# fusion
+fusion_type: "AttentionFusion"   ##  ["concat", "Tensor Fusion", "AttentionFusion","RNNFusion"]
+
+fusion_output_dim: 256
+
+# head
+## MLP
+head_type: "MLP"     ## ["MLP", "Transformer"]
+head_MLP_hidden_dim: 128
+head_output_dim: 1

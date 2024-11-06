@@ -439,3 +439,21 @@ class NLgate(torch.nn.Module):
         matmulled = torch.matmul(qin, kin)
         finalout = torch.matmul(self.softmax(matmulled), vin)
         return torch.flatten(qin + finalout, 1)
+
+
+class AttentionFusion(nn.Module):
+    def __init__(self, input_dims, output_dim):
+        super(AttentionFusion, self).__init__()
+        self.linears = nn.ModuleList([nn.Linear(input_dim, output_dim) for input_dim in input_dims])
+        self.attention = nn.Linear(output_dim * len(input_dims), len(input_dims))
+
+    def forward(self, modalities):
+        transformed = [linear(modality.float()) for linear, modality in zip(self.linears, modalities)]
+        concatenated = torch.cat(transformed, dim=1)
+        attention_weights = torch.softmax(self.attention(concatenated), dim=1)
+        weighted_sum = sum(w * t for w, t in zip(attention_weights.split(1, dim=1), transformed))
+        return weighted_sum
+
+
+class RNNFusion(nn.Module):
+    pass

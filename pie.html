@@ -7,11 +7,11 @@
 
 </head>
 <body >
-    <div id="2e5565b49fcf4cb0bd55aaf3c0b8cbfa" class="chart-container" style="width:900px; height:500px; "></div>
+    <div id="d1f75d7f401d440fa22af17a41884c8b" class="chart-container" style="width:900px; height:500px; "></div>
     <script>
-        var chart_2e5565b49fcf4cb0bd55aaf3c0b8cbfa = echarts.init(
-            document.getElementById('2e5565b49fcf4cb0bd55aaf3c0b8cbfa'), 'white', {renderer: 'canvas'});
-        var option_2e5565b49fcf4cb0bd55aaf3c0b8cbfa = {
+        var chart_d1f75d7f401d440fa22af17a41884c8b = echarts.init(
+            document.getElementById('d1f75d7f401d440fa22af17a41884c8b'), 'white', {renderer: 'canvas'});
+        var option_d1f75d7f401d440fa22af17a41884c8b = {
     "animation": true,
     "animationThreshold": 2000,
     "animationDuration": 1000,
@@ -64,35 +64,35 @@
             "data": [
                 {
                     "name": "relu",
-                    "value": 0.0
+                    "value": 1.7017017017017015
                 },
                 {
                     "name": "conv",
-                    "value": 0.0
+                    "value": 2.002002002002002
                 },
                 {
                     "name": "bnorm",
-                    "value": 0.0
+                    "value": 3.6036036036036037
                 },
                 {
                     "name": "elewise",
-                    "value": 21.5
+                    "value": 5.705705705705702
                 },
                 {
                     "name": "pooling",
-                    "value": 0.0
+                    "value": 0.40040040040040037
                 },
                 {
                     "name": "gemm",
-                    "value": 0.0
+                    "value": 45.94594594594595
                 },
                 {
                     "name": "reduce",
-                    "value": 0.0
+                    "value": 6.506506506506506
                 },
                 {
                     "name": "other",
-                    "value": 78.5
+                    "value": 34.13413413413414
                 }
             ],
             "radius": [
@@ -106,7 +106,8 @@
             "label": {
                 "show": true,
                 "margin": 8,
-                "formatter": function(params) {return params.name + ': ' + params.value.toFixed(2) + '%';}
+                "formatter": function(params) {return params.name + ': ' + params.value.toFixed(2) + '%';},
+                "valueAnimation": false
             },
             "labelLine": {
                 "show": true,
@@ -198,7 +199,7 @@
         }
     ]
 };
-        chart_2e5565b49fcf4cb0bd55aaf3c0b8cbfa.setOption(option_2e5565b49fcf4cb0bd55aaf3c0b8cbfa);
+        chart_d1f75d7f401d440fa22af17a41884c8b.setOption(option_d1f75d7f401d440fa22af17a41884c8b);
     </script>
 </body>
 </html>

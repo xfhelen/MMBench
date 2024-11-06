@@ -2,12 +2,13 @@
 import csv
 import sys
 
-if len(sys.argv) != 3:
+if len(sys.argv) != 4:
     print("Usage: python script.py input_file_path output_file_path")
     sys.exit(1)
 
 input_file_path = sys.argv[1]
 output_file_path = sys.argv[2]
+description = sys.argv[3]
 
 print("Output file path: {}".format(output_file_path))
 
@@ -57,3 +58,33 @@ for metric, total_value in metric_data.items():
     if metric == 'smsp__sass_average_data_bytes_per_sector_mem_global_op_st.pct':
         metric_name = 'GST efficiency (global store efficiency)'
     print("Metric: {}, Average Value: {}".format(metric_name, average_value))
+
+import os 
+file_path = 'scripts/metrics_output.txt'
+
+# 打开文件，追加模式，如果文件不存在则创建
+with open(file_path, 'a') as file:
+    # 写入一个空行，分隔不同次添加
+    if os.path.getsize(file_path) > 0:
+        file.write('\n')
+    file.write("{}\n".format(description))
+    
+    for metric, total_value in metric_data.items():
+        count = count_data[metric]
+        average_value = total_value / count
+        if metric == 'dram__throughput.avg.pct_of_peak_sustained_elapsed':
+            metric_name = 'DRAM utilization'
+        elif metric == 'sm__warps_active.avg.pct_of_peak_sustained_active':
+            metric_name = 'achieved occupancy'
+        elif metric == 'smsp__inst_executed.avg.per_cycle_active':
+            metric_name = 'IPC'
+        elif metric == 'smsp__sass_average_data_bytes_per_sector_mem_global_op_ld.pct':
+            metric_name = 'GLD efficiency (global load efficiency)'
+        elif metric == 'smsp__sass_average_data_bytes_per_sector_mem_global_op_st.pct':
+            metric_name = 'GST efficiency (global store efficiency)'
+        else:
+            metric_name = metric  # 如果没有匹配的名称，使用原始名称
+
+        # 写入文件
+        
+        file.write("Metric: {}, Average Value: {}\n".format(metric_name, average_value))

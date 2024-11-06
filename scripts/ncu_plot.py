@@ -1,41 +1,55 @@
 import matplotlib.pyplot as plt
+import numpy as np
+def read_metrics_from_file(file_path):
+    metrics = {
+        'DRAM utilization': [],
+        'achieved occupancy': [],
+        'IPC': [],
+        'GLD efficiency (global load efficiency)': [],
+        'GST efficiency (global store efficiency)': []
+    }
+    
+    with open(file_path, 'r') as file:
+        for line in file:
+            if line.startswith('Metric:'):
+                parts = line.split(',')
+                metric_name = parts[0].split(': ')[1]
+                average_value = float(parts[1].split(': ')[1])
+                if metric_name in metrics:
+                    metrics[metric_name].append(average_value)
+    
+    return metrics
 
-# 数据
-metrics = ["DRAM utilization", "achieved occupancy", "GLD efficiency", "GST efficiency", "IPC"]
-average_values = [17.131235955056173, 37.859348314606784, 68.62361797752806, 89.53728089887643, 0.1575730337078654]
+def plot_metrics(metrics):
+    metric_names = list(metrics.keys())
+    num_groups = len(metrics[metric_names[0]])
+    num_metrics = len(metric_names)
+    
+    # 放大 IPC 数据
+    if 'IPC' in metric_names:
+        metrics['IPC'] = [v * 10 for v in metrics['IPC']]
+    
+    # 设置柱状图的宽度和位置
+    bar_width = 0.15
+    index = np.arange(num_metrics)
+    
+    plt.figure(figsize=(12, 8))
+    
+    colors = ['r', 'g', 'b', 'c', 'm', 'y', 'k']
+    
+    for group_idx in range(num_groups):
+        values = [metrics[metric][group_idx] for metric in metric_names]
+        plt.bar(index + group_idx * bar_width, values, bar_width, label=f'Group {group_idx + 1}', color=colors[group_idx % len(colors)])
+    
+    plt.xlabel('Metrics')
+    plt.ylabel('Value')
+    plt.title('Metrics Bar Plot')
+    plt.xticks(index + bar_width * (num_groups - 1) / 2, metric_names, rotation=45)
+    plt.legend()
+    plt.grid(True)
+    plt.savefig("test.png")
 
-# 设置 IPC 的颜色和范围
-ipc_color = '#87CEEB'  # 湖蓝色
-ipc_values = [average_values[-1]]  # 只显示 IPC 的值
-ipc_ticks = [0, 5]  # y 轴刻度范围
-
-# 设置其他指标的颜色和范围
-red_palette = ['#FFB6C1', '#FFA07A', '#FA8072', '#FF6347']  # 红色系
-other_values = average_values[:-1]
-other_ticks = [0, 50, 100]  # y 轴刻度范围
-
-# 创建图形和子图
-fig, ax1 = plt.subplots(figsize=(10, 6))
-
-# 绘制左边 y 轴的柱状图
-ax1.bar(metrics[:-1], other_values, color=red_palette)
-ax1.set_ylabel('Average Value', color=red_palette[0])
-ax1.tick_params(axis='y', labelcolor=red_palette[0])
-ax1.set_yticks(other_ticks)
-
-# 创建右边 y 轴
-ax2 = ax1.twinx()
-
-# 绘制右边 y 轴的柱状图
-ax2.bar(metrics[-1:], ipc_values, color=ipc_color)  # IPC 是最后一个指标
-ax2.set_ylabel('IPC', color=ipc_color)
-ax2.tick_params(axis='y', labelcolor=ipc_color)
-ax2.set_ylim(ipc_ticks)
-
-# 添加标题
-plt.title('Average Values and IPC')
-
-# 展示图形
-plt.show()
-
-
+# 示例使用
+file_path = 'scripts/metrics_output.txt'
+metrics = read_metrics_from_file(file_path)
+plot_metrics(metrics)
