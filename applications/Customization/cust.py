@@ -14,9 +14,10 @@ import librosa
 from models.unimodals.common_models import LeNet, MLP,TransformerWithMlp
 from models.unimodals.robotics.encoders import (ProprioEncoder, ForceEncoder, ImageEncoder, DepthEncoder, ActionEncoder)
 from models.fusions.common_fusions import Concat,TensorFusion,AttentionFusion,RNNFusion,LowRankTensorFusion,create_film_layer,create_film_layer_v2,ConcatWithLinear,MultiplicativeInteractions2Modal,MultiplicativeInteractions3Modal
-from torchvggish import vggish
+from torchvggish import vggish, vggish_input  # 添加 vggish_input 的导入
 from torchaudio.models import Wav2Vec2Model
 import warnings
+import opensmile
 import cv2
 import torchvision.transforms as transforms
 
@@ -145,8 +146,8 @@ class Roberta_encoder(nn.Module):
             param.requires_grad = False
 
     def forward(self, inputs):
-        tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
-        encoded_input = tokenizer(inputs.to(device), return_tensors='pt')
+        tokenizer = RobertaTokenizer.from_pretrained('applications/Customization/roberta-base')
+        encoded_input = tokenizer(inputs, return_tensors='pt').to(device)
         output = self.roberta(**encoded_input)['last_hidden_state']
         return output[:, 0, :]
     
@@ -160,8 +161,8 @@ class DistilBert_encoder(nn.Module):
             param.requires_grad = False
 
     def forward(self, inputs):
-        tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased')
-        encoded_input = tokenizer(inputs.to(device), return_tensors='pt')
+        tokenizer = DistilBertTokenizer.from_pretrained('applications/Customization/distilbert-base-uncased')
+        encoded_input = tokenizer(inputs, return_tensors='pt').to(device)
         output = self.distilbert(**encoded_input)['last_hidden_state']
         return output[:, 0, :]
     
@@ -175,8 +176,8 @@ class GPT2_encoder(nn.Module):
             param.requires_grad = False
 
     def forward(self, inputs):
-        tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
-        encoded_input = tokenizer(inputs.to(device), return_tensors='pt')
+        tokenizer = GPT2Tokenizer.from_pretrained('applications/Customization/gpt2')
+        encoded_input = tokenizer(inputs, return_tensors='pt').to(device)
         output = self.gpt2(**encoded_input)['last_hidden_state']
         return output[:, 0, :]
 
@@ -219,19 +220,22 @@ class Librosa_encoder(nn.Module):
 class VGGish_encoder(nn.Module):
     def __init__(self):
         super(VGGish_encoder, self).__init__()
-        self.vggish = vggish()
+        self.vggish = vggish().to(device)  # 确保模型在正确的设备上
 
     def forward(self, inputs_file):
-        wav_preprocess=vggish_input.wavfile_to_examples(inputs_file)
-        wav_preprocess = torch.from_numpy(wav_preprocess).unsqueeze(dim=1)
-        input_wav = wav_preprocess.float().to(device)
+        wav_preprocess = vggish_input.wavfile_to_examples(inputs_file)  # 保持默认设备
+        wav_preprocess = wav_preprocess.unsqueeze(dim=1)
+        input_wav = wav_preprocess.float()  # 保证输入为 float 类型
 
-        audio_feature_name=os.path.basename(inputs_file)
-        audio_feature_name=audio_feature_name[:-4]
+        # 确保输入数据和模型在同一设备
+        input_wav = input_wav.to(self.vggish.parameters().__next__().device)  # 直接将输入数据转移到模型所在的设备
+
         with torch.no_grad():
-            output=self.vggish(input_wav)
-            output=output.squeeze(0) 
+            output = self.vggish(input_wav.squeeze(2))  # 输入数据已经在正确的设备
+            output = output.squeeze(0)
+
         return output
+
 
 class OpenSMILE_encoder(nn.Module):
     def __init__(self):
@@ -241,7 +245,9 @@ class OpenSMILE_encoder(nn.Module):
             feature_level=opensmile.FeatureLevel.Functionals,
         )
 
-    def forward(self, inputs_tensor):
+    def forward(self, inputs_file):
+        audio, sr = librosa.load(inputs_file, sr=None)
+        inputs_tensor = torch.concat((torch.tensor(audio), torch.tensor([sr])), dim=0).to(device)
         inputs_np = inputs_tensor.to('cpu').numpy()
         inputs = (np.array(inputs_np[:-1]), inputs_np[-1])
 
@@ -253,12 +259,14 @@ class OpenSMILE_encoder(nn.Module):
 class Wav2Vec2_encoder(nn.Module):
     def __init__(self):
         super(Wav2Vec2_encoder, self).__init__()
-        self.wav2vec2 = Wav2Vec2Model.from_pretrained("facebook/wav2vec2-base-960h").to(device)
+        self.wav2vec2 = Wav2Vec2Model.from_pretrained("applications/Customization/wav2vec2-base-960h").to(device)
         self.wav2vec2.eval()
         for param in self.wav2vec2.parameters():
             param.requires_grad = False
 
-    def forward(self, inputs_tensor):
+    def forward(self, inputs_file):
+        audio, sr = librosa.load(inputs_file, sr=None)
+        inputs_tensor = torch.concat((torch.tensor(audio), torch.tensor([sr])), dim=0).to(device)
         inputs_np = inputs_tensor.to('cpu').numpy()
         inputs = (np.array(inputs_np[:-1]), inputs_np[-1])
 
@@ -280,7 +288,7 @@ class Linear_out_Lenet(nn.Module):
         return out
 
 class ResNetEncoder(nn.Module):
-    def __init__(self):
+    def __init__(self, output_dim):
         super(ResNetEncoder, self).__init__()
         # 定义图像预处理步骤
         self.transforms = transforms.Compose([
@@ -298,14 +306,26 @@ class ResNetEncoder(nn.Module):
         
         # 替换全连接层
         self.resnet.fc = Identity()
+        
+        # 添加一个线性层将输出特征维度从 2048 降到 768
+        self.linear = nn.Linear(2048, output_dim).to(device)
 
     def forward(self, img):
+        # 检查输入图像的维度
+        if (img.dim() == 4):
+            # 如果输入是批次图像，取第一个图像
+            img = img[0]
+        # 将张量转换为 PIL 图像
+        img = transforms.ToPILImage()(img)
         # 应用图像预处理
         img = self.transforms(img)
         # 添加批次维度
-        img = img.unsqueeze(0)
+        img = img.unsqueeze(0).to(device)  # 确保输入数据在同一设备上
         # 通过 ResNet 模型
         features = self.resnet(img)
+        features = torch.flatten(features, start_dim=1)
+        features = torch.mean(features, dim=0, keepdim=True)
+        features = self.linear(features)  # 通过线性层
         return features
 
 class ResNet3DEncoder(nn.Module):
@@ -411,7 +431,8 @@ def main():
                 encoder_output_dim.append(config["Lenet_output_dim"])
                 
             elif config["img_encoder"] == "Resnet":
-                encoders.append(ResNetEncoder())
+                encoders.append(ResNetEncoder(config["Resnet_output_dim"]))
+                encoder_output_dim.append(config["Resnet_output_dim"])
 
         if config['have_video'] :
             inputs.append(config['video_init_file'])
@@ -452,9 +473,11 @@ def main():
 
             if config["audio_encoder"] == "OpenSMILE":
                 encoders.append(OpenSMILE_encoder().to(device))
+                encoder_output_dim.append(config["OpenSMILE_output_dim"])
 
             if config["audio_encoder"] == "Wav2Vec2":
                 encoders.append(Wav2Vec2_encoder().to(device))
+                encoder_output_dim.append(config["Wav2Vec2_output_dim"])
         
         if config['have_sensor']:
             if config["have_force"]:
