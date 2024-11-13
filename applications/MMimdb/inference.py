@@ -39,6 +39,7 @@ def args_parser():
     parser.add_argument('--gpu', type=int, default=0, help='gpu index')
     parser.add_argument('--seed', type=int, default=20, help='random seed')
     parser.add_argument('--options', type=str, default='normal', help='random seed')
+    parser.add_argument('--folder_path', type=str, default='./', help='folder path')
     args = parser.parse_args()
     return args
 args= args_parser()
@@ -218,11 +219,11 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-with open("./mapping", "rb") as fp:   # Unpickling
+with open(os.path.join(args.folder_path,"./mapping"), "rb") as fp:   # Unpickling
     mapping = pickle.load(fp)
     #print(b)
 
-with open('./list.txt', 'r') as f:
+with open(os.path.join(args.folder_path,"./list.txt"), 'r') as f:
     #files = f.read().splitlines()[18160:25959] ## the test set of mmimdf
     files_origin = f.read().splitlines()#[25859:25959]
 files=[]
@@ -230,13 +231,13 @@ for i in range(0,25959):
     files.append(files_origin[mapping[i][1]])
 # files=files[18160:25959]## the test set
 files=files[25950:25959]  ## subset test
-labels=np.load("./imdb_res.npy")
+labels=np.load(os.path.join(args.folder_path,"./imdb_res.npy"))
 logger.info('Reading json and jpeg files...')
 
 vocab_counts = []
 
 tokenizer = AlbertTokenizer.from_pretrained('albert-base-v2')
-model_transformer = AlbertModel.from_pretrained("albert-base-v2", from_tf=True)
+model_transformer = AlbertModel.from_pretrained("albert-base-v2", from_tf=False)
 
 #model_transformer .add_module("MaxOut_MLP0",MaxOut_MLP(512, 512, 768, linear_layer=False))
 

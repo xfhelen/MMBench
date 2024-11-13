@@ -13,7 +13,7 @@ from transformers import BertModel,BertTokenizer,BertConfig,RobertaModel, Robert
 import librosa
 from models.unimodals.common_models import LeNet, MLP,TransformerWithMlp
 from models.unimodals.robotics.encoders import (ProprioEncoder, ForceEncoder, ImageEncoder, DepthEncoder, ActionEncoder)
-from models.fusions.common_fusions import Concat,TensorFusion,AttentionFusion,RNNFusion
+from models.fusions.common_fusions import Concat,TensorFusion,AttentionFusion,RNNFusion,LowRankTensorFusion,create_film_layer,create_film_layer_v2,ConcatWithLinear,MultiplicativeInteractions2Modal,MultiplicativeInteractions3Modal
 from torchvggish import vggish
 from torchaudio.models import Wav2Vec2Model
 import warnings
@@ -482,23 +482,51 @@ def main():
 
     fusion_input_dim = encoder_output_dim
     
-    if config["fusion_type"] == "concat":
-        fusion = Concat()
+    if config["fusion_type"] == "Concat":
+        fusion = Concat(config["fusion_concat_dim"])
         fusion_output_dim = [1, sum(fusion_input_dim)]
     if config["fusion_type"] == "Tensor Fusion":
         fusion  = TensorFusion()
+        sss=1
+        for s in fusion_input_dim:
+            sss*=s+1
+        fusion_output_dim = [1,sss]
     if config["fusion_type"] == "AttentionFusion":
         fusion_output_dim = [1,config["fusion_output_dim"]]
         fusion  = AttentionFusion(fusion_input_dim,fusion_output_dim[1])
     if config["fusion_type"] == "RNNFusion":
-        fusion  = RNNFusion()
+        fusion_output_dim = [1,config["fusion_output_dim"]]
+        fusion  = RNNFusion(fusion_output_dim[1])
+    if config["fusion_type"] == "LowRankTensorFusion":
+        fusion_output_dim = [1,config["fusion_output_dim"]]
+        fusion  = LowRankTensorFusion(fusion_input_dim,fusion_output_dim[1],config["fusion_rank"])
+    if config["fusion_type"] == "FiLM":
+        fusion_output_dim = [1,config["fusion_output_dim"]]
+        if len(fusion_input_dim) == 3:
+            fusion = create_film_layer_v2(fusion_input_dim[0], fusion_input_dim[1], fusion_input_dim[2], config["fusion_hidden_dim"])
+        elif len(fusion_input_dim) == 2:
+            fusion = create_film_layer(fusion_input_dim[0], fusion_input_dim[1], config["fusion_hidden_dim"])
+        else:
+            print("Only support 2or3 modalities in FiLM fusion")
+            exit()
+    if config["fusion_type"] == "ConcatWithLinear":
+        fusion_output_dim = [1, config["fusion_output_dim"]]
+        fusion = ConcatWithLinear(sum(fusion_input_dim), config["fusion_output_dim"], config["fusion_concat_dim"])
+    if config["fusion_type"] == "MultiplicativeInteractions2Modal":
+        fusion_output_dim = [1, config["fusion_output_dim"]]
+        fusion = MultiplicativeInteractions2Modal(fusion_input_dim, config["fusion_output_dim"], config["fusion_output_choice"], config["fusion_flatten"], None if config["fusion_clip"]=="None" else config["fusion_clip"], None if config["fusion_grad_clip"]=="None" else config["fusion_grad_clip"], config["fusion_flip"])  
+    if config["fusion_type"] == "MultiplicativeInteractions3Modal":
+        fusion_output_dim = [1, config["fusion_output_dim"]]
+        fusion = MultiplicativeInteractions3Modal(fusion_input_dim, config["fusion_output_dim"], config["fusion_output_choice"], config["fusion_flatten"], None if config["fusion_clip"]=="None" else config["fusion_clip"], None if config["fusion_grad_clip"]=="None" else config["fusion_grad_clip"], config["fusion_flip"])  
+
+
 
     head_input_dim = fusion_output_dim
     if config["head_type"] == "MLP":
         head = MLP(head_input_dim[1], config["head_MLP_hidden_dim"], config["head_output_dim"]).to(device)
         
-    if config['head_type'] == "Transformer":
-        head = TransformerWithMlp(head_input_dim[1], config["head_Transformer_hidden_dim"], config["head_output_dim"]).to(device)
+    if config['head_type'] == "TransformerWithMlp":
+        head = TransformerWithMlp(head_input_dim[1], config["head_Transformer_hidden_dim"], config["head_output_dim"], config["head_Transformer_conv"]).to(device)
     run_profiler(encoders, fusion, head, inputs,fusion_input_dim,head_input_dim)
                 
 

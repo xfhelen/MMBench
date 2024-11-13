@@ -12,9 +12,13 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 class Concat(nn.Module):
     """Concatenation of input data on dimension 1."""
 
-    def __init__(self):
-        """Initialize Concat Module."""
+    def __init__(self, concat_dim=1):
+        """Initialize Concat Module.
+        
+        :param concat_dim: The concatentation dimension for the modalities.
+        """
         super(Concat, self).__init__()
+        self.concat_dim = concat_dim
 
     def forward(self, modalities):
         """
@@ -25,24 +29,8 @@ class Concat(nn.Module):
         flattened = []
         for modality in modalities:
             flattened.append(torch.flatten(modality, start_dim=1))
-        return torch.cat(flattened, dim=1)
+        return torch.cat(flattened, dim=self.concat_dim)
 
-
-
-class ConcatEarly(nn.Module):
-    """Concatenation of input data on dimension 2."""
-
-    def __init__(self):
-        """Initialize ConcatEarly Module."""
-        super(ConcatEarly, self).__init__()
-
-    def forward(self, modalities):
-        """
-        Forward Pass of ConcatEarly.
-        
-        :param modalities: An iterable of modalities to combine
-        """
-        return torch.cat(modalities, dim=2)
 
 
 # Stacking modalities
@@ -88,6 +76,87 @@ class ConcatWithLinear(nn.Module):
         return self.fc(torch.cat(modalities, dim=self.concat_dim))
 
 
+class FeatureModulator(nn.Module):
+    """FiLM 用于生成gamma和beta参数的网络"""
+    def __init__(self, input_dim, output_dim, hidden_dim=512):
+        super().__init__()
+        self.network = nn.Sequential(
+            nn.Linear(input_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, output_dim)
+        )
+    
+    def forward(self, x):
+        return self.network(x)
+
+def create_film_layer(image_dim=256, text_dim=512, hidden_dim=512):
+    """
+    创建FiLM层
+    :param image_dim: 图像特征维度
+    :param text_dim: 文本特征维度
+    :param hidden_dim: 隐藏层维度
+    :return: 配置好的FiLM层
+    """
+    # 创建gamma生成网络
+    gamma_net = FeatureModulator(
+        input_dim=text_dim,    
+        output_dim=image_dim,   
+        hidden_dim=hidden_dim
+    )
+    
+    # 创建beta生成网络
+    beta_net = FeatureModulator(
+        input_dim=text_dim,    
+        output_dim=image_dim,  
+        hidden_dim=hidden_dim
+    )
+    
+    # 创建FiLM层
+    film_layer = FiLM(
+        gamma_generation_network=gamma_net,
+        beta_generation_network=beta_net,
+        base_modal=0,              # 图像特征是第一个模态
+        gamma_generate_modal=1,    # 文本特征是第二个模态
+        beta_generate_modal=1      # 文本特征是第二个模态
+    )
+    
+    return film_layer
+
+
+def create_film_layer_v2(image_dim=256, text_dim=512, audio_dim=128, hidden_dim=512):
+    """
+    创建使用不同模态生成gamma和beta的FiLM层
+    
+    :param image_dim: 图像特征维度
+    :param text_dim: 文本特征维度
+    :param audio_dim: 音频特征维度
+    :return: 配置好的FiLM层
+    """
+    # gamma使用文本特征生成
+    gamma_net = FeatureModulator(
+        input_dim=text_dim,   
+        output_dim=image_dim,  
+        hidden_dim=hidden_dim
+    )
+    
+    # beta使用音频特征生成
+    beta_net = FeatureModulator(
+        input_dim=audio_dim,  
+        output_dim=image_dim,
+        hidden_dim=hidden_dim
+    )
+    
+    # 创建FiLM层
+    film_layer = FiLM(
+        gamma_generation_network=gamma_net,
+        beta_generation_network=beta_net,
+        base_modal=0,              # 图像特征是第一个模态
+        gamma_generate_modal=1,    # 文本特征是第二个模态
+        beta_generate_modal=2      # 音频特征是第三个模态
+    )
+    
+    return film_layer
+
 class FiLM(nn.Module):
     """Implements FiLM - Feature-Wise Affine Transformations of the Input.
     
@@ -116,6 +185,8 @@ class FiLM(nn.Module):
         
         :param modalities: An iterable of modalities to combine. 
         """
+        for i in range(len(modalities)):
+            modalities[i] = modalities[i].float()
         gamma = self.g_net(modalities[self.ggen_modal])
         beta = self.b_net(modalities[self.bgen_modal])
         return gamma * modalities[self.base_modal] + beta
@@ -125,19 +196,18 @@ class FiLM(nn.Module):
 class MultiplicativeInteractions3Modal(nn.Module):
     """Implements 3-Way Modal Multiplicative Interactions."""
     
-    def __init__(self, input_dims, output_dim, task=None):
+    def __init__(self, input_dims, output_dim, output, flatten=False, clip=None, grad_clip=None, flip=False):
         """Initialize MultiplicativeInteractions3Modal object.
 
         :param input_dims: list or tuple of 3 integers indicating sizes of input
         :param output_dim: size of outputs
-        :param task: Set to "affect" when working with social data.
         """
         super(MultiplicativeInteractions3Modal, self).__init__()
+            
         self.a = MultiplicativeInteractions2Modal([input_dims[0], input_dims[1]],
-                                                  [input_dims[2], output_dim], 'matrix3D')
+                                                  [input_dims[2], output_dim],  output, flatten, clip, grad_clip, flip)
         self.b = MultiplicativeInteractions2Modal([input_dims[0], input_dims[1]],
-                                                  output_dim, 'matrix')
-        self.task = task
+                                                  output_dim, output, flatten, clip, grad_clip, flip)
 
     def forward(self, modalities):
         """
@@ -145,8 +215,8 @@ class MultiplicativeInteractions3Modal(nn.Module):
         
         :param modalities: An iterable of modalities to combine. 
         """
-        if self.task == 'affect':
-            return torch.einsum('bm, bmp -> bp', modalities[2], self.a(modalities[0:2])) + self.b(modalities[0:2])
+        # if self.task == 'affect':
+        #     return torch.einsum('bm, bmp -> bp', modalities[2], self.a(modalities[0:2])) + self.b(modalities[0:2])
         return torch.matmul(modalities[2], self.a(modalities[0:2])) + self.b(modalities[0:2])
 
 
@@ -234,8 +304,8 @@ class MultiplicativeInteractions2Modal(nn.Module):
             return modalities[0]
         elif len(modalities) > 2:
             assert False
-        m1 = modalities[0]
-        m2 = modalities[1]
+        m1 = modalities[0].float()
+        m2 = modalities[1].float()
         if self.flip:
             m1 = modalities[1]
             m2 = modalities[0]
@@ -340,13 +410,12 @@ class LowRankTensorFusion(nn.Module):
         self.factors = []
         for input_dim in input_dims:
             factor = nn.Parameter(torch.Tensor(
-                self.rank, input_dim+1, self.output_dim), requires_grad=False).to(device)
+                self.rank, input_dim+1, self.output_dim).float(), requires_grad=False).to(device)
             nn.init.xavier_normal_(factor)
             self.factors.append(factor)
 
-        self.fusion_weights = nn.Parameter(torch.Tensor(1, self.rank), requires_grad=False).to(device)
-        self.fusion_bias = nn.Parameter(
-            torch.Tensor(1, self.output_dim), requires_grad=False).to(device)
+        self.fusion_weights = nn.Parameter(torch.Tensor(1, self.rank).float(), requires_grad=False).to(device)
+        self.fusion_bias = nn.Parameter(torch.Tensor(1, self.output_dim).float(), requires_grad=False).to(device)
         # init the fusion weights
         nn.init.xavier_normal_(self.fusion_weights)
         self.fusion_bias.data.fill_(0)
@@ -363,6 +432,7 @@ class LowRankTensorFusion(nn.Module):
         # basically swapping the order of summation and elementwise product
         fused_tensor = 1
         for (modality, factor) in zip(modalities, self.factors):
+            modality = modality.float()
             ones = Variable(torch.ones(batch_size, 1).type(
                 modality.dtype), requires_grad=False).to(device)
             if self.flatten:
@@ -456,4 +526,23 @@ class AttentionFusion(nn.Module):
 
 
 class RNNFusion(nn.Module):
-    pass
+    def __init__(self,output_dim):
+        super(RNNFusion, self).__init__()
+        self.gru = nn.GRU(input_size=1, hidden_size=output_dim, num_layers=2, batch_first=True)
+
+    def forward(self, modalities):
+        # 将每个模态展平并转换为序列
+        flattened = []
+        for modality in modalities:
+            modality = modality.float()
+            flat = torch.flatten(modality, start_dim=1).unsqueeze(2)
+            flattened.append(flat)
+            
+        # 将所有模态拼接为序列
+        sequence = torch.cat(flattened, dim=1)
+        
+        # 通过GRU处理序列
+        output, hidden = self.gru(sequence)
+        
+        # 返回最后一个时间步的输出
+        return output[:,-1,:]
