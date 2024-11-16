@@ -13,6 +13,7 @@ elewise='elementwise'
 pooling='pool'
 gemm='gemm'
 reduce='reduce'
+gemv='gemv'
 # other='void'
 label=['relu','conv','bnorm','elewise','pooling','gemm','reduce','other']
 tp=[0,0,0,0, 0, 0, 0, 0]
@@ -75,7 +76,7 @@ for line in content:
             bnorm_tp = float(second_word.replace(",", ""))
             tp[2]=bnorm_tp+tp[2]
                 # 打印结果
-            print("bnorm", bnorm_tp)
+            # print("bnorm", bnorm_tp)
 
 
     elif elewise in line:
@@ -99,7 +100,7 @@ for line in content:
             #print("pooling", pool_tp)
 
 
-    elif gemm in line:
+    elif gemm in line or gemv in line:
       if len(words) >= 3:
             # 获取第二个空格与第三个空格之间的字符并转换为数字
             second_word = words[0]

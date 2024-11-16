@@ -34,12 +34,18 @@ def args_parser():
     parser.add_argument('--options', default="normal", type=str, help='mode')
     parser.add_argument('--path_config', default='applications/Customization/config.yaml', type=str, help='path to a yaml options file')
     parser.add_argument('--torchprofiler', action='store_true', help='Enable profiler mode')
+    parser.add_argument('--intelv', action='store_true', help='Enable intel vtune mode')
     args = parser.parse_args()
     return args
 
 args = args_parser()
 options = args.options
 torchprofiler = args.torchprofiler
+intel_vtune = args.intelv
+if intel_vtune:
+    torch.cuda.is_available = lambda : False
+    print("Using CPU only mode")
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 class MMDL(nn.Module):
     
@@ -385,7 +391,7 @@ class Identity(nn.Module):
         return input_
 
 
-def run_profiler(encoders, fusion, head, valid_dataloader, fusion_input_dim,head_input_dim,input_to_float=True):
+def run_profiler(encoders, fusion, head, valid_dataloader, fusion_input_dim,head_input_dim):
 
     model = MMDL(encoders, fusion, head,fusion_input_dim,head_input_dim).to(device)
 
@@ -409,6 +415,12 @@ def run_profiler(encoders, fusion, head, valid_dataloader, fusion_input_dim,head
                     # _ = model([_processinput(i).to(device) for i in j[:-1]])
 
                     prof.step()
+    elif intel_vtune:
+        with torch.no_grad():
+            with torch.autograd.profiler.emit_itt():
+                for j,data in enumerate(valid_dataloader):
+                    with torch.profiler.itt.range(f'iteration_{j}'):
+                        _ = model(data)
     else:
         with torch.no_grad():
             for j in valid_dataloader:
