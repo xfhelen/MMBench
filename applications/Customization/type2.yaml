@@ -28,8 +28,8 @@ num_frames: 16
 ## audio
 have_audio: True
 audio_init_file: "applications/Customization/raw_data/audio.aac"
-# audio_encoder: "Librosa"
-audio_encoder: "OpenSMILE"
+audio_encoder: "Librosa"
+# audio_encoder: "OpenSMILE"
 # audio_encoder: "Wav2Vec2"
 
 ### Librosa
@@ -43,7 +43,8 @@ Wav2Vec2_output_dim: 768
 ## text
 have_text: True
 text_init_file: "applications/Customization/raw_data/text.txt"
-text_encoder: "Bert"
+# text_encoder: "Bert"
+text_encoder: "LSTM"
 # text_encoder: "Roberta"
 # text_encoder: "DistilBert"
 # text_encoder: "GPT2"

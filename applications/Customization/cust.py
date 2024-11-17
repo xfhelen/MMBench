@@ -121,6 +121,21 @@ class RandomBertTokenizer:
         
         return torch.tensor(encoded_inputs)
 
+class LSTM_encoder(nn.Module):
+    def __init__(self, vocab_size=30522, embedding_dim=768, hidden_dim=512, num_layers=2):
+        super(LSTM_encoder, self).__init__()
+        self.embedding = nn.Embedding(vocab_size, embedding_dim)
+        self.lstm = nn.LSTM(embedding_dim, hidden_dim, num_layers, batch_first=True)
+        self.hidden_dim = hidden_dim
+
+    def forward(self, inputs):
+        tokenizer = RandomBertTokenizer()
+        encoded_input = tokenizer(inputs).to(device)
+        embedded = self.embedding(encoded_input)
+        lstm_out, _ = self.lstm(embedded)
+        lstm_out = torch.mean(lstm_out, dim=0, keepdim=True)
+        return lstm_out[:, -1, :]
+
 class Bert_encoder(nn.Module):
     def __init__(self):
         super(Bert_encoder, self).__init__()
@@ -445,17 +460,25 @@ def main():
             inputs.append(text)
             if config["text_encoder"] == "Roberta":
                 encoders.append(Roberta_encoder().to(device))
+                encoder_output_dim.append(config["Bert_output_dim"])
 
             elif config["text_encoder"] == "DistilBert":
                 encoders.append(DistilBert_encoder().to(device))
+                encoder_output_dim.append(config["Bert_output_dim"])
 
             elif config["text_encoder"] == "GPT2":
                 encoders.append(GPT2_encoder().to(device))
+                encoder_output_dim.append(config["Bert_output_dim"])
 
             elif config["text_encoder"] == "Bert":
                 encoders.append(Bert_encoder().to(device))
+                encoder_output_dim.append(config["Bert_output_dim"])
             
-            encoder_output_dim.append(config["Bert_output_dim"])
+            elif config["text_encoder"] == "LSTM":
+                encoders.append(LSTM_encoder().to(device))
+                encoder_output_dim.append(config["LSTM_output_dim"])
+
+            
             
 
         if config['have_audio']:

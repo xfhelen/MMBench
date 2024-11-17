@@ -1,0 +1,72 @@
+option: normal step: type1
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[1.7000000000000002, 2.0, 3.7000000000000006, 5.799999999999996, 0.5, 46.99999999999999, 6.6000000000000005, 32.70000000000001]
+option: normal step: type3
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[1.7000000000000002, 2.0, 3.7000000000000006, 5.399999999999998, 0.4, 47.199999999999996, 6.6000000000000005, 33.00000000000001]
+option: encoder step: type1
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[1.6949152542372878, 1.994017946161515, 3.7886340977068786, 5.4835493519441645, 0.3988035892323031, 47.158524426719836, 6.8793619142572275, 32.602193419740786]
+option: encoder step: type3
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[0.9980039920159682, 1.1976047904191618, 2.19560878243513, 3.1936127744510987, 0.29940119760479045, 69.06187624750497, 3.992015968063873, 19.061876247504998]
+option: fusion step: type1
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 100.0]
+option: fusion step: type3
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 100.0]
+option: head step: type1
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[0.0, 0.0, 0.0, 21.4, 0.0, 78.6, 0.0, 0.0]
+option: head step: type3
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[0.0, 0.0, 0.0, 14.2, 0.0, 85.8, 0.0, 0.0]
+option: normal step: type4
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[2.0000000000000004, 2.6000000000000005, 4.800000000000001, 9.799999999999999, 0.5000000000000001, 66.9, 8.1, 5.299999999999998]
+option: normal step: type5
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[1.6949152542372885, 2.093718843469592, 4.985044865403789, 11.964107676969093, 0.39880358923230314, 61.016949152542374, 7.477567298105685, 10.36889332003988]
+option: normal step: type6
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[0.8000000000000002, 2.8000000000000003, 1.5000000000000002, 9.799999999999995, 0.10000000000000002, 59.4, 3.6000000000000005, 22.000000000000007]
+option: encoder step: type4
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[2.2817460317460325, 2.6785714285714293, 4.960317460317461, 9.126984126984127, 0.5952380952380953, 66.86507936507937, 8.432539682539684, 5.05952380952381]
+option: encoder step: type5
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[2.0, 2.6, 4.7, 12.999999999999998, 0.5, 64.3, 7.9, 4.999999999999999]
+option: encoder step: type6
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[0.998003992015968, 3.293413173652694, 1.097804391217565, 11.077844311377243, 0.19960079840319364, 57.18562874251496, 3.6926147704590817, 22.45508982035928]
+option: fusion step: type4
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[0.0, 0.0, 0.0, 31.268731268731266, 0.0, 58.841158841158844, 2.3976023976023972, 7.4925074925074915]
+option: fusion step: type5
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[0.0, 0.0, 0.0, 50.150150150150154, 0.0, 43.44344344344344, 0.0, 6.406406406406406]
+option: fusion step: type6
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[0.0, 0.0, 0.0, 40.5, 0.0, 0.0, 0.0, 59.5]
+option: head step: type4
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[0.0, 0.0, 0.0, 24.0, 0.0, 76.0, 0.0, 0.0]
+option: head step: type5
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[0.0, 0.0, 5.994005994005994, 24.87512487512488, 0.0, 32.36763236763237, 5.194805194805195, 31.56843156843157]
+option: head step: type6
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[0.0, 0.0, 3.8038038038038033, 2.5025025025025025, 0.0, 71.17117117117118, 3.303303303303303, 19.219219219219223]
+option: normal step: type2
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[8.39160839160839, 10.189810189810187, 0.0, 21.578421578421576, 2.1978021978021975, 32.467532467532465, 7.392607392607392, 17.78221778221778]
+option: encoder step: type2
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[8.882235528942118, 10.778443113772457, 0.0, 19.560878243512978, 2.2954091816367264, 33.03393213572854, 7.8842315369261495, 17.56487025948104]
+option: fusion step: type2
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[0.0, 0.0, 0.0, 92.8, 0.0, 0.0, 0.0, 7.200000000000001]
+option: head step: type2
+['relu', 'conv', 'bnorm', 'elewise', 'pooling', 'gemm', 'reduce', 'other']
+[0.0, 0.0, 0.0, 81.98198198198199, 0.0, 18.01801801801802, 0.0, 0.0]

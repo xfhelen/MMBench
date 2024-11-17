@@ -1,0 +1,163 @@
+group3
+Metric: DRAM utilization, Average Value: 14.146573208722739
+Metric: achieved occupancy, Average Value: 19.904112149532704
+Metric: IPC, Average Value: 0.19489096573208742
+Metric: GLD efficiency (global load efficiency), Average Value: 79.43862928348909
+Metric: GST efficiency (global store efficiency), Average Value: 92.58887850467285
+
+group1
+Metric: DRAM utilization, Average Value: 13.806615853658544
+Metric: achieved occupancy, Average Value: 19.53533536585365
+Metric: IPC, Average Value: 0.19039634146341491
+Metric: GLD efficiency (global load efficiency), Average Value: 79.73368902439026
+Metric: GST efficiency (global store efficiency), Average Value: 92.6171341463414
+
+--options
+
+--options
+
+--options
+
+--options
+
+--options
+
+--options
+
+--options
+
+--options
+
+group1_encoder
+Metric: DRAM utilization, Average Value: 14.115691823899368
+Metric: achieved occupancy, Average Value: 19.91279874213836
+Metric: IPC, Average Value: 0.19556603773584932
+Metric: GLD efficiency (global load efficiency), Average Value: 79.56138364779875
+Metric: GST efficiency (global store efficiency), Average Value: 93.03647798742134
+
+
+group1_fusion
+Metric: DRAM utilization, Average Value: 0.44
+Metric: achieved occupancy, Average Value: 6.56
+Metric: IPC, Average Value: 0.03
+Metric: GLD efficiency (global load efficiency), Average Value: 99.01
+Metric: GST efficiency (global store efficiency), Average Value: 24.48
+
+group1_head
+Metric: DRAM utilization, Average Value: 6.47
+Metric: achieved occupancy, Average Value: 8.303333333333333
+Metric: IPC, Average Value: 0.06333333333333334
+Metric: GLD efficiency (global load efficiency), Average Value: 67.47333333333333
+Metric: GST efficiency (global store efficiency), Average Value: 45.833333333333336
+
+group3
+Metric: DRAM utilization, Average Value: 16.90084112149532
+Metric: achieved occupancy, Average Value: 19.815825545171336
+Metric: IPC, Average Value: 0.1934579439252339
+Metric: GLD efficiency (global load efficiency), Average Value: 79.46277258566978
+Metric: GST efficiency (global store efficiency), Average Value: 92.58887850467285
+
+group3_encoder
+Metric: DRAM utilization, Average Value: 16.649905362776
+Metric: achieved occupancy, Average Value: 19.79321766561514
+Metric: IPC, Average Value: 0.19397476340694028
+Metric: GLD efficiency (global load efficiency), Average Value: 79.515047318612
+Metric: GST efficiency (global store efficiency), Average Value: 93.01561514195578
+
+group3_fusion
+Metric: DRAM utilization, Average Value: 1.26
+Metric: achieved occupancy, Average Value: 8.5
+Metric: IPC, Average Value: 0.02
+Metric: GLD efficiency (global load efficiency), Average Value: 99.87
+Metric: GST efficiency (global store efficiency), Average Value: 24.86
+
+group3_head
+Metric: DRAM utilization, Average Value: 14.32
+Metric: achieved occupancy, Average Value: 8.306666666666667
+Metric: IPC, Average Value: 0.06999999999999999
+Metric: GLD efficiency (global load efficiency), Average Value: 67.53
+Metric: GST efficiency (global store efficiency), Average Value: 45.833333333333336
+
+x
+Metric: DRAM utilization, Average Value: 16.07850609756099
+Metric: achieved occupancy, Average Value: 19.48344512195123
+Metric: IPC, Average Value: 0.18841463414634155
+Metric: GLD efficiency (global load efficiency), Average Value: 79.75506097560978
+Metric: GST efficiency (global store efficiency), Average Value: 92.6171341463414
+
+x
+Metric: DRAM utilization, Average Value: 16.40760124610592
+Metric: achieved occupancy, Average Value: 19.76271028037382
+Metric: IPC, Average Value: 0.19208722741433018
+Metric: GLD efficiency (global load efficiency), Average Value: 79.46068535825546
+Metric: GST efficiency (global store efficiency), Average Value: 92.58887850467285
+
+x
+Metric: DRAM utilization, Average Value: 16.5135220125786
+Metric: achieved occupancy, Average Value: 19.84531446540879
+Metric: IPC, Average Value: 0.19273584905660376
+Metric: GLD efficiency (global load efficiency), Average Value: 79.57393081761008
+Metric: GST efficiency (global store efficiency), Average Value: 93.03647798742134
+
+x
+Metric: DRAM utilization, Average Value: 16.331640378548883
+Metric: achieved occupancy, Average Value: 19.810031545741314
+Metric: IPC, Average Value: 0.19328075709779183
+Metric: GLD efficiency (global load efficiency), Average Value: 79.51921135646688
+Metric: GST efficiency (global store efficiency), Average Value: 93.01561514195578
+
+x
+Metric: DRAM utilization, Average Value: 0.54
+Metric: achieved occupancy, Average Value: 6.6
+Metric: IPC, Average Value: 0.03
+Metric: GLD efficiency (global load efficiency), Average Value: 99.01
+Metric: GST efficiency (global store efficiency), Average Value: 24.48
+
+x
+Metric: DRAM utilization, Average Value: 1.42
+Metric: achieved occupancy, Average Value: 8.48
+Metric: IPC, Average Value: 0.02
+Metric: GLD efficiency (global load efficiency), Average Value: 99.87
+Metric: GST efficiency (global store efficiency), Average Value: 24.86
+
+x
+Metric: DRAM utilization, Average Value: 6.273333333333333
+Metric: achieved occupancy, Average Value: 8.313333333333334
+Metric: IPC, Average Value: 0.06
+Metric: GLD efficiency (global load efficiency), Average Value: 67.47333333333333
+Metric: GST efficiency (global store efficiency), Average Value: 45.833333333333336
+
+x
+Metric: DRAM utilization, Average Value: 13.206666666666665
+Metric: achieved occupancy, Average Value: 8.303333333333333
+Metric: IPC, Average Value: 0.06666666666666667
+Metric: GLD efficiency (global load efficiency), Average Value: 67.53
+Metric: GST efficiency (global store efficiency), Average Value: 45.833333333333336
+
+x
+Metric: DRAM utilization, Average Value: 7.322892561983471
+Metric: achieved occupancy, Average Value: 16.118016528925608
+Metric: IPC, Average Value: 0.10611570247933871
+Metric: GLD efficiency (global load efficiency), Average Value: 68.85570247933885
+Metric: GST efficiency (global store efficiency), Average Value: 81.86710743801652
+
+x
+Metric: DRAM utilization, Average Value: 7.802882882882883
+Metric: achieved occupancy, Average Value: 16.867747747747746
+Metric: IPC, Average Value: 0.11234234234234222
+Metric: GLD efficiency (global load efficiency), Average Value: 67.38018018018019
+Metric: GST efficiency (global store efficiency), Average Value: 82.10027027027029
+
+x
+Metric: DRAM utilization, Average Value: 58.85666666666666
+Metric: achieved occupancy, Average Value: 56.47
+Metric: IPC, Average Value: 0.05666666666666667
+Metric: GLD efficiency (global load efficiency), Average Value: 32.96
+Metric: GST efficiency (global store efficiency), Average Value: 74.80333333333333
+
+x
+Metric: DRAM utilization, Average Value: 38.986000000000004
+Metric: achieved occupancy, Average Value: 37.678
+Metric: IPC, Average Value: 0.062
+Metric: GLD efficiency (global load efficiency), Average Value: 40.478
+Metric: GST efficiency (global store efficiency), Average Value: 67.5

@@ -1,0 +1,203 @@
+option: normal step: type1
+Output file path: ncu_normal_type1.csv
+Metric: DRAM utilization, Average Value: 16.07850609756099
+Metric: achieved occupancy, Average Value: 19.48344512195123
+Metric: IPC, Average Value: 0.18841463414634155
+Metric: GLD efficiency (global load efficiency), Average Value: 79.75506097560978
+Metric: GST efficiency (global store efficiency), Average Value: 92.6171341463414
+option: normal step: type3
+Output file path: ncu_normal_type3.csv
+Metric: DRAM utilization, Average Value: 16.40760124610592
+Metric: achieved occupancy, Average Value: 19.76271028037382
+Metric: IPC, Average Value: 0.19208722741433018
+Metric: GLD efficiency (global load efficiency), Average Value: 79.46068535825546
+Metric: GST efficiency (global store efficiency), Average Value: 92.58887850467285
+option: encoder step: type1
+Output file path: ncu_encoder_type1.csv
+Metric: DRAM utilization, Average Value: 16.5135220125786
+Metric: achieved occupancy, Average Value: 19.84531446540879
+Metric: IPC, Average Value: 0.19273584905660376
+Metric: GLD efficiency (global load efficiency), Average Value: 79.57393081761008
+Metric: GST efficiency (global store efficiency), Average Value: 93.03647798742134
+option: encoder step: type3
+Output file path: ncu_encoder_type3.csv
+Metric: DRAM utilization, Average Value: 16.331640378548883
+Metric: achieved occupancy, Average Value: 19.810031545741314
+Metric: IPC, Average Value: 0.19328075709779183
+Metric: GLD efficiency (global load efficiency), Average Value: 79.51921135646688
+Metric: GST efficiency (global store efficiency), Average Value: 93.01561514195578
+option: fusion step: type1
+Output file path: ncu_fusion_type1.csv
+Metric: DRAM utilization, Average Value: 0.54
+Metric: achieved occupancy, Average Value: 6.6
+Metric: IPC, Average Value: 0.03
+Metric: GLD efficiency (global load efficiency), Average Value: 99.01
+Metric: GST efficiency (global store efficiency), Average Value: 24.48
+option: fusion step: type3
+Output file path: ncu_fusion_type3.csv
+Metric: DRAM utilization, Average Value: 1.42
+Metric: achieved occupancy, Average Value: 8.48
+Metric: IPC, Average Value: 0.02
+Metric: GLD efficiency (global load efficiency), Average Value: 99.87
+Metric: GST efficiency (global store efficiency), Average Value: 24.86
+option: head step: type1
+Output file path: ncu_head_type1.csv
+Metric: DRAM utilization, Average Value: 6.273333333333333
+Metric: achieved occupancy, Average Value: 8.313333333333334
+Metric: IPC, Average Value: 0.06
+Metric: GLD efficiency (global load efficiency), Average Value: 67.47333333333333
+Metric: GST efficiency (global store efficiency), Average Value: 45.833333333333336
+option: head step: type3
+Output file path: ncu_head_type3.csv
+Metric: DRAM utilization, Average Value: 13.206666666666665
+Metric: achieved occupancy, Average Value: 8.303333333333333
+Metric: IPC, Average Value: 0.06666666666666667
+Metric: GLD efficiency (global load efficiency), Average Value: 67.53
+Metric: GST efficiency (global store efficiency), Average Value: 45.833333333333336
+option: normal step: type4
+```
+Output file path: ncu_normal_type4.csv
+Metric: DRAM utilization, Average Value: 11.004408060453406
+Metric: achieved occupancy, Average Value: 19.516624685138527
+Metric: IPC, Average Value: 0.1741057934508815
+Metric: GLD efficiency (global load efficiency), Average Value: 79.29523929471034
+Metric: GST efficiency (global store efficiency), Average Value: 88.11249370277072
+```
+
+option: encoder step: type4
+```
+Output file path: ncu_encoder_type4.csv
+Metric: DRAM utilization, Average Value: 11.696967213114752
+Metric: achieved occupancy, Average Value: 20.339344262295075
+Metric: IPC, Average Value: 0.18499999999999997
+Metric: GLD efficiency (global load efficiency), Average Value: 80.43163934426231
+Metric: GST efficiency (global store efficiency), Average Value: 89.64622950819665
+```
+
+option: fusion step: type4
+```
+Output file path: ncu_fusion_type4.csv
+Metric: DRAM utilization, Average Value: 3.609230769230768
+Metric: achieved occupancy, Average Value: 10.08076923076923
+Metric: IPC, Average Value: 0.04884615384615386
+Metric: GLD efficiency (global load efficiency), Average Value: 67.89269230769231
+Metric: GST efficiency (global store efficiency), Average Value: 70.55307692307693
+```
+
+option: head step: type4
+```
+Output file path: ncu_head_type4.csv
+Metric: DRAM utilization, Average Value: 2.32
+Metric: achieved occupancy, Average Value: 8.313333333333334
+Metric: IPC, Average Value: 0.05000000000000001
+Metric: GLD efficiency (global load efficiency), Average Value: 41.67666666666667
+Metric: GST efficiency (global store efficiency), Average Value: 45.833333333333336
+```
+
+
+option: normal step: type5
+```
+Output file path: ncu_normal_type5.csv
+Metric: DRAM utilization, Average Value: 12.13281573498964
+Metric: achieved occupancy, Average Value: 20.624472049689405
+Metric: IPC, Average Value: 0.1701242236024845
+Metric: GLD efficiency (global load efficiency), Average Value: 74.838115942029
+Metric: GST efficiency (global store efficiency), Average Value: 84.51002070393363
+```
+
+option: encoder step: type5
+```
+Output file path: ncu_encoder_type5.csv
+Metric: DRAM utilization, Average Value: 12.15288
+Metric: achieved occupancy, Average Value: 21.19677333333333
+Metric: IPC, Average Value: 0.19482666666666676
+Metric: GLD efficiency (global load efficiency), Average Value: 78.50384000000003
+Metric: GST efficiency (global store efficiency), Average Value: 89.89471999999991
+```
+option: fusion step: type5
+```
+Output file path: ncu_fusion_type5.csv
+Metric: DRAM utilization, Average Value: 24.544375000000002
+Metric: achieved occupancy, Average Value: 25.213437500000005
+Metric: IPC, Average Value: 0.19874999999999995
+Metric: GLD efficiency (global load efficiency), Average Value: 66.9375
+Metric: GST efficiency (global store efficiency), Average Value: 83.4290625
+```
+option: head step: type5
+```
+Output file path: ncu_head_type5.csv
+Metric: DRAM utilization, Average Value: 11.678064516129032
+Metric: achieved occupancy, Average Value: 23.160752688172035
+Metric: IPC, Average Value: 0.14182795698924722
+Metric: GLD efficiency (global load efficiency), Average Value: 48.533655913978485
+Metric: GST efficiency (global store efficiency), Average Value: 65.44086021505377
+```
+
+
+option: normal step: type6
+```
+Output file path: ncu_normal_type6.csv
+Metric: DRAM utilization, Average Value: 17.11291855203619
+Metric: achieved occupancy, Average Value: 23.21771493212667
+Metric: IPC, Average Value: 0.13519230769230817
+Metric: GLD efficiency (global load efficiency), Average Value: 72.40900452488702
+Metric: GST efficiency (global store efficiency), Average Value: 89.40418552036206
+```
+
+option: encoder step: type6
+```
+Output file path: ncu_encoder_type6.csv
+Metric: DRAM utilization, Average Value: 18.055942211055275
+Metric: achieved occupancy, Average Value: 23.493278894472304
+Metric: IPC, Average Value: 0.1392462311557794
+Metric: GLD efficiency (global load efficiency), Average Value: 74.414082914573
+Metric: GST efficiency (glob
+```
+
+option: fusion step: type6
+```
+Output file path: ncu_fusion_type6.csv
+Metric: DRAM utilization, Average Value: 0.9466666666666667
+Metric: achieved occupancy, Average Value: 24.993333333333336
+Metric: IPC, Average Value: 0.09333333333333334
+Metric: GLD efficiency (global load efficiency), Average Value: 88.77333333333333
+Metric: GST efficiency (global store efficiency), Average Value: 49.699999999999996
+```
+
+option: head step: type6
+```
+Output file path: ncu_head_type6.csv
+Metric: DRAM utilization, Average Value: 9.72435294117647
+Metric: achieved occupancy, Average Value: 19.875764705882357
+Metric: IPC, Average Value: 0.09470588235294113
+Metric: GLD efficiency (global load efficiency), Average Value: 53.02964705882352
+Metric: GST efficiency (global store efficiency), Average Value: 61.15882352941176
+```
+option: normal step: type2
+Output file path: ncu_normal_type2.csv
+Metric: DRAM utilization, Average Value: 7.322892561983471
+Metric: achieved occupancy, Average Value: 16.118016528925608
+Metric: IPC, Average Value: 0.10611570247933871
+Metric: GLD efficiency (global load efficiency), Average Value: 68.85570247933885
+Metric: GST efficiency (global store efficiency), Average Value: 81.86710743801652
+option: encoder step: type2
+Output file path: ncu_encoder_type2.csv
+Metric: DRAM utilization, Average Value: 7.802882882882883
+Metric: achieved occupancy, Average Value: 16.867747747747746
+Metric: IPC, Average Value: 0.11234234234234222
+Metric: GLD efficiency (global load efficiency), Average Value: 67.38018018018019
+Metric: GST efficiency (global store efficiency), Average Value: 82.10027027027029
+option: fusion step: type2
+Output file path: ncu_fusion_type2.csv
+Metric: DRAM utilization, Average Value: 58.85666666666666
+Metric: achieved occupancy, Average Value: 56.47
+Metric: IPC, Average Value: 0.05666666666666667
+Metric: GLD efficiency (global load efficiency), Average Value: 32.96
+Metric: GST efficiency (global store efficiency), Average Value: 74.80333333333333
+option: head step: type2
+Output file path: ncu_head_type2.csv
+Metric: DRAM utilization, Average Value: 38.986000000000004
+Metric: achieved occupancy, Average Value: 37.678
+Metric: IPC, Average Value: 0.062
+Metric: GLD efficiency (global load efficiency), Average Value: 40.478
+Metric: GST efficiency (global store efficiency), Average Value: 67.5
