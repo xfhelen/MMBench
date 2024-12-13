@@ -1,5 +1,5 @@
 # BriVL
-The code repository for our Nature Communications paper "[Towards artificial general intelligence via a multimodal foundation model](https://www.nature.com/articles/s41467-022-30761-2)".
+The code repository for The Nature Communications paper "[Towards artificial general intelligence via a multimodal foundation model](https://www.nature.com/articles/s41467-022-30761-2)".
 
 ## BriVL (Bridging Vision and Language)
 
