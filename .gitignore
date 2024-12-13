@@ -22,3 +22,10 @@ sailgpu1*
 log/
 
 nsys_temp_file.txt
+vtune/
+r000hs/
+temp_file1.txt
+temp_file2.csv
+temp_file3.csv
+
+*.html

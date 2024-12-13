@@ -1000,7 +1000,7 @@ class ResNetLSTMEnc(torch.nn.Module):
 class Transformer(nn.Module):
     """Extends nn.Transformer."""
     
-    def __init__(self, n_features, dim):
+    def __init__(self, n_features, dim, have_conv):
         """Initialize Transformer object.
 
         Args:
@@ -1009,9 +1009,11 @@ class Transformer(nn.Module):
         """
         super().__init__()
         self.embed_dim = dim
-        self.conv = nn.Conv1d(n_features, self.embed_dim,
+        if have_conv:
+            self.conv = nn.Conv1d(n_features, self.embed_dim,
                               kernel_size=1, padding=0, bias=False)
-        layer = nn.TransformerEncoderLayer(d_model=self.embed_dim, nhead=5)
+        self.have_conv = have_conv
+        layer = nn.TransformerEncoderLayer(d_model=self.embed_dim, nhead=2)
         self.transformer = nn.TransformerEncoder(layer, num_layers=5)
 
     def forward(self, x):
@@ -1025,7 +1027,65 @@ class Transformer(nn.Module):
         """
         if type(x) is list:
             x = x[0]
-        x = self.conv(x.permute([0, 2, 1]))
-        x = x.permute([2, 0, 1])
+        if len(x.shape) == 2:
+            x = x.unsqueeze(1)
+        if self.have_conv:
+            x = self.conv(x.permute([0, 2, 1]))
+            x = x.permute([0, 2, 1])
         x = self.transformer(x)[-1]
         return x
+
+class TransformerWithMlp(nn.Module):
+    """ 这个实际上只有encoder """
+    def __init__(self, indim, hiddim, outdim, have_conv, dropout=False, dropoutp=0.1, output_each_layer=False):
+        super(TransformerWithMlp, self).__init__()
+        self.transformer = Transformer(indim, hiddim//2 if not have_conv else hiddim, have_conv)
+        # print(indim, hiddim, outdim, have_conv)
+        self.mlp = MLP(hiddim//2 if not have_conv else hiddim, hiddim, outdim, dropout=False, dropoutp=0.1, output_each_layer=False)
+
+    def forward(self, x):
+        transformer_output = self.transformer(x)
+        # print(transformer_output.shape)
+        mlp_output = self.mlp(transformer_output)
+        return mlp_output
+
+# class MLP(torch.nn.Module):
+#     """Two layered perceptron."""
+    
+#     def __init__(self, indim, hiddim, outdim, dropout=False, dropoutp=0.1, output_each_layer=False):
+#         """Initialize two-layered perceptron.
+
+#         Args:
+#             indim (int): Input dimension
+#             hiddim (int): Hidden layer dimension
+#             outdim (int): Output layer dimension
+#             dropout (bool, optional): Whether to apply dropout or not. Defaults to False.
+#             dropoutp (float, optional): Dropout probability. Defaults to 0.1.
+#             output_each_layer (bool, optional): Whether to return outputs of each layer as a list. Defaults to False.
+#         """
+#         super(MLP, self).__init__()
+#         self.fc = nn.Linear(indim, hiddim)
+#         self.fc2 = nn.Linear(hiddim, outdim)
+#         self.dropout_layer = torch.nn.Dropout(dropoutp)
+#         self.dropout = dropout
+#         self.output_each_layer = output_each_layer
+#         self.lklu = nn.LeakyReLU(0.2)
+
+#     def forward(self, x):
+#         """Apply MLP to Input.
+
+#         Args:
+#             x (torch.Tensor): Layer Input
+
+#         Returns:
+#             torch.Tensor: Layer Output
+#         """
+#         output = F.relu(self.fc(x))
+#         if self.dropout:
+#             output = self.dropout_layer(output)
+#         output2 = self.fc2(output)
+#         if self.dropout:
+#             output2 = self.dropout_layer(output)
+#         if self.output_each_layer:
+#             return [0, x, output, self.lklu(output2)]
+#         return output2

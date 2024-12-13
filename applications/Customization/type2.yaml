@@ -1,0 +1,112 @@
+# total
+batch_size: 1
+
+# encoder
+have_time: False
+time_series_length: 10
+
+## img
+have_img: True
+channels: 3
+img_size_x: 256
+img_size_y: 256 
+img_encoder: "Lenet"
+
+### Resnet
+Resnet_output_dim: 256
+
+### Lenet
+Lenet_channels: 6
+Lenet_output_dim:  256
+Lenet_additional_layers: 3
+
+## video
+have_video: False
+video_init_file: "applications/Customization/raw_data/video.mp4"
+num_frames: 16
+
+## audio
+have_audio: True
+audio_init_file: "applications/Customization/raw_data/audio.aac"
+audio_encoder: "Librosa"
+# audio_encoder: "OpenSMILE"
+# audio_encoder: "Wav2Vec2"
+
+### Librosa
+Librosa_output_dim: 283
+### OpenSMILE
+OpenSMILE_output_dim: 6373
+### Wav2Vec2
+Wav2Vec2_output_dim: 768
+
+
+## text
+have_text: True
+text_init_file: "applications/Customization/raw_data/text.txt"
+# text_encoder: "Bert"
+text_encoder: "LSTM"
+# text_encoder: "Roberta"
+# text_encoder: "DistilBert"
+# text_encoder: "GPT2"
+
+### Bert
+Bert_output_dim: 768
+
+### LSTM
+LSTM_output_dim: 512
+
+## sensor
+have_sensor: True
+# sensor_length: 10
+zdim: 128
+
+### force
+have_force: True
+force: 1.0
+force_output_dim : 256
+
+### proprio
+have_proprio: True
+proprio: 1.0
+proprio_output_dim : 256
+
+### depth
+have_depth: True
+depth: 1.0
+depth_output_dim : 256
+
+### action
+have_action: True
+action_dim: 4
+action_output_dim : 32
+
+
+# fusion
+fusion_type: "Concat"   
+##  ["Concat", "Tensor Fusion", "AttentionFusion", "RNNFusion", "LowRankTensorFusion", "FiLM", "ConcatWithLinear", "MultiplicativeInteractions2Modal"]
+
+# 注意用Tensor Fusion时，很容易发生维度爆炸，输出的output_dim是 叠乘 (input_dim+1)，太大了巨卡
+# 注意FiLM只支持 图像+文字+音频 中取2到3个模态
+
+fusion_output_dim: 512 # 对Concat\ConcatWithLinear\Tensor Fusion无效
+fusion_rank: 16 #仅对LowRankTensorFusion有效
+fusion_hidden_dim: 512 #仅对FiLM有效
+fusion_concat_dim: 1 #仅对Concat\ConcatWithLinear有效
+
+## MultiplicativeInteractions2Modal，只支持两个模态
+fusion_output_choice: "matrix" # ["matrix", "vector", "scalar", "matrix3D"], 暂时只有matrix是可以跑的
+fusion_flatten: True # True表示flatten，False表示不flatten
+fusion_clip: [1,1]  #None表示不做clip
+fusion_grad_clip: [0.1,0.1]  #None表示不做clip
+fusion_flip: False #这个不要换成True
+
+# head
+head_type: "MLP"     ## ["MLP", "TransformerWithMlp"]
+head_output_dim: 16
+
+## MLP
+head_MLP_hidden_dim: 128
+
+## TransformerWithMlp
+head_Transformer_conv: True
+head_Transformer_hidden_dim: 512

@@ -12,6 +12,7 @@ bnorm='norm'
 elewise='elementwise'
 pooling='pool'
 gemm='gemm'
+gemv='gemv'
 reduce='reduce'
 # other='void'
 label=['relu','conv','bnorm','elewise','pooling','gemm','reduce','other']
@@ -75,7 +76,7 @@ for line in content:
             bnorm_tp = float(second_word.replace(",", ""))
             tp[2]=bnorm_tp+tp[2]
                 # 打印结果
-            print("bnorm", bnorm_tp)
+            # print("bnorm", bnorm_tp)
 
 
     elif elewise in line:
@@ -99,7 +100,7 @@ for line in content:
             #print("pooling", pool_tp)
 
 
-    elif gemm in line:
+    elif gemm in line or gemv in line:
       if len(words) >= 3:
             # 获取第二个空格与第三个空格之间的字符并转换为数字
             second_word = words[0]
@@ -151,7 +152,7 @@ pie = (
     Pie()
     .add("tp", [(i, j) for i, j in zip(label, percentages)])
     .set_colors(
-        ["blue", "green", "yellow", "red", "pink", "orange", "purple", "lilac", "pansy"]
+        ["blue", "green", "yellow", "red", "pink", "orange", "purple", "gray"]
     )
     .set_global_opts(
         title_opts=opts.TitleOpts(title="Proportion of Time(%)"),

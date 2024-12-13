@@ -11,6 +11,7 @@ import torch.nn as nn
 import torchvision
 from transformers import BertModel,BertTokenizer
 import librosa
+
 from models.unimodals.common_models import LeNet, MLP
 from models.unimodals.robotics.encoders import (ProprioEncoder, ForceEncoder, ImageEncoder, DepthEncoder, ActionEncoder)
 from models.fusions.common_fusions import Concat

@@ -45,7 +45,7 @@ class ProprioEncoder(nn.Module):
         Returns:
             torch.Tensor: Encoded Output
         """
-        return self.proprio_encoder(self.alpha * proprio).unsqueeze(2)
+        return self.proprio_encoder(self.alpha * proprio).unsqueeze(2)[:,:,0]
 
 
 class ForceEncoder(nn.Module):
@@ -91,7 +91,7 @@ class ForceEncoder(nn.Module):
         Returns:
             torch.Tensor: Encoded Output
         """        
-        return self.frc_encoder(self.alpha * force)
+        return self.frc_encoder(self.alpha * force)[:,:,0]
 
 
 class ImageEncoder(nn.Module):
@@ -222,7 +222,8 @@ class DepthEncoder(nn.Module):
         flattened = self.flatten(out_depth_conv6)
         depth_out = self.depth_encoder(flattened).unsqueeze(2)
 
-        return depth_out, depth_out_convs
+        # return depth_out, depth_out_convs
+        return depth_out[:,:,0]
 
 
 class ActionEncoder(nn.Module):
